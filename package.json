@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-electron-boilerplate",
+  "name": "analysatron",
   "version": "0.0.1",
   "description": "boilerplate for apps using react, redux, and electron",
   "main": "main.js",
