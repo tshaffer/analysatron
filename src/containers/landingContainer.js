@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 
 import Landing from '../components/landing';
 
-import { readGooglePhotos } from '../store/googlePhotos';
-import { readDrivePhotos } from '../store/drivePhotos';
+import { analyzePhotos } from '../store/index';
+// import { readGooglePhotos } from '../store/googlePhotos';
+// import { readDrivePhotos } from '../store/drivePhotos';
 
 // function mapStateToProps (state) {
 //   return {
@@ -15,12 +16,15 @@ import { readDrivePhotos } from '../store/drivePhotos';
 
 function mapDispatchToProps(dispatch) {
   return {
-    onReadGooglePhotos: () => {
-      dispatch(readGooglePhotos());
-    },
-    onReadDrivePhotos: () => {
-      dispatch(readDrivePhotos());
+    onAnalyzePhotos: () => {
+      dispatch(analyzePhotos());
     }
+    // onReadGooglePhotos: () => {
+    //   dispatch(readGooglePhotos());
+    // },
+    // onReadDrivePhotos: () => {
+    //   dispatch(readDrivePhotos());
+    // }
   };
 }
 

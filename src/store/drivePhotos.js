@@ -14,30 +14,57 @@ const ADD_DRIVE_PHOTOS = 'ADD_DRIVE_PHOTOS';
 // ------------------------------------
 export function readDrivePhotos() {
 
-  return function (dispatch: Function) {
+  return function(dispatch: Function) {
 
-    let promise = readFile('drivePhotos.json');
-    promise.then((drivePhotosStr) => {
-      let drivePhotosSpec = JSON.parse(drivePhotosStr);
+    return new Promise( (resolve, reject) => {
 
-      let drivePhotos = [];
+      readFile('drivePhotos.json').then((drivePhotosStr) => {
 
-      for (let photoPath in drivePhotosSpec) {
-        if (drivePhotosSpec.hasOwnProperty(photoPath)) {
-          let drivePhotoSpec = drivePhotosSpec[photoPath];
-          let drivePhoto = new DrivePhoto(drivePhotoSpec);
-          drivePhotos.push(drivePhoto);
+        let drivePhotosSpec = JSON.parse(drivePhotosStr);
+
+        let drivePhotos = [];
+
+        for (let photoPath in drivePhotosSpec) {
+          if (drivePhotosSpec.hasOwnProperty(photoPath)) {
+            let drivePhotoSpec = drivePhotosSpec[photoPath];
+            let drivePhoto = new DrivePhoto(drivePhotoSpec);
+            drivePhotos.push(drivePhoto);
+          }
         }
-      }
 
-      dispatch(addDrivePhotos(drivePhotos));
+        dispatch(addDrivePhotos(drivePhotos));
 
-    }, (reason) => {
-      throw(reason);
+        resolve();
+      }).catch( (err) => {
+        reject(err);
+      });
     });
   };
 }
 
+// ------------------------------------
+// Helpers
+// ------------------------------------
+let drivePhotosByPath = {};
+
+export function buildDrivePhotoDictionaries() {
+
+  return function (dispatch: Function, getState: Function) {
+    const state = getState();
+    const drivePhotos = state.drivePhotos.drivePhotos;
+
+    drivePhotosByPath = {};
+    drivePhotos.forEach( (drivePhoto: DrivePhoto) => {
+      if (drivePhotosByPath[drivePhoto.path]) {
+        debugger;
+      }
+      else {
+        drivePhotosByPath[drivePhoto.path] = drivePhoto;
+      }
+    });
+  };
+
+}
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -63,7 +90,6 @@ export default function(state: Object = initialState, action: Object) {
       {
         let newState = Object.assign({}, state);
         newState.drivePhotos = action.payload;
-        debugger;
         return newState;
       }
   }

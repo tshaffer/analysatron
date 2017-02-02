@@ -17,20 +17,24 @@ export function readGooglePhotos() {
 
   return function (dispatch: Function) {
 
-    let promise = readFile('googlePhotos.json');
-    promise.then((googlePhotosStr) => {
-      let googlePhotosSpec = JSON.parse(googlePhotosStr);
+    return new Promise( (resolve, reject) => {
 
-      let googlePhotos = [];
-      googlePhotosSpec.forEach( (googlePhotoSpec ) => {
-        let googlePhoto = new GooglePhoto(googlePhotoSpec);
-        googlePhotos.push(googlePhoto);
+      readFile('googlePhotos.json').then((googlePhotosStr) => {
+        let googlePhotosSpec = JSON.parse(googlePhotosStr);
+
+        let googlePhotos = [];
+        googlePhotosSpec.forEach( (googlePhotoSpec ) => {
+          let googlePhoto = new GooglePhoto(googlePhotoSpec);
+          googlePhotos.push(googlePhoto);
+        });
+
+        dispatch(addGooglePhotos(googlePhotos));
+
+        resolve();
+
+      }, (reason) => {
+        reject(reason);
       });
-
-      dispatch(addGooglePhotos(googlePhotos));
-
-    }, (reason) => {
-      throw(reason);
     });
   };
 }
