@@ -1,6 +1,6 @@
 // @flow
 
-const fs = require('fs');
+import { readFile } from '../utilities/utils';
 
 import { GooglePhoto } from '../entities/googlePhoto';
 
@@ -17,7 +17,7 @@ export function readGooglePhotos() {
 
   return function (dispatch: Function) {
 
-    let promise = readGooglePhotoFiles('googlePhotos.json');
+    let promise = readFile('googlePhotos.json');
     promise.then((googlePhotosStr) => {
       let googlePhotosSpec = JSON.parse(googlePhotosStr);
 
@@ -33,19 +33,6 @@ export function readGooglePhotos() {
       throw(reason);
     });
   };
-}
-
-function readGooglePhotoFiles(filePath) {
-  return new Promise( (resolve, reject) => {
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
-        reject(err);
-      }
-      else {
-        resolve(data);
-      }
-    });
-  });
 }
 
 // ------------------------------------

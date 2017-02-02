@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Landing from '../components/landing';
 
 import { readGooglePhotos } from '../store/googlePhotos';
+import { readDrivePhotos } from '../store/drivePhotos';
 
 // function mapStateToProps (state) {
 //   return {
@@ -16,6 +17,9 @@ function mapDispatchToProps(dispatch) {
   return {
     onReadGooglePhotos: () => {
       dispatch(readGooglePhotos());
+    },
+    onReadDrivePhotos: () => {
+      dispatch(readDrivePhotos());
     }
   };
 }
