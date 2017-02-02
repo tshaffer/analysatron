@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import LandingContainer from '../containers/landingContainer';
+
 export default class App extends Component {
 
   componentDidMount() {
@@ -16,9 +18,7 @@ export default class App extends Component {
     return (
       <MuiThemeProvider>
         <div>
-          <p className="autorunText">Pizza</p>
-          <p className="autorunText">Line 2</p>
-          <p className="autorunText">Line 3</p>
+          <LandingContainer />
         </div>
       </MuiThemeProvider>
     );

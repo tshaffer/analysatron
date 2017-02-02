@@ -1,10 +1,10 @@
 // @flow
 
 import {combineReducers} from 'redux';
-import PlaceholderReducer from './placeholder';
+import GooglePhotosReducer from './googlePhotos';
 
 const rootReducer = combineReducers({
-  sign: PlaceholderReducer
+  googlePhotos: GooglePhotosReducer
 });
 
 export default rootReducer;
