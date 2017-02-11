@@ -2,7 +2,11 @@
 
 import { readFile } from '../utilities/utils';
 
-import { DrivePhoto } from '../entities/drivePhoto';
+import DrivePhoto from '../entities/drivePhoto';
+
+const StringDecoder = require('string_decoder').StringDecoder;
+const decoder = new StringDecoder('utf8');
+
 
 // ------------------------------------
 // Constants
@@ -18,8 +22,9 @@ export function readDrivePhotos() {
 
     return new Promise( (resolve, reject) => {
 
-      readFile('drivePhotos.json').then((drivePhotosStr) => {
+      readFile('drivePhotos.json').then((drivePhotosBuf) => {
 
+        let drivePhotosStr = decoder.write(drivePhotosBuf);
         let drivePhotosSpec = JSON.parse(drivePhotosStr);
 
         let drivePhotos = [];
@@ -49,7 +54,7 @@ let drivePhotosByPath = {};
 
 export function buildDrivePhotoDictionaries() {
 
-  return function (dispatch: Function, getState: Function) {
+  return function (_: Function, getState: Function) {
     const state = getState();
     const drivePhotos = state.drivePhotos.drivePhotos;
 

@@ -2,7 +2,10 @@
 
 import { readFile } from '../utilities/utils';
 
-import { GooglePhoto } from '../entities/googlePhoto';
+import GooglePhoto from '../entities/googlePhoto';
+
+const StringDecoder = require('string_decoder').StringDecoder;
+const decoder = new StringDecoder('utf8');
 
 // ------------------------------------
 // Constants
@@ -19,7 +22,9 @@ export function readGooglePhotos() {
 
     return new Promise( (resolve, reject) => {
 
-      readFile('googlePhotos.json').then((googlePhotosStr) => {
+      readFile('googlePhotos.json').then((googlePhotosBuf) => {
+
+        let googlePhotosStr = decoder.write(googlePhotosBuf);
         let googlePhotosSpec = JSON.parse(googlePhotosStr);
 
         let googlePhotos = [];
@@ -49,23 +54,23 @@ function addGooglePhotos(googlePhotos) {
   };
 }
 
-function setGooglePhotoDictionaries(
-  gfsByDateTime,
-  gfsByExifDateTime,
-  gfsByName,
-  photosByAltKey,
-  gfsByHash) {
-  return {
-    type: SET_GOOGLE_PHOTO_DICTIONARIES,
-    payload: {
-      gfsByDateTime,
-      gfsByExifDateTime,
-      gfsByName,
-      photosByAltKey,
-      gfsByHash
-    }
-  };
-}
+// function setGooglePhotoDictionaries(
+//   gfsByDateTime,
+//   gfsByExifDateTime,
+//   gfsByName,
+//   photosByAltKey,
+//   gfsByHash) {
+//   return {
+//     type: SET_GOOGLE_PHOTO_DICTIONARIES,
+//     payload: {
+//       gfsByDateTime,
+//       gfsByExifDateTime,
+//       gfsByName,
+//       photosByAltKey,
+//       gfsByHash
+//     }
+//   };
+// }
 
 
 // ------------------------------------
