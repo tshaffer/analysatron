@@ -1,7 +1,6 @@
 // @flow
 
-const fs = require('fs');
-const Jimp = require('jimp');
+// const Jimp = require('jimp');
 
 import { readFile } from '../utilities/utils';
 const StringDecoder = require('string_decoder').StringDecoder;
@@ -13,7 +12,7 @@ import { buildDrivePhotoDictionaries } from './drivePhotos';
 
 import Photo from '../entities/photo';
 // import DrivePhoto from '../entities/drivePhoto';
-import GooglePhoto from '../entities/googlePhoto';
+// import GooglePhoto from '../entities/googlePhoto';
 
 // https://flowtype.org/docs/quick-reference.html#type-aliases
 type IdenticalPhotos = {
@@ -104,29 +103,54 @@ export function analyzePhotos() {
         let unmatchedDrivePhotosStr = decoder.write(unmatchedDrivePhotosBuffer);
         let unmatchedDrivePhotos = JSON.parse(unmatchedDrivePhotosStr);
         photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotos;
+        analyzeHashDifferences(photoComparisonResults);
       }).catch( (err) => {
+        console.log(err);
         debugger;
       });
 
-      debugger;
 
 /*
 Results:
-     Number of googlePhotos:  7773
-     Number of google photos with unique hashes:  7576
-     Number of duplicate google photos:  144
-     Number of google photos with unique hash/name combos:  7749
-     Number of drivePhotos:  20571
-     Number of drive photos with unique hashes:  9013
-     Number of duplicate drive photos:  6324
-     Number of drive photos with unique hash/name combos:  10293
-     Number of drive photos with exact hash matches:  4358
-     Number of drive photos without an exact hash match:  4655
+    Number of googlePhotos:  7773
+    Number of google photos with unique hashes:  7576
+    Number of duplicate google photos:  144
+    Number of google photos with unique hash/name combos:  7749
+    Number of drivePhotos:  20571
+    Number of drive photos with unique hashes:  9013
+    Number of duplicate drive photos:  6324
+    Number of drive photos with unique hash/name combos:  10293
+    Number of drive photos with exact hash matches:  4358
+    Number of drive photos without an exact hash match:  4655
+    Number of photos whose hashes are close enough to qualify for a match:  1178
+    Number of photos that don't match at all:  3477
  */
     }).catch( (err) => {
       throw(err);
     });
   };
+}
+
+function analyzeHashDifferences(photoComparisonResults) {
+
+  const hashThreshold = 0.04;
+
+  let numCloseEnoughHashes = 0;
+  let numNotEvenCloseHashes = 0;
+
+  photoComparisonResults.unmatchedPhotos.forEach( (identicalDrivePhotos) => {
+    let closestGooglePhoto: ClosestHashSearchResult = identicalDrivePhotos.closestGooglePhoto;
+    if (closestGooglePhoto.minHashDistance < hashThreshold) {
+      numCloseEnoughHashes++;
+    }
+    else {
+      numNotEvenCloseHashes++;
+    }
+  });
+
+  console.log('Number of photos whose hashes are close enough to qualify for a match: ', numCloseEnoughHashes);
+  console.log('Number of photos that don\'t match at all: ', numNotEvenCloseHashes);
+  debugger;
 }
 
 function getPhotosByHash(photos) : PhotosByHash {
@@ -218,28 +242,28 @@ function getMatchesByExactHash(
   return photoComparisonResults;
 }
 
-function getClosestGooglePhotoByHash(
-  drivePhoto: IdenticalPhotos,
-  googlePhotos : Array<GooglePhoto>) : ClosestHashSearchResult {
-
-  const drivePhotoHash : string = drivePhoto.hash;
-
-  let googlePhotoIndexOfMinHashDistance = -1;
-  let minHashDistance = 1;
-
-  googlePhotos.forEach( (googlePhoto, index) => {
-    if (googlePhoto.getHash()) {
-      let hashDistance = Jimp.distanceByHash(drivePhotoHash, googlePhoto.getHash());
-      if (hashDistance < minHashDistance) {
-        minHashDistance = hashDistance;
-        googlePhotoIndexOfMinHashDistance = index;
-      }
-    }
-  });
-
-  let closestHashSearchResult : ClosestHashSearchResult = {
-    minHashDistance,
-    googlePhotoIndexOfMinHashDistance
-  };
-  return closestHashSearchResult;
-}
+// function getClosestGooglePhotoByHash(
+//   drivePhoto: IdenticalPhotos,
+//   googlePhotos : Array<GooglePhoto>) : ClosestHashSearchResult {
+//
+//   const drivePhotoHash : string = drivePhoto.hash;
+//
+//   let googlePhotoIndexOfMinHashDistance = -1;
+//   let minHashDistance = 1;
+//
+//   googlePhotos.forEach( (googlePhoto, index) => {
+//     if (googlePhoto.getHash()) {
+//       let hashDistance = Jimp.distanceByHash(drivePhotoHash, googlePhoto.getHash());
+//       if (hashDistance < minHashDistance) {
+//         minHashDistance = hashDistance;
+//         googlePhotoIndexOfMinHashDistance = index;
+//       }
+//     }
+//   });
+//
+//   let closestHashSearchResult : ClosestHashSearchResult = {
+//     minHashDistance,
+//     googlePhotoIndexOfMinHashDistance
+//   };
+//   return closestHashSearchResult;
+// }
