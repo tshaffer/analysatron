@@ -1,6 +1,11 @@
 // @flow
 
+const fs = require('fs');
 const Jimp = require('jimp');
+
+import { readFile } from '../utilities/utils';
+const StringDecoder = require('string_decoder').StringDecoder;
+const decoder = new StringDecoder('utf8');
 
 import { readGooglePhotos } from './googlePhotos';
 import { readDrivePhotos } from './drivePhotos';
@@ -13,7 +18,8 @@ import GooglePhoto from '../entities/googlePhoto';
 // https://flowtype.org/docs/quick-reference.html#type-aliases
 type IdenticalPhotos = {
   hash: string,
-  photos: Array<Photo>
+  photos: Array<Photo>,
+  closestGooglePhoto: ClosestHashSearchResult
 };
 
 type PhotosByHash = { [hash:string]: IdenticalPhotos };
@@ -83,10 +89,23 @@ export function analyzePhotos() {
 
       console.log(photoComparisonResults);
 
-      debugger;
 
-      photoComparisonResults.unmatchedPhotos.forEach( (drivePhoto) => {
-        let closestGooglePhoto = getClosestGooglePhotoByHash(drivePhoto, googlePhotos);
+      // photoComparisonResults.unmatchedPhotos.forEach( (identicalDrivePhotos) => {
+      //   let closestGooglePhoto = getClosestGooglePhotoByHash(identicalDrivePhotos, googlePhotos);
+      //   identicalDrivePhotos.closestGooglePhoto = closestGooglePhoto;
+      //
+      //   console.log('poo');
+      // });
+      //
+      // const unmatchedDrivePhotosStr = JSON.stringify(photoComparisonResults.unmatchedPhotos, null, 2);
+      // fs.writeFileSync('unmatchedDrivePhotos.json', unmatchedDrivePhotosStr);
+
+      readFile('unmatchedDrivePhotos.json').then((unmatchedDrivePhotosBuffer) => {
+        let unmatchedDrivePhotosStr = decoder.write(unmatchedDrivePhotosBuffer);
+        let unmatchedDrivePhotos = JSON.parse(unmatchedDrivePhotosStr);
+        photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotos;
+      }).catch( (err) => {
+        debugger;
       });
 
       debugger;
@@ -117,7 +136,9 @@ function getPhotosByHash(photos) : PhotosByHash {
   photos.forEach( (photo) => {
     const hash = photo.hash;
     if (!photosByHash[hash]) {
-      let identicalPhotos : IdenticalPhotos = { hash: '', photos: []};
+      // TODO - any better way to do this other than by making this a class?
+      let closestGooglePhoto: ClosestHashSearchResult = { minHashDistance: 1, googlePhotoIndexOfMinHashDistance: -1};
+      let identicalPhotos : IdenticalPhotos = { hash: '', photos: [], closestGooglePhoto};
       identicalPhotos.hash = hash;
       identicalPhotos.photos.push(photo);
       photosByHash[hash] = identicalPhotos;
