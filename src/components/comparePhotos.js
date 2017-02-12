@@ -13,12 +13,12 @@ class ComparePhotos extends Component {
         <div className="allImages">
           <div className="leftPanel">
             <img className="leftImage"
-                 src={leftPhotoUrl}
+              src={leftPhotoUrl}
             />
           </div>
           <div className="rightPanel">
             <img className="rightImage"
-                 src={rightPhotoUrl}
+              src={rightPhotoUrl}
             />
           </div>
         </div>
@@ -31,6 +31,29 @@ class ComparePhotos extends Component {
   render() {
 
     debugger;
+
+    switch(this.props.comparisonType) {
+      case 'identicalDrivePhotos':
+        {
+          // for now, find the first drive photo that has a match with other drive photos
+          const drivePhotosByHash = this.props.drivePhotosByHash;
+          for (let hash in drivePhotosByHash) {
+            if (drivePhotosByHash.hasOwnProperty(hash)) {
+              const identicalPhotos = drivePhotosByHash[hash];
+              const identicalDrivePhotos = identicalPhotos.photos;
+              const closestGooglePhoto = identicalPhotos.closestGooglePhoto;
+              if (closestGooglePhoto.minHashDistance === 1 && identicalDrivePhotos.length > 1) {
+                debugger;
+              }
+            }
+          }
+          break;
+        }
+      default:
+        {
+          debugger;
+        }
+    }
 
     const imagesJSX = this.getImagesJSX(
       this.props.googlePhotos[0].url,
@@ -52,6 +75,9 @@ class ComparePhotos extends Component {
 
 ComparePhotos.propTypes = {
   googlePhotos: React.PropTypes.array.isRequired,
+  comparisonType: React.PropTypes.string.isRequired,
+  drivePhotosByHash: React.PropTypes.object.isRequired,
+
   // diskImageUrl: React.PropTypes.string.isRequired,
   // googleImageUrl: React.PropTypes.string.isRequired,
 };

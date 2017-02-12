@@ -32,7 +32,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App} />
-      <Route path="/comparePhotosContainer" component={ComparePhotosContainer}/>
+      <Route path="/comparePhotosContainer/:id" component={ComparePhotosContainer}/>
     </Router>
   </Provider>
   , document.getElementById('content'));

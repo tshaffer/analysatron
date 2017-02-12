@@ -15,10 +15,13 @@ class Landing extends Component {
     this.props.onAnalyzePhotos();
   }
 
-  handleComparePhotos() {
-    // const volumeName = this.volumeNameField.input.value;
-    // this.props.onMatchPhotos(volumeName);
-    hashHistory.push('/comparePhotosContainer');
+  handleCompareIdenticalGooglePhotos() {
+    hashHistory.push('/comparePhotosContainer/' + 'identicalGooglePhotos');
+
+  }
+
+  handleCompareIdenticalDrivePhotos() {
+    hashHistory.push('/comparePhotosContainer/' + 'identicalDrivePhotos');
   }
 
 
@@ -35,8 +38,13 @@ class Landing extends Component {
         <div>
           <h1>Pizza!</h1>
           <RaisedButton
-            onClick={this.handleComparePhotos.bind(this)}
-            label="Compare Photos"
+            onClick={this.handleCompareIdenticalGooglePhotos.bind(this)}
+            label="Compare 'Identical' Google Photos"
+            style={style}
+          />
+          <RaisedButton
+            onClick={this.handleCompareIdenticalDrivePhotos.bind(this)}
+            label="Compare 'Identical' Drive Photos"
             style={style}
           />
 

@@ -12,6 +12,7 @@ const decoder = new StringDecoder('utf8');
 // Constants
 // ------------------------------------
 const ADD_DRIVE_PHOTOS = 'ADD_DRIVE_PHOTOS';
+const SET_DRIVE_PHOTOS_BY_HASH = 'SET_DRIVE_PHOTOS_BY_HASH';
 
 // ------------------------------------
 // Action Creators
@@ -80,11 +81,18 @@ function addDrivePhotos(drivePhotos) {
   };
 }
 
+export function setDrivePhotosByHash(drivePhotosByHash) {
+  return {
+    type: SET_DRIVE_PHOTOS_BY_HASH,
+    payload: drivePhotosByHash
+  };
+}
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState: Object = {
   drivePhotos: [],
+  drivePhotosByHash: {}
 };
 
 export default function(state: Object = initialState, action: Object) {
@@ -95,6 +103,15 @@ export default function(state: Object = initialState, action: Object) {
       {
         let newState = Object.assign({}, state);
         newState.drivePhotos = action.payload;
+        newState.drivePhotosByHash = state.drivePhotosByHash;
+        return newState;
+      }
+
+    case SET_DRIVE_PHOTOS_BY_HASH:
+      {
+        let newState = Object.assign({}, state);
+        newState.drivePhotos = state.drivePhotos;
+        newState.drivePhotosByHash = action.payload;
         return newState;
       }
   }

@@ -6,9 +6,16 @@ import { readFile } from '../utilities/utils';
 const StringDecoder = require('string_decoder').StringDecoder;
 const decoder = new StringDecoder('utf8');
 
-import { readGooglePhotos } from './googlePhotos';
-import { readDrivePhotos } from './drivePhotos';
-import { buildDrivePhotoDictionaries } from './drivePhotos';
+import {
+  readDrivePhotos,
+  setDrivePhotosByHash,
+  buildDrivePhotoDictionaries
+} from './drivePhotos';
+
+import {
+  readGooglePhotos,
+} from './googlePhotos';
+
 
 import Photo from '../entities/photo';
 // import DrivePhoto from '../entities/drivePhoto';
@@ -69,6 +76,7 @@ export function analyzePhotos() {
       
       let drivePhotos  = state.drivePhotos.drivePhotos;
       const drivePhotosByHash : PhotosByHash = getPhotosByHash(drivePhotos);
+      dispatch(setDrivePhotosByHash(drivePhotosByHash));
       // const duplicateDrivePhotosByHash = getDuplicatePhotos(drivePhotosByHash);
       // const numDuplicateDrivePhotos = Object.keys(duplicateDrivePhotosByHash).length;
       console.log('Number of drivePhotos: ', drivePhotos.length);
