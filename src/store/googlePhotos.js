@@ -11,7 +11,8 @@ const decoder = new StringDecoder('utf8');
 // Constants
 // ------------------------------------
 const ADD_GOOGLE_PHOTOS = 'ADD_GOOGLE_PHOTOS';
-const SET_GOOGLE_PHOTO_DICTIONARIES = 'SET_GOOGLE_PHOTO_DICTIONARIES';
+// const SET_GOOGLE_PHOTO_DICTIONARIES = 'SET_GOOGLE_PHOTO_DICTIONARIES';
+const SET_GOOGLE_PHOTOS_BY_HASH = 'SET_GOOGLE_PHOTOS_BY_HASH';
 
 // ------------------------------------
 // Action Creators
@@ -54,6 +55,13 @@ function addGooglePhotos(googlePhotos) {
   };
 }
 
+export function setGooglePhotosByHash(googlePhotosByHash) {
+  return {
+    type: SET_GOOGLE_PHOTOS_BY_HASH,
+    payload: googlePhotosByHash
+  };
+}
+
 // function setGooglePhotoDictionaries(
 //   gfsByDateTime,
 //   gfsByExifDateTime,
@@ -81,7 +89,9 @@ const initialState: Object = {
   gfsByExifDateTime: {},
   gfsByName: {},
   photosByAltKey: {},
-  gfsByHash: {}
+  gfsByHash: {},
+  googlePhotosByHash: {}
+
 };
 
 export default function(state: Object = initialState, action: Object) {
@@ -92,19 +102,27 @@ export default function(state: Object = initialState, action: Object) {
       {
         let newState = Object.assign({}, state);
         newState.googlePhotos = action.payload;
+        newState.googlePhotosByHash = state.googlePhotosByHash;
         return newState;
       }
-    case SET_GOOGLE_PHOTO_DICTIONARIES:
+    case SET_GOOGLE_PHOTOS_BY_HASH:
       {
-        let payload = action.payload;
         let newState = Object.assign({}, state);
-        newState.gfsByDateTime = payload.gfsByDateTime;
-        newState.gfsByExifDateTime = payload.gfsByExifDateTime;
-        newState.gfsByName = payload.gfsByName;
-        newState.photosByAltKey = payload.photosByAltKey;
-        newState.gfsByHash = payload.gfsByHash;
+        newState.googlePhotos = state.googlePhotos;
+        newState.googlePhotosByHash = action.payload;
         return newState;
       }
+    // case SET_GOOGLE_PHOTO_DICTIONARIES:
+    //   {
+    //     let payload = action.payload;
+    //     let newState = Object.assign({}, state);
+    //     newState.gfsByDateTime = payload.gfsByDateTime;
+    //     newState.gfsByExifDateTime = payload.gfsByExifDateTime;
+    //     newState.gfsByName = payload.gfsByName;
+    //     newState.photosByAltKey = payload.photosByAltKey;
+    //     newState.gfsByHash = payload.gfsByHash;
+    //     return newState;
+    //   }
   }
 
   return state;

@@ -32,6 +32,8 @@ class ComparePhotos extends Component {
 
     debugger;
 
+    let imagesJSX;
+
     switch(this.props.comparisonType) {
       case 'identicalDrivePhotos':
         {
@@ -49,16 +51,34 @@ class ComparePhotos extends Component {
           }
           break;
         }
+      case 'identicalGooglePhotos':
+        {
+          // for now, find the first google photo that has a match with other google photos
+          const googlePhotosByHash = this.props.googlePhotosByHash;
+          for (let hash in googlePhotosByHash) {
+            if (googlePhotosByHash.hasOwnProperty(hash)) {
+              const identicalPhotos = googlePhotosByHash[hash];
+              const identicalGooglePhotos = identicalPhotos.photos;
+              if (identicalGooglePhotos.length > 1) {
+                imagesJSX = this.getImagesJSX(
+                  identicalGooglePhotos[0].url,
+                  identicalGooglePhotos[1].url
+                );
+              }
+            }
+          }
+          break;
+        }
       default:
         {
           debugger;
         }
     }
 
-    const imagesJSX = this.getImagesJSX(
-      this.props.googlePhotos[0].url,
-      this.props.googlePhotos[1].url
-    );
+    // const imagesJSX = this.getImagesJSX(
+    //   this.props.googlePhotos[0].url,
+    //   this.props.googlePhotos[1].url
+    // );
 
     return (
       <MuiThemeProvider>
@@ -77,6 +97,7 @@ ComparePhotos.propTypes = {
   googlePhotos: React.PropTypes.array.isRequired,
   comparisonType: React.PropTypes.string.isRequired,
   drivePhotosByHash: React.PropTypes.object.isRequired,
+  googlePhotosByHash: React.PropTypes.object.isRequired,
 
   // diskImageUrl: React.PropTypes.string.isRequired,
   // googleImageUrl: React.PropTypes.string.isRequired,

@@ -14,6 +14,7 @@ import {
 
 import {
   readGooglePhotos,
+  setGooglePhotosByHash,
 } from './googlePhotos';
 
 
@@ -63,6 +64,7 @@ export function analyzePhotos() {
 
       let googlePhotos = state.googlePhotos.googlePhotos;
       const googlePhotosByHash : PhotosByHash  = getPhotosByHash(googlePhotos);
+      dispatch(setGooglePhotosByHash(googlePhotosByHash));
       // const duplicateGooglePhotosByHash = getDuplicatePhotos(googlePhotosByHash);
       // const numDuplicateGooglePhotos = Object.keys(duplicateGooglePhotosByHash).length;
       console.log('Number of googlePhotos: ', googlePhotos.length);
