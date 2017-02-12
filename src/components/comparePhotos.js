@@ -69,23 +69,59 @@ class ComparePhotos extends Component {
     this.setState( { photoGroupIndex });
   }
 
+  handlePrevPhotoGroup() {
+
+    let photoGroupIndex = this.state.photoGroupIndex - 1;
+    if (photoGroupIndex < 0 ) {
+      photoGroupIndex = this.state.photoGroups.length - 1;
+    }
+
+    this.setState( { photoGroupIndex });
+  }
+
+  formatDateTime(dateTimeStr) {
+    const dateTime = new Date(dateTimeStr);
+    return dateTime.toDateString() + ', ' + dateTime.toLocaleTimeString();
+  }
+
   getPhotosToDisplay(photos) {
+
+    let self = this;
+
+    const maxHeight = 400;
 
     let photosJSX = photos.map(function(photo) {
 
       let width = photo.getWidth();
       let height = photo.getHeight();
 
-      let dateTime = photo.getDateTime();
-      let exifDateTime = photo.getExifDateTime();
+      let aspectRatio = width / height;
+      if (height > maxHeight) {
+        height = maxHeight;
+        width = aspectRatio * height;
+      }
 
-      let name = photo.getName();
+      let dateTime = photo.getDateTime();
+      let formattedDateTime = self.formatDateTime(dateTime);
+
+      let exifDateTime = photo.getExifDateTime();
+      let formattedExifDateTime = self.formatDateTime(exifDateTime);
 
       return (
         <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
-          <img  src={photo.url} className="thumbImg"
+          <img
+            className="thumbImg"
+            src={photo.url}
+            width={width}
+            height={height}
           />
-          <p>{name}</p>
+          <p>{'Name: ' + photo.getName()}</p>
+          <p>{'DateTime: ' + formattedDateTime}</p>
+          <p>{'ExifDateTime: ' + formattedExifDateTime}</p>
+          <p>{'Width: ' + photo.getWidth()}</p>
+          <p>{'Height: ' + photo.getHeight()}</p>
+          <p>{'Aspect ratio: ' + aspectRatio}</p>
+          <p>{photo.getHash()}</p>
         </li>
       );
     });
@@ -114,6 +150,11 @@ class ComparePhotos extends Component {
         <div className="photoPageContainer">
           <div className="photosDiv">
             <div className="dayOfPhotosDiv" key={Math.random().toString()}>
+              <RaisedButton
+                label='Prev'
+                onClick={this.handlePrevPhotoGroup.bind(this)}
+                style={buttonStyle}
+              />
               <RaisedButton
                 label='Next'
                 onClick={this.handleNextPhotoGroup.bind(this)}
