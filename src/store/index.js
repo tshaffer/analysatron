@@ -88,7 +88,6 @@ export function analyzePhotos() {
 
       console.log(photoComparisonResults);
 
-
       // photoComparisonResults.unmatchedPhotos.forEach( (identicalDrivePhotos) => {
       //   let closestGooglePhoto = getClosestGooglePhotoByHash(identicalDrivePhotos, googlePhotos);
       //   identicalDrivePhotos.closestGooglePhoto = closestGooglePhoto;
@@ -122,8 +121,12 @@ Results:
     Number of drive photos with unique hash/name combos:  10293
     Number of drive photos with exact hash matches:  4358
     Number of drive photos without an exact hash match:  4655
-    Number of photos whose hashes are close enough to qualify for a match:  1178
+    Number of photos whose hashes are close enough to qualify for a match:  1178 (hashThreshold 0.04)
     Number of photos that don't match at all:  3477
+
+ Number of photos whose hashes are close enough to qualify for a match:  1308 (hashThreshold 0.05)
+ Number of photos that don't match at all:  3347
+
  */
     }).catch( (err) => {
       throw(err);
@@ -133,7 +136,8 @@ Results:
 
 function analyzeHashDifferences(photoComparisonResults) {
 
-  const hashThreshold = 0.04;
+  // const hashThreshold = 0.04;
+  const hashThreshold = 0.05;
 
   let numCloseEnoughHashes = 0;
   let numNotEvenCloseHashes = 0;
@@ -150,7 +154,6 @@ function analyzeHashDifferences(photoComparisonResults) {
 
   console.log('Number of photos whose hashes are close enough to qualify for a match: ', numCloseEnoughHashes);
   console.log('Number of photos that don\'t match at all: ', numNotEvenCloseHashes);
-  debugger;
 }
 
 function getPhotosByHash(photos) : PhotosByHash {

@@ -15,6 +15,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducers from './store/reducers';
 
 import App from './components/App';
+import ComparePhotosContainer from './containers/comparePhotosContainer';
 
 const store = createStore(
   reducers,
@@ -31,6 +32,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App} />
+      <Route path="/comparePhotosContainer" component={ComparePhotosContainer}/>
     </Router>
   </Provider>
   , document.getElementById('content'));
