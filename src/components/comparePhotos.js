@@ -70,11 +70,22 @@ class ComparePhotos extends Component {
   }
 
   getPhotosToDisplay(photos) {
+
     let photosJSX = photos.map(function(photo) {
+
+      let width = photo.getWidth();
+      let height = photo.getHeight();
+
+      let dateTime = photo.getDateTime();
+      let exifDateTime = photo.getExifDateTime();
+
+      let name = photo.getName();
+
       return (
         <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
           <img  src={photo.url} className="thumbImg"
           />
+          <p>{name}</p>
         </li>
       );
     });
