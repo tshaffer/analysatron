@@ -17,7 +17,7 @@ export default class App extends Component {
 
     return (
       <MuiThemeProvider>
-        <div>
+        <div className = "container shafferotoContainer">
           <LandingContainer />
         </div>
       </MuiThemeProvider>
