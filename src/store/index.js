@@ -63,31 +63,32 @@ export function analyzePhotos() {
       let state = getState();
 
       let googlePhotos = state.googlePhotos.googlePhotos;
-      const googlePhotosByHash : PhotosByHash  = getPhotosByHash(googlePhotos);
+      const googlePhotosByHash : PhotosByHash  = getMatchingPhotos(googlePhotos);
       dispatch(setGooglePhotosByHash(googlePhotosByHash));
+      console.log('Number of googlePhotos: ', googlePhotos.length);
+      console.log('Number of google photos with unique keys: ', Object.keys(googlePhotosByHash).length);
+
       // const duplicateGooglePhotosByHash = getDuplicatePhotos(googlePhotosByHash);
       // const numDuplicateGooglePhotos = Object.keys(duplicateGooglePhotosByHash).length;
-      console.log('Number of googlePhotos: ', googlePhotos.length);
-      console.log('Number of google photos with unique hashes: ', Object.keys(googlePhotosByHash).length);
       // console.log('Number of duplicate google photos: ', numDuplicateGooglePhotos);
-
       // const googlePhotosByHashAndName = getPhotosByHashAndName(googlePhotos);
       // console.log('Number of google photos with unique hash/name combos: ',
       //   Object.keys(googlePhotosByHashAndName).length);
 
       
       let drivePhotos  = state.drivePhotos.drivePhotos;
-      const drivePhotosByHash : PhotosByHash = getPhotosByHash(drivePhotos);
+      const drivePhotosByHash : PhotosByHash = getMatchingPhotos(drivePhotos);
       dispatch(setDrivePhotosByHash(drivePhotosByHash));
+      console.log('Number of drivePhotos: ', drivePhotos.length);
+      console.log('Number of drive photos with unique keys: ', Object.keys(drivePhotosByHash).length);
+
       // const duplicateDrivePhotosByHash = getDuplicatePhotos(drivePhotosByHash);
       // const numDuplicateDrivePhotos = Object.keys(duplicateDrivePhotosByHash).length;
-      console.log('Number of drivePhotos: ', drivePhotos.length);
-      console.log('Number of drive photos with unique hashes: ', Object.keys(drivePhotosByHash).length);
       // console.log('Number of duplicate drive photos: ', numDuplicateDrivePhotos);
-      
       // const drivePhotosByHashAndName = getPhotosByHashAndName(drivePhotos);
       // console.log('Number of drive photos with unique hash/name combos: ',
       //   Object.keys(drivePhotosByHashAndName).length);
+
 
       let photoComparisonResults : PhotoComparisonResults =
         getMatchesByExactHash(drivePhotosByHash, googlePhotosByHash);
@@ -166,22 +167,31 @@ function analyzeHashDifferences(photoComparisonResults) {
   console.log('Number of photos that don\'t match at all: ', numNotEvenCloseHashes);
 }
 
-function getPhotosByHash(photos) : PhotosByHash {
+function getMatchingPhotos(photos) : PhotosByHash {
+
+  // photos are considered an exact match if and only if
+  //    hashes match
+  //    aspect ratios match
+  //    hash it not one of the magic numbers? not implemented yet
 
   let photosByHash : PhotosByHash = {};
 
   photos.forEach( (photo) => {
     const hash = photo.hash;
-    if (!photosByHash[hash]) {
+    const aspectRatio = (Number(photo.getWidth()) / Number(photo.getHeight())).toString();
+    const key = hash + '-' + aspectRatio;
+
+    if (!photosByHash[key]) {
       // TODO - any better way to do this other than by making this a class?
       let closestGooglePhoto: ClosestHashSearchResult = { minHashDistance: 1, googlePhotoIndexOfMinHashDistance: -1};
       let identicalPhotos : IdenticalPhotos = { hash: '', photos: [], closestGooglePhoto};
-      identicalPhotos.hash = hash;
+      // identicalPhotos.hash = hash;
+      identicalPhotos.hash = key;
       identicalPhotos.photos.push(photo);
-      photosByHash[hash] = identicalPhotos;
+      photosByHash[key] = identicalPhotos;
     }
     else {
-      let identicalPhotos : IdenticalPhotos = photosByHash[hash];
+      let identicalPhotos : IdenticalPhotos = photosByHash[key];
       identicalPhotos.photos.push(photo);
     }
   });
@@ -225,9 +235,9 @@ function getMatchesByExactHash(
   let matchedPhotos : Array<MatchedPhoto> = [];
   let unmatchedPhotos: Array<IdenticalPhotos> = [];
 
-  for (let hash in drivePhotosByHash) {
-    if (drivePhotosByHash.hasOwnProperty(hash)) {
-      const drivePhotos : IdenticalPhotos = drivePhotosByHash[hash];
+  for (let key in drivePhotosByHash) {
+    if (drivePhotosByHash.hasOwnProperty(key)) {
+      const drivePhotos : IdenticalPhotos = drivePhotosByHash[key];
 
       // TODO - hash should be a property of drivePhotos. i.e., drivePhotos should be an object, not an array
       const drivePhotoHash = drivePhotos.hash;

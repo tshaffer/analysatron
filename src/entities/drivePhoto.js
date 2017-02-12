@@ -26,16 +26,24 @@ export default class DrivePhoto extends Photo {
     this.name = parts[parts.length - 1];
   }
 
+  getWidth(): string {
+    // apparently, not all drive photos have dimensions
+    if (!this.dimensions) {
+      return '1';
+    }
+    return this.dimensions.width.toString();
+  }
+
+  getHeight(): string {
+    // apparently, not all drive photos have dimensions
+    if (!this.dimensions) {
+      return '1';
+    }
+    return this.dimensions.height.toString();
+  }
+
   // getName(): string {
   //   return this.name;
-  // }
-  //
-  // getWidth(): string {
-  //   return this.width;
-  // }
-  //
-  // getHeight(): string {
-  //   return this.height;
   // }
   //
   // getDateTime(): string {
