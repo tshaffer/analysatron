@@ -7,3 +7,47 @@ body {
     color: blue;
 }
 
+.sideBySidePhotos {
+    /*height: 800px;*/
+    height: 600px;
+    width: 1200px;
+}
+
+.allImages {
+    width: 1200px;
+    background-color: green;
+}
+
+.leftPanel {
+    float: left;
+}
+.leftImage {
+    /*width: 450px;*/
+    /*max-width:450px;*/
+    width: 350px;
+    max-width:350px;
+}
+
+.rightPanel {
+    float: left;
+    margin-left: 100px;
+}
+.rightImage {
+    /*width: 450px;*/
+    /*max-width:450px;*/
+    width: 350px;
+    max-width: 350px;
+}
+
+.clear {
+    clear: left;
+}
+
+.comparePhotos {
+    position: absolute;
+}
+
+.comparePhotosActions {
+    position: absolute;
+    bottom: 16px;
+}
