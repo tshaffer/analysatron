@@ -1,5 +1,37 @@
 // @flow
 
+import Photo from '../entities/photo';
+// import DrivePhoto from '../entities/drivePhoto';
+// import GooglePhoto from '../entities/googlePhoto';
+
+type PhotoItem = {
+  photo: Photo,
+  matchedPhotoGroupIndex: ?number
+}
+// https://flowtype.org/docs/quick-reference.html#type-aliases
+type IdenticalPhotos = {
+  hash: string,
+  key: string,
+  photoItems: Array<PhotoItem>,
+  closestGooglePhoto: ClosestHashSearchResult
+};
+
+type PhotosByHash = { [hash:string]: IdenticalPhotos };
+
+type MatchedPhoto = {
+  drivePhotos: IdenticalPhotos,
+  matchedGooglePhotos: IdenticalPhotos
+};
+
+type PhotoComparisonResults = {
+  matchedPhotos: Array<MatchedPhoto>,
+  unmatchedPhotos: Array<IdenticalPhotos>
+};
+type ClosestHashSearchResult = {
+  minHashDistance: number,
+  googlePhotoIndexOfMinHashDistance: number
+}
+
 import React, { Component } from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -7,34 +39,36 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 class ComparePhotos extends Component {
 
+  state : Object;
+
   constructor(props: Object) {
     super(props);
     this.state = {
-      photoGroupIndex: 0,
-      photoGroups: []
+      identicalPhotoCollectionIndex: 0,
+      identicalPhotosCollection: []
     };
   }
 
 
   componentWillMount() {
 
-    let photoGroups = [];
+    let identicalPhotosCollection : Array<IdenticalPhotos> = [];
 
     switch(this.props.comparisonType) {
       case 'identicalGooglePhotos': {
         // for now, find the first google photo that has a match with other google photos
-        const googlePhotosByHash = this.props.googlePhotosByHash;
+        const googlePhotosByHash : PhotosByHash = this.props.googlePhotosByHash;
         for (let hash in googlePhotosByHash) {
           if (googlePhotosByHash.hasOwnProperty(hash)) {
-            const identicalPhotos = googlePhotosByHash[hash];
-            const identicalGooglePhotos = identicalPhotos.photos;
-            if (identicalGooglePhotos.length > 1) {
-              photoGroups.push(identicalPhotos);
+            const identicalPhotos : IdenticalPhotos = googlePhotosByHash[hash];
+            const identicalGooglePhotoItems : Array<PhotoItem> = identicalPhotos.photoItems;
+            if (identicalGooglePhotoItems.length > 1) {
+              identicalPhotosCollection.push(identicalPhotos);
             }
           }
         }
 
-        this.setState({photoGroups});
+        this.setState({identicalPhotosCollection});
 
         break;
       }
@@ -61,26 +95,26 @@ class ComparePhotos extends Component {
 
   handleAllMatch() {
     console.log('handleNextMatch invoked');
-    this.handleNextPhotoGroup();
+    this.handleNextIdenticalPhotos();
   }
 
   handleNoneMatch() {
     console.log('handleNoneMatch invoked');
-    this.handleNextPhotoGroup();
+    this.handleNextIdenticalPhotos();
   }
 
   handleCheckedMatch() {
     console.log('handleCheckedMatch invoked');
   }
 
-  handleNextPhotoGroup() {
+  handleNextIdenticalPhotos() {
 
-    let photoGroupIndex = this.state.photoGroupIndex + 1;
-    if (photoGroupIndex >= this.state.photoGroups.length) {
-      photoGroupIndex = 0;
+    let identicalPhotoCollectionIndex = this.state.identicalPhotoCollectionIndex + 1;
+    if (identicalPhotoCollectionIndex >= this.state.identicalPhotosCollection.length) {
+      identicalPhotoCollectionIndex = 0;
     }
 
-    this.setState( { photoGroupIndex });
+    this.setState( { identicalPhotoCollectionIndex });
   }
 
   // handlePrevPhotoGroup() {
@@ -93,12 +127,12 @@ class ComparePhotos extends Component {
   //   this.setState( { photoGroupIndex });
   // }
 
-  formatDateTime(dateTimeStr) {
+  formatDateTime(dateTimeStr : string) {
     const dateTime = new Date(dateTimeStr);
     return dateTime.toDateString() + ', ' + dateTime.toLocaleTimeString();
   }
 
-  togglePhotoSelection(_) {
+  togglePhotoSelection(_ : any) {
     console.log("togglePhotoSelection");
 
     // if (this.selectedPhotos.hasOwnProperty(photo.dbId)) {
@@ -120,14 +154,15 @@ class ComparePhotos extends Component {
     // this.selectedPhotos = selectedPhotos;
   }
 
-  getPhotosToDisplay(photos) {
+  getPhotosToDisplay(photoItems : Array<PhotoItem>) {
 
     let self = this;
 
     const maxHeight = 400;
 
-    let photosJSX = photos.map(function(photo) {
+    let photosJSX = photoItems.map(function(photoItem: PhotoItem) {
 
+      const photo = photoItem.photo;
       let width = photo.getWidth();
       let height = photo.getHeight();
 
@@ -193,8 +228,11 @@ class ComparePhotos extends Component {
 
     let self = this;
 
-    const photoGroups = this.state.photoGroups[this.state.photoGroupIndex];
-    if (!photoGroups) {
+    // this.state.photoGroups : Array<IdenticalPhotos>
+    // photosGroups : IdenticalPhotos
+
+    const identicalPhotos = this.state.identicalPhotosCollection[this.state.identicalPhotoCollectionIndex];
+    if (!identicalPhotos) {
       return (
         <div>Loading...</div>
       );
@@ -226,7 +264,7 @@ class ComparePhotos extends Component {
                 labelStyle={this.getButtonLabelStyle()}
               />
               <ul className="flex-container wrap">
-                {this.getPhotosToDisplay(photoGroups.photos)}
+                {this.getPhotosToDisplay(identicalPhotos.photoItems)}
               </ul>
             </div>
           </div>
