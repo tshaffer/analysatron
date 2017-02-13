@@ -1,5 +1,32 @@
 // @flow
 
+import Photo from '../entities/photo';
+
+// https://flowtype.org/docs/quick-reference.html#type-aliases
+type IdenticalPhotos = {
+  hash: string,
+  key: string,
+  photos: Array<Photo>,
+  closestGooglePhoto: ClosestHashSearchResult
+};
+
+type PhotosByHash = { [hash:string]: IdenticalPhotos };
+
+type MatchedPhoto = {
+  drivePhotos: IdenticalPhotos,
+  matchedGooglePhotos: IdenticalPhotos
+};
+
+type PhotoComparisonResults = {
+  matchedPhotos: Array<MatchedPhoto>,
+  unmatchedPhotos: Array<IdenticalPhotos>
+};
+type ClosestHashSearchResult = {
+  minHashDistance: number,
+  googlePhotoIndexOfMinHashDistance: number
+}
+
+
 import { readFile } from '../utilities/utils';
 
 import GooglePhoto from '../entities/googlePhoto';
@@ -55,7 +82,7 @@ function addGooglePhotos(googlePhotos) {
   };
 }
 
-export function setGooglePhotosByHash(googlePhotosByHash) {
+export function setGooglePhotosByHash(googlePhotosByHash : PhotosByHash) {
   return {
     type: SET_GOOGLE_PHOTOS_BY_HASH,
     payload: googlePhotosByHash

@@ -59,6 +59,20 @@ class ComparePhotos extends Component {
     }
   }
 
+  handleAllMatch() {
+    console.log('handleNextMatch invoked');
+    this.handleNextPhotoGroup();
+  }
+
+  handleNoneMatch() {
+    console.log('handleNoneMatch invoked');
+    this.handleNextPhotoGroup();
+  }
+
+  handleCheckedMatch() {
+    console.log('handleCheckedMatch invoked');
+  }
+
   handleNextPhotoGroup() {
 
     let photoGroupIndex = this.state.photoGroupIndex + 1;
@@ -69,19 +83,41 @@ class ComparePhotos extends Component {
     this.setState( { photoGroupIndex });
   }
 
-  handlePrevPhotoGroup() {
-
-    let photoGroupIndex = this.state.photoGroupIndex - 1;
-    if (photoGroupIndex < 0 ) {
-      photoGroupIndex = this.state.photoGroups.length - 1;
-    }
-
-    this.setState( { photoGroupIndex });
-  }
+  // handlePrevPhotoGroup() {
+  //
+  //   let photoGroupIndex = this.state.photoGroupIndex - 1;
+  //   if (photoGroupIndex < 0 ) {
+  //     photoGroupIndex = this.state.photoGroups.length - 1;
+  //   }
+  //
+  //   this.setState( { photoGroupIndex });
+  // }
 
   formatDateTime(dateTimeStr) {
     const dateTime = new Date(dateTimeStr);
     return dateTime.toDateString() + ', ' + dateTime.toLocaleTimeString();
+  }
+
+  togglePhotoSelection(_) {
+    console.log("togglePhotoSelection");
+
+    // if (this.selectedPhotos.hasOwnProperty(photo.dbId)) {
+    //   delete this.selectedPhotos[photo.dbId];
+    // }
+    // else {
+    //   this.selectedPhotos[photo.dbId] = photo;
+    // }
+    //
+    // let selectedPhotos = {};
+    //
+    // for (var property in this.selectedPhotos) {
+    //   if (this.selectedPhotos.hasOwnProperty(property)) {
+    //     selectedPhotos[property] = this.selectedPhotos[property];
+    //   }
+    // }
+    //
+    // this.props.updateSelectedPhotos(selectedPhotos);
+    // this.selectedPhotos = selectedPhotos;
   }
 
   getPhotosToDisplay(photos) {
@@ -115,6 +151,9 @@ class ComparePhotos extends Component {
             width={width}
             height={height}
           />
+          <input id={photo.url} type="checkbox" className="thumbSelector"
+            onClick={() => self.togglePhotoSelection(photo)}
+          />
           <p>{'Name: ' + photo.getName()}</p>
           <p>{'DateTime: ' + formattedDateTime}</p>
           <p>{'ExifDateTime: ' + formattedExifDateTime}</p>
@@ -129,14 +168,30 @@ class ComparePhotos extends Component {
     return photosJSX;
   }
 
-  render() {
+  // getButtonButtonStyle(){
+  //   return {
+  //     height: '24px',
+  //     width: '240px',
+  //   };
+  // }
 
-    const buttonStyle = {
-      marginLeft: '2px',
-      marginTop: '4px',
+  getButtonStyle() {
+    return {
+      height: '24px',
+      width: '240px',
+      marginLeft: '2px'
+    };
+  }
+
+  getButtonLabelStyle() {
+    return {
       fontSize: '12px',
     };
+  }
 
+  render() {
+
+    let self = this;
 
     const photoGroups = this.state.photoGroups[this.state.photoGroupIndex];
     if (!photoGroups) {
@@ -145,20 +200,30 @@ class ComparePhotos extends Component {
       );
     }
 
+    // buttonStyle={this.getButtonButtonStyle()}
+
     return (
       <MuiThemeProvider>
         <div className="photoPageContainer">
           <div className="photosDiv">
             <div className="dayOfPhotosDiv" key={Math.random().toString()}>
               <RaisedButton
-                label='Prev'
-                onClick={this.handlePrevPhotoGroup.bind(this)}
-                style={buttonStyle}
+                label='All Match'
+                onClick={self.handleAllMatch.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
               />
               <RaisedButton
-                label='Next'
-                onClick={this.handleNextPhotoGroup.bind(this)}
-                style={buttonStyle}
+                label='None Match'
+                onClick={this.handleNoneMatch.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
+                label='Checked Match'
+                onClick={this.handleCheckedMatch.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
               />
               <ul className="flex-container wrap">
                 {this.getPhotosToDisplay(photoGroups.photos)}

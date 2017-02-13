@@ -25,6 +25,7 @@ import Photo from '../entities/photo';
 // https://flowtype.org/docs/quick-reference.html#type-aliases
 type IdenticalPhotos = {
   hash: string,
+  key: string,
   photos: Array<Photo>,
   closestGooglePhoto: ClosestHashSearchResult
 };
@@ -184,9 +185,9 @@ function getMatchingPhotos(photos) : PhotosByHash {
     if (!photosByHash[key]) {
       // TODO - any better way to do this other than by making this a class?
       let closestGooglePhoto: ClosestHashSearchResult = { minHashDistance: 1, googlePhotoIndexOfMinHashDistance: -1};
-      let identicalPhotos : IdenticalPhotos = { hash: '', photos: [], closestGooglePhoto};
-      // identicalPhotos.hash = hash;
-      identicalPhotos.hash = key;
+      let identicalPhotos : IdenticalPhotos = { hash: '', key: '', photos: [], closestGooglePhoto};
+      identicalPhotos.hash = hash;
+      identicalPhotos.key = key;
       identicalPhotos.photos.push(photo);
       photosByHash[key] = identicalPhotos;
     }
