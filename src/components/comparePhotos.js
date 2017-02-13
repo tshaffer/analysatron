@@ -1,8 +1,6 @@
 // @flow
 
 import Photo from '../entities/photo';
-// import DrivePhoto from '../entities/drivePhoto';
-// import GooglePhoto from '../entities/googlePhoto';
 
 type PhotoItem = {
   photo: Photo,
@@ -72,21 +70,6 @@ class ComparePhotos extends Component {
 
         break;
       }
-      // case 'identicalDrivePhotos':
-      // {
-      //   const drivePhotosByHash = this.props.drivePhotosByHash;
-      //   for (let hash in drivePhotosByHash) {
-      //     if (drivePhotosByHash.hasOwnProperty(hash)) {
-      //       const identicalPhotos = drivePhotosByHash[hash];
-      //       const identicalDrivePhotos = identicalPhotos.photos;
-      //       const closestGooglePhoto = identicalPhotos.closestGooglePhoto;
-      //       if (closestGooglePhoto.minHashDistance === 1 && identicalDrivePhotos.length > 1) {
-      //         debugger;
-      //       }
-      //     }
-      //   }
-      //   break;
-      // }
       default: {
         debugger;
       }
@@ -94,12 +77,25 @@ class ComparePhotos extends Component {
   }
 
   handleAllMatch() {
+
     console.log('handleNextMatch invoked');
+
+    const identicalPhotos : IdenticalPhotos = this.state.identicalPhotosCollection[this.state.identicalPhotoCollectionIndex];
+    identicalPhotos.photoItems.forEach( (photoItem: PhotoItem) => {
+      photoItem.matchedPhotoGroupIndex = 0;
+    });
+
     this.handleNextIdenticalPhotos();
   }
 
   handleNoneMatch() {
     console.log('handleNoneMatch invoked');
+
+    const identicalPhotos : IdenticalPhotos = this.state.identicalPhotosCollection[this.state.identicalPhotoCollectionIndex];
+    identicalPhotos.photoItems.forEach( (photoItem: PhotoItem) => {
+      photoItem.matchedPhotoGroupIndex = -1;
+    });
+
     this.handleNextIdenticalPhotos();
   }
 
@@ -117,16 +113,6 @@ class ComparePhotos extends Component {
     this.setState( { identicalPhotoCollectionIndex });
   }
 
-  // handlePrevPhotoGroup() {
-  //
-  //   let photoGroupIndex = this.state.photoGroupIndex - 1;
-  //   if (photoGroupIndex < 0 ) {
-  //     photoGroupIndex = this.state.photoGroups.length - 1;
-  //   }
-  //
-  //   this.setState( { photoGroupIndex });
-  // }
-
   formatDateTime(dateTimeStr : string) {
     const dateTime = new Date(dateTimeStr);
     return dateTime.toDateString() + ', ' + dateTime.toLocaleTimeString();
@@ -134,24 +120,6 @@ class ComparePhotos extends Component {
 
   togglePhotoSelection(_ : any) {
     console.log("togglePhotoSelection");
-
-    // if (this.selectedPhotos.hasOwnProperty(photo.dbId)) {
-    //   delete this.selectedPhotos[photo.dbId];
-    // }
-    // else {
-    //   this.selectedPhotos[photo.dbId] = photo;
-    // }
-    //
-    // let selectedPhotos = {};
-    //
-    // for (var property in this.selectedPhotos) {
-    //   if (this.selectedPhotos.hasOwnProperty(property)) {
-    //     selectedPhotos[property] = this.selectedPhotos[property];
-    //   }
-    // }
-    //
-    // this.props.updateSelectedPhotos(selectedPhotos);
-    // this.selectedPhotos = selectedPhotos;
   }
 
   getPhotosToDisplay(photoItems : Array<PhotoItem>) {
@@ -203,13 +171,6 @@ class ComparePhotos extends Component {
     return photosJSX;
   }
 
-  // getButtonButtonStyle(){
-  //   return {
-  //     height: '24px',
-  //     width: '240px',
-  //   };
-  // }
-
   getButtonStyle() {
     return {
       height: '24px',
@@ -237,8 +198,6 @@ class ComparePhotos extends Component {
         <div>Loading...</div>
       );
     }
-
-    // buttonStyle={this.getButtonButtonStyle()}
 
     return (
       <MuiThemeProvider>
@@ -279,10 +238,65 @@ ComparePhotos.propTypes = {
   comparisonType: React.PropTypes.string.isRequired,
   drivePhotosByHash: React.PropTypes.object.isRequired,
   googlePhotosByHash: React.PropTypes.object.isRequired,
-
-  // diskImageUrl: React.PropTypes.string.isRequired,
-  // googleImageUrl: React.PropTypes.string.isRequired,
 };
 
 
 export default ComparePhotos;
+
+// diskImageUrl: React.PropTypes.string.isRequired,
+// googleImageUrl: React.PropTypes.string.isRequired,
+
+// handlePrevPhotoGroup() {
+//
+//   let photoGroupIndex = this.state.photoGroupIndex - 1;
+//   if (photoGroupIndex < 0 ) {
+//     photoGroupIndex = this.state.photoGroups.length - 1;
+//   }
+//
+//   this.setState( { photoGroupIndex });
+// }
+
+// import DrivePhoto from '../entities/drivePhoto';
+// import GooglePhoto from '../entities/googlePhoto';
+// case 'identicalDrivePhotos':
+// {
+//   const drivePhotosByHash = this.props.drivePhotosByHash;
+//   for (let hash in drivePhotosByHash) {
+//     if (drivePhotosByHash.hasOwnProperty(hash)) {
+//       const identicalPhotos = drivePhotosByHash[hash];
+//       const identicalDrivePhotos = identicalPhotos.photos;
+//       const closestGooglePhoto = identicalPhotos.closestGooglePhoto;
+//       if (closestGooglePhoto.minHashDistance === 1 && identicalDrivePhotos.length > 1) {
+//         debugger;
+//       }
+//     }
+//   }
+//   break;
+// }
+
+// if (this.selectedPhotos.hasOwnProperty(photo.dbId)) {
+//   delete this.selectedPhotos[photo.dbId];
+// }
+// else {
+//   this.selectedPhotos[photo.dbId] = photo;
+// }
+//
+// let selectedPhotos = {};
+//
+// for (var property in this.selectedPhotos) {
+//   if (this.selectedPhotos.hasOwnProperty(property)) {
+//     selectedPhotos[property] = this.selectedPhotos[property];
+//   }
+// }
+//
+// this.props.updateSelectedPhotos(selectedPhotos);
+// this.selectedPhotos = selectedPhotos;
+// buttonStyle={this.getButtonButtonStyle()}
+
+// getButtonButtonStyle(){
+//   return {
+//     height: '24px',
+//     width: '240px',
+//   };
+// }
+
