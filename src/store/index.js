@@ -24,7 +24,7 @@ import Photo from '../entities/photo';
 
 type PhotoItem = {
   photo: Photo,
-  matchedPhotoGroupIndex: number
+  matchedPhotoGroupIndex: ?number
 }
 // https://flowtype.org/docs/quick-reference.html#type-aliases
 type IdenticalPhotos = {
@@ -195,7 +195,7 @@ function getMatchingPhotos(photos) : PhotosByHash {
 
       const photoItem : PhotoItem = {
         photo,
-        matchedPhotoGroupIndex : -99
+        matchedPhotoGroupIndex : null
       };
       identicalPhotos.photoItems.push(photoItem);
       photosByHash[key] = identicalPhotos;
@@ -204,7 +204,7 @@ function getMatchingPhotos(photos) : PhotosByHash {
       let identicalPhotos : IdenticalPhotos = photosByHash[key];
       const photoItem : PhotoItem = {
         photo,
-        matchedPhotoGroupIndex : -99
+        matchedPhotoGroupIndex : null
       };
       identicalPhotos.photoItems.push(photoItem);
     }
