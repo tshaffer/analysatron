@@ -22,11 +22,15 @@ import Photo from '../entities/photo';
 // import DrivePhoto from '../entities/drivePhoto';
 // import GooglePhoto from '../entities/googlePhoto';
 
+type PhotoItem = {
+  photo: Photo,
+  matchedPhotoGroupIndex: number
+}
 // https://flowtype.org/docs/quick-reference.html#type-aliases
 type IdenticalPhotos = {
   hash: string,
   key: string,
-  photos: Array<Photo>,
+  photoItems: Array<PhotoItem>,
   closestGooglePhoto: ClosestHashSearchResult
 };
 
@@ -185,15 +189,24 @@ function getMatchingPhotos(photos) : PhotosByHash {
     if (!photosByHash[key]) {
       // TODO - any better way to do this other than by making this a class?
       let closestGooglePhoto: ClosestHashSearchResult = { minHashDistance: 1, googlePhotoIndexOfMinHashDistance: -1};
-      let identicalPhotos : IdenticalPhotos = { hash: '', key: '', photos: [], closestGooglePhoto};
+      let identicalPhotos : IdenticalPhotos = { hash: '', key: '', photoItems: [], closestGooglePhoto};
       identicalPhotos.hash = hash;
       identicalPhotos.key = key;
-      identicalPhotos.photos.push(photo);
+
+      const photoItem : PhotoItem = {
+        photo,
+        matchedPhotoGroupIndex : -99
+      };
+      identicalPhotos.photoItems.push(photoItem);
       photosByHash[key] = identicalPhotos;
     }
     else {
       let identicalPhotos : IdenticalPhotos = photosByHash[key];
-      identicalPhotos.photos.push(photo);
+      const photoItem : PhotoItem = {
+        photo,
+        matchedPhotoGroupIndex : -99
+      };
+      identicalPhotos.photoItems.push(photoItem);
     }
   });
 

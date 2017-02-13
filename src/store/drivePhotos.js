@@ -3,10 +3,14 @@
 import Photo from '../entities/photo';
 
 // https://flowtype.org/docs/quick-reference.html#type-aliases
+type PhotoItem = {
+  photo: Photo,
+  matchedPhotoGroupIndex: number
+}
 type IdenticalPhotos = {
   hash: string,
   key: string,
-  photos: Array<Photo>,
+  photoItems: Array<PhotoItem>,
   closestGooglePhoto: ClosestHashSearchResult
 };
 
