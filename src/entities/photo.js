@@ -19,4 +19,23 @@ export default class Photo {
     return this.hash;
   }
 
+  getUrl() : string {
+    return '';
+  }
+
+  getWidth(): string {
+    return '';
+  }
+
+  getHeight(): string {
+    return '';
+  }
+
+  getDateTime(): string {
+    return '';
+  }
+
+  getExifDateTime(): string {
+    return '';
+  }
 }

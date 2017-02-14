@@ -19,6 +19,10 @@ export default class GooglePhoto extends Photo {
     this.exifDateTime = googlePhotoSpec.exifDateTime;
   }
 
+  getUrl() : string {
+    return this.url;
+  }
+
   getWidth(): string {
     return this.width;
   }

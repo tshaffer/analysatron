@@ -113,7 +113,8 @@ class ComparePhotos extends Component {
     });
 
     const newGroupIndex = minIndex + 1;
-    const matchingPhotoItems : PhotoItems = this.state.identicalPhotoItemsCollection[this.state.identicalPhotoItemsCollectionIndex];
+    const matchingPhotoItems : PhotoItems =
+      this.state.identicalPhotoItemsCollection[this.state.identicalPhotoItemsCollectionIndex];
     matchingPhotoItems.forEach( (photoItem) => {
       photoItem.matchedPhotoGroupIndex = newGroupIndex;
     });
@@ -123,7 +124,8 @@ class ComparePhotos extends Component {
 
   handleNoneMatch() {
 
-    const nonMatchingPhotoItems : PhotoItems = this.state.identicalPhotoItemsCollection[this.state.identicalPhotoItemsCollectionIndex];
+    const nonMatchingPhotoItems : PhotoItems =
+      this.state.identicalPhotoItemsCollection[this.state.identicalPhotoItemsCollectionIndex];
     nonMatchingPhotoItems.forEach( (photoItem) => {
       photoItem.matchedPhotoGroupIndex = -1;
     });
@@ -163,8 +165,8 @@ class ComparePhotos extends Component {
     let photosJSX = photoItems.map(function(photoItem: PhotoItem) {
 
       const photo = photoItem.photo;
-      let width = photo.getWidth();
-      let height = photo.getHeight();
+      let width = Number(photo.getWidth());
+      let height = Number(photo.getHeight());
 
       let aspectRatio = width / height;
       if (height > maxHeight) {
@@ -182,11 +184,11 @@ class ComparePhotos extends Component {
         <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
           <img
             className="thumbImg"
-            src={photo.url}
+            src={photo.getUrl()}
             width={width}
             height={height}
           />
-          <input id={photo.url} type="checkbox" className="thumbSelector"
+          <input id={photo.getUrl()} type="checkbox" className="thumbSelector"
             onClick={() => self.togglePhotoSelection(photo)}
           />
           <p>{'Name: ' + photo.getName()}</p>
@@ -228,6 +230,9 @@ class ComparePhotos extends Component {
       );
     }
 
+    const photoItems : PhotoItems =
+      this.state.identicalPhotoItemsCollection[this.state.identicalPhotoItemsCollectionIndex];
+
     return (
       <MuiThemeProvider>
         <div className="photoPageContainer">
@@ -252,7 +257,7 @@ class ComparePhotos extends Component {
                 labelStyle={this.getButtonLabelStyle()}
               />
               <ul className="flex-container wrap">
-                {this.getPhotosToDisplay(this.state.identicalPhotoItemsCollection[this.state.identicalPhotoItemsCollectionIndex])}
+                {this.getPhotosToDisplay(photoItems)}
               </ul>
             </div>
           </div>
