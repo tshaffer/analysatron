@@ -2,37 +2,7 @@
 
 import Photo from '../entities/photo';
 
-type PhotoItem = {
-  photo: Photo,
-  matchedPhotoGroupIndex: ?number
-}
-
-type PhotoItems = Array<PhotoItem>;
-
-// https://flowtype.org/docs/quick-reference.html#type-aliases
-type IdenticalPhotos = {
-  hash: string,
-  key: string,
-  photoItems: PhotoItems,
-  closestGooglePhoto: ClosestHashSearchResult
-};
-
-type PhotosByHash = { [hash:string]: IdenticalPhotos };
-
-type MatchedPhoto = {
-  drivePhotos: IdenticalPhotos,
-  matchedGooglePhotos: IdenticalPhotos
-};
-
-type PhotoComparisonResults = {
-  matchedPhotos: Array<MatchedPhoto>,
-  unmatchedPhotos: Array<IdenticalPhotos>
-};
-
-type ClosestHashSearchResult = {
-  minHashDistance: number,
-  googlePhotoIndexOfMinHashDistance: number
-};
+import type { PhotoItem, PhotoItems, IdenticalPhotos, PhotosByHash, MatchedPhoto, PhotoComparisonResults, ClosestHashSearchResult } from '../types';
 
 // type CPState = {
 //   identicalPhotoCollectionIndex: number,
