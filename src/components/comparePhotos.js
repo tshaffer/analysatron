@@ -1,5 +1,7 @@
 // @flow
 
+const fs = require('fs');
+
 import Photo from '../entities/photo';
 
 import type { PhotoItem, PhotoItems, IdenticalPhotos, PhotosByHash, MatchedPhoto, PhotoComparisonResults, ClosestHashSearchResult } from '../types';
@@ -46,13 +48,14 @@ class ComparePhotos extends Component {
         const googlePhotosByHash : PhotosByHash = this.props.googlePhotosByHash;
 
         for (let hash in googlePhotosByHash) {
+
           if (googlePhotosByHash.hasOwnProperty(hash)) {
             const identicalPhotos : IdenticalPhotos = googlePhotosByHash[hash];
             const identicalPhotoItems : PhotoItems = identicalPhotos.photoItems;
             if (identicalPhotoItems.length > 1) {
               let photoItemsWithinIdenticalPhotosThatMayMatch : PhotoItems = [];
               identicalPhotoItems.forEach( (photoItem: PhotoItem) => {
-                if (!photoItem.matchedPhotoGroupIndex) {
+                if (photoItem.matchedPhotoGroupIndex === null || photoItem.matchedPhotoGroupIndex === undefined) {
                   photoItemsWithinIdenticalPhotosThatMayMatch.push(photoItem);
                 }
               });
@@ -134,7 +137,10 @@ class ComparePhotos extends Component {
   }
 
   handleSave() {
-    console.log('pizza');
+    const googlePhotosByHash = this.props.googlePhotosByHash;
+    const googlePhotosByHashStr = JSON.stringify(googlePhotosByHash, null, 2);
+    fs.writeFileSync('googlePhotosByHash.json', googlePhotosByHashStr);
+    console.log('googlePhotosByHash write complete.');
   }
 
   togglePhotoSelection(photoItem : PhotoItem) {
@@ -148,7 +154,7 @@ class ComparePhotos extends Component {
       delete this.selectedPhotos[key];
     }
     else {
-      this.selectedPhotos[key] = photo;
+      this.selectedPhotos[key] = photoItem;
     }
   }
 
