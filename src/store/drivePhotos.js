@@ -1,8 +1,6 @@
 // @flow
 
-import Photo from '../entities/photo';
-
-import type { PhotoItem, PhotoItems, IdenticalPhotos, PhotosByHash, MatchedPhoto, PhotoComparisonResults, ClosestHashSearchResult } from '../types';
+import type { PhotosByHash } from '../types';
 
 import { readFile } from '../utilities/utils';
 

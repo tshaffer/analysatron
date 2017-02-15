@@ -2,9 +2,7 @@
 
 const fs = require('fs');
 
-import Photo from '../entities/photo';
-
-import type { PhotoItem, PhotoItems, IdenticalPhotos, PhotosByHash, MatchedPhoto, PhotoComparisonResults, ClosestHashSearchResult } from '../types';
+import type { PhotoItem, PhotoItems, IdenticalPhotos, PhotosByHash } from '../types';
 
 // type CPState = {
 //   identicalPhotoCollectionIndex: number,
@@ -148,7 +146,7 @@ class ComparePhotos extends Component {
     console.log("togglePhotoSelection");
 
     const photo = photoItem.photo;
-    const key = photo.url;
+    const key = photo.getUrl();
 
     if (this.selectedPhotos.hasOwnProperty(key)) {
       delete this.selectedPhotos[key];

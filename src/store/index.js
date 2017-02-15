@@ -18,41 +18,19 @@ import {
 } from './googlePhotos';
 
 
-import Photo from '../entities/photo';
+// import Photo from '../entities/photo';
 import GooglePhoto from '../entities/googlePhoto';
 
-import type { PhotoItem, PhotoItems, IdenticalPhotos, PhotosByHash, MatchedPhoto, PhotoComparisonResults, ClosestHashSearchResult } from '../types';
+import type {
+  PhotoItem,
+  IdenticalPhotos,
+  PhotosByHash,
+  MatchedPhoto,
+  PhotoComparisonResults,
+  ClosestHashSearchResult
+}
+from '../types';
 
-// import DrivePhoto from '../entities/drivePhoto';
-// import GooglePhoto from '../entities/googlePhoto';
-
-// type PhotoItem = {
-//   photo: Photo,
-//   matchedPhotoGroupIndex: ?number
-// }
-// // https://flowtype.org/docs/quick-reference.html#type-aliases
-// type IdenticalPhotos = {
-//   hash: string,
-//   key: string,
-//   photoItems: Array<PhotoItem>,
-//   closestGooglePhoto: ClosestHashSearchResult
-// };
-//
-// type PhotosByHash = { [hash:string]: IdenticalPhotos };
-//
-// type MatchedPhoto = {
-//   drivePhotos: IdenticalPhotos,
-//   matchedGooglePhotos: IdenticalPhotos
-// };
-//
-// type PhotoComparisonResults = {
-//   matchedPhotos: Array<MatchedPhoto>,
-//   unmatchedPhotos: Array<IdenticalPhotos>
-// };
-// type ClosestHashSearchResult = {
-//   minHashDistance: number,
-//   googlePhotoIndexOfMinHashDistance: number
-// }
 
 export function analyzePhotos() {
 
@@ -82,30 +60,22 @@ export function analyzePhotos() {
         let googlePhotosByHash = {};
         for (let hash in googlePhotosByHashRaw) {
           if (googlePhotosByHashRaw.hasOwnProperty(hash)) {
-            const identicalPhotos : IdenticalPhotos = googlePhotosByHashRaw[hash];
+            // const identicalPhotos : IdenticalPhotos = googlePhotosByHashRaw[hash];
+            const identicalPhotos = googlePhotosByHashRaw[hash];
             const photoItems = identicalPhotos.photoItems;
             photoItems.forEach( (photoItem) => {
-              const photo = photoItem.photo;
-              let newPhoto = new GooglePhoto(
+              const photo = new GooglePhoto(
                 {
-                  name: '',
-                  hash: '',
-                  url: '',
-                  width: 0,
-                  height: 0,
-                  dateTime: '',
-                  exifDateTime: ''
+                  name: photoItem.photo.name,
+                  hash: photoItem.photo.hash,
+                  url: photoItem.photo.url,
+                  width: photoItem.photo.width,
+                  height: photoItem.photo.height,
+                  dateTime: photoItem.photo.dateTime,
+                  exifDateTime: photoItem.photo.exifDateTime
                 }
               );
-              newPhoto.name = photo.name;
-              newPhoto.hash = photo.hash;
-              newPhoto.url = photo.url;
-              newPhoto.width = photo.width;
-              newPhoto.height = photo.height;
-              newPhoto.dateTime = photo.dateTime;
-              newPhoto.exifDateTime = photo.exifDateTime;
-
-              photoItem.photo = newPhoto;
+              photoItem.photo = photo;
             });
 
             googlePhotosByHash[hash] = identicalPhotos;
