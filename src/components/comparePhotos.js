@@ -31,6 +31,8 @@ class ComparePhotos extends Component {
       identicalPhotoItemsCollectionIndex: 0,
       identicalPhotoItemsCollection: []
     };
+
+    this.selectedPhotos = {};
   }
 
   state : Object;
@@ -71,6 +73,18 @@ class ComparePhotos extends Component {
     }
   }
 
+  selectedPhotos: Object;
+
+  nextIdenticalPhotoCollection() {
+
+    let identicalPhotoItemsCollectionIndex = this.state.identicalPhotoItemsCollectionIndex + 1;
+    if (identicalPhotoItemsCollectionIndex >= this.state.identicalPhotoItemsCollection.length) {
+      identicalPhotoItemsCollectionIndex = 0;
+    }
+
+    this.setState( { identicalPhotoItemsCollectionIndex });
+  }
+
   handleAllMatch() {
 
     let minIndex : number = -1;
@@ -103,27 +117,74 @@ class ComparePhotos extends Component {
     this.nextIdenticalPhotoCollection();
   }
 
-  handleCheckedMatch() {
-    console.log('handleCheckedMatch invoked');
+  handleNext() {
+
+    this.nextIdenticalPhotoCollection();
+
   }
 
-  nextIdenticalPhotoCollection() {
+  handlePrev() {
 
-    let identicalPhotoItemsCollectionIndex = this.state.identicalPhotoItemsCollectionIndex + 1;
-    if (identicalPhotoItemsCollectionIndex >= this.state.identicalPhotoItemsCollection.length) {
-      identicalPhotoItemsCollectionIndex = 0;
+    let identicalPhotoItemsCollectionIndex = this.state.identicalPhotoItemsCollectionIndex - 1;
+    if (identicalPhotoItemsCollectionIndex < 0) {
+      identicalPhotoItemsCollectionIndex = this.state.identicalPhotoItemsCollection.length - 1;
     }
 
     this.setState( { identicalPhotoItemsCollectionIndex });
   }
 
+  handleSave() {
+    console.log('pizza');
+  }
+
+  togglePhotoSelection(photoItem : PhotoItem) {
+
+    console.log("togglePhotoSelection");
+
+    const photo = photoItem.photo;
+    const key = photo.url;
+
+    if (this.selectedPhotos.hasOwnProperty(key)) {
+      delete this.selectedPhotos[key];
+    }
+    else {
+      this.selectedPhotos[key] = photo;
+    }
+  }
+
+  handleCheckedMatch() {
+
+    console.log('handleCheckedMatch invoked');
+
+    let minIndex : number = -1;
+    const identicalPhotosItems : PhotoItems =
+      this.state.identicalPhotoItemsCollection[this.state.identicalPhotoItemsCollectionIndex];
+    identicalPhotosItems.forEach( (photoItem: PhotoItem) => {
+      if (photoItem.matchedPhotoGroupIndex && photoItem.matchedPhotoGroupIndex > minIndex) {
+        minIndex = photoItem.matchedPhotoGroupIndex;
+      }
+    });
+
+    const newIndex = minIndex + 1;
+    for (let key in this.selectedPhotos) {
+      if (this.selectedPhotos.hasOwnProperty(key)) {
+        let photoItem = this.selectedPhotos[key];
+        photoItem.matchedPhotoGroupIndex = newIndex;
+      }
+    }
+
+    // TODO - how to redisplay?
+    // let identicalPhotoItemsCollectionIndex = this.state.identicalPhotoItemsCollectionIndex;
+    // identicalPhotoItemsCollectionIndex++;
+    // this.setState( { identicalPhotoItemsCollectionIndex });
+    // identicalPhotoItemsCollectionIndex--;
+    // this.setState( { identicalPhotoItemsCollectionIndex });
+
+  }
+
   formatDateTime(dateTimeStr : string) {
     const dateTime = new Date(dateTimeStr);
     return dateTime.toDateString() + ', ' + dateTime.toLocaleTimeString();
-  }
-
-  togglePhotoSelection(_ : any) {
-    console.log("togglePhotoSelection");
   }
 
   getPhotosToDisplay(photoItems : PhotoItems) {
@@ -159,7 +220,7 @@ class ComparePhotos extends Component {
             height={height}
           />
           <input id={photo.getUrl()} type="checkbox" className="thumbSelector"
-            onClick={() => self.togglePhotoSelection(photo)}
+            onClick={() => self.togglePhotoSelection(photoItem)}
           />
           <p>{'Name: ' + photo.getName()}</p>
           <p>{'DateTime: ' + formattedDateTime}</p>
@@ -178,7 +239,7 @@ class ComparePhotos extends Component {
   getButtonStyle() {
     return {
       height: '24px',
-      width: '240px',
+      width: '200px',
       marginLeft: '2px'
     };
   }
@@ -223,6 +284,24 @@ class ComparePhotos extends Component {
               <RaisedButton
                 label='Checked Match'
                 onClick={this.handleCheckedMatch.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
+                label='Next'
+                onClick={this.handleNext.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
+                label='Prev'
+                onClick={this.handlePrev.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
+                label='Save'
+                onClick={this.handleSave.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />

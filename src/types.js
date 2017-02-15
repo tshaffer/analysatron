@@ -1,6 +1,8 @@
 // @flow
 
 // https://flowtype.org/docs/quick-reference.html#type-aliases
+// https://flowtype.org/blog/2015/02/18/Import-Types.html
+// https://flowexport type.org/docs/quick-reference.html#export type-aliases
 
 import Photo from './entities/photo';
 
@@ -11,7 +13,6 @@ export type PhotoItem = {
 
 export type PhotoItems = Array<PhotoItem>;
 
-// https://flowexport type.org/docs/quick-reference.html#export type-aliases
 export type IdenticalPhotos = {
   hash: string,
   key: string,
