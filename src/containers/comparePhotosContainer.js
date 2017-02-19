@@ -24,7 +24,7 @@ function mapStateToProps (state, ownProps) {
     googlePhotos: state.googlePhotos.googlePhotos,
     drivePhotosByHash: state.drivePhotos.drivePhotosByHash,
     googlePhotosByHash: state.googlePhotos.googlePhotosByHash,
-    comparisonType: ownProps.params.id
+    parameters: ownProps.params
   };
 }
 //

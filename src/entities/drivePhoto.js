@@ -26,8 +26,12 @@ export default class DrivePhoto extends Photo {
     this.name = parts[parts.length - 1];
   }
 
-  getPath() : string {
+  getUrl() : string {
     return 'file:////' + this.path;
+  }
+
+  getPath() : string {
+    return this.path;
   }
 
   getWidth(): string {

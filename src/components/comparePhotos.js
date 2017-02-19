@@ -4,11 +4,6 @@ const fs = require('fs');
 
 import type { PhotoItem, PhotoItems, IdenticalPhotos, PhotosByHash } from '../types';
 
-// type CPState = {
-//   identicalPhotoCollectionIndex: number,
-//   identicalPhotoItemsCollection: Array<PhotoItems>
-// };
-
 import React, { Component } from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -18,14 +13,6 @@ class ComparePhotos extends Component {
 
   constructor(props: Object) {
     super(props);
-
-    // const cpState: CPState = {
-    //   identicalPhotoCollectionIndex: 0,
-    //   identicalPhotoItemsCollection: []
-    // };
-
-    // identicalPhotoItemsCollectionIndex : 0,
-    //   identicalPhotoItemsCollection: []
 
     this.state = {
       identicalPhotoItemsCollectionIndex: 0,
@@ -39,9 +26,13 @@ class ComparePhotos extends Component {
 
   componentWillMount() {
 
+    const parameters = this.props.parameters.ids.split(",");
+    this.comparisonType = parameters[0];
+    this.outputFileName = parameters[1];
+
     let identicalPhotoItemsCollection : Array<PhotoItems> = [];
 
-    switch(this.props.comparisonType) {
+    switch(this.comparisonType) {
       case 'identicalGooglePhotos': {
         const googlePhotosByHash : PhotosByHash = this.props.googlePhotosByHash;
 
@@ -82,7 +73,8 @@ class ComparePhotos extends Component {
                 identicalPhotoItems.forEach( (photoItem: PhotoItem) => {
                   if (photoItem.matchedPhotoGroupIndex === null || photoItem.matchedPhotoGroupIndex === undefined) {
                     if (photoItem.photo.path.startsWith('E:\\RemovableMedia\\')) {
-                      let newPath = photoItem.photo.path.replace('E:\\RemovableMedia\\', '/Users/tedshaffer/Documents/RemovableMedia/');
+                      let newPath = photoItem.photo.path.replace('E:\\RemovableMedia\\',
+                        '/Users/tedshaffer/Documents/RemovableMedia/');
                       newPath = this.replaceAll(newPath, '\\', '/');
                       if (fs.existsSync(newPath)) {
                         photoItem.photo.path = newPath;
@@ -183,7 +175,7 @@ class ComparePhotos extends Component {
   handleSave() {
     const googlePhotosByHash = this.props.googlePhotosByHash;
     const googlePhotosByHashStr = JSON.stringify(googlePhotosByHash, null, 2);
-    fs.writeFileSync('googlePhotosByHash.json', googlePhotosByHashStr);
+    fs.writeFileSync(this.outputFileName, googlePhotosByHashStr);
     console.log('googlePhotosByHash write complete.');
   }
 
@@ -267,7 +259,7 @@ class ComparePhotos extends Component {
         <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
           <img
             className="thumbImg"
-            src={photo.getPath()}
+            src={photo.getUrl()}
             width={width}
             height={height}
           />
@@ -370,9 +362,9 @@ class ComparePhotos extends Component {
 
 ComparePhotos.propTypes = {
   googlePhotos: React.PropTypes.array.isRequired,
-  comparisonType: React.PropTypes.string.isRequired,
   drivePhotosByHash: React.PropTypes.object.isRequired,
   googlePhotosByHash: React.PropTypes.object.isRequired,
+  parameters: React.PropTypes.object.isRequired,
 };
 
 

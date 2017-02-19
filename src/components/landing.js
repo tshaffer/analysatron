@@ -16,12 +16,21 @@ class Landing extends Component {
   }
 
   handleCompareIdenticalGooglePhotos() {
-    hashHistory.push('/comparePhotosContainer/' + 'identicalGooglePhotos');
 
+    const parameters = [
+      'identicalGooglePhotos',
+      'googlePhotosByHash.json'
+    ];
+    hashHistory.push('/comparePhotosContainer/' + parameters);
   }
 
   handleCompareIdenticalDrivePhotos() {
-    hashHistory.push('/comparePhotosContainer/' + 'identicalDrivePhotos');
+
+    const parameters = [
+      'identicalDrivePhotos',
+      'drivePhotosByHash.json'
+    ];
+    hashHistory.push('/comparePhotosContainer/' + parameters);
   }
 
 
