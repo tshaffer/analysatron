@@ -26,6 +26,10 @@ export default class DrivePhoto extends Photo {
     this.name = parts[parts.length - 1];
   }
 
+  getPath() : string {
+    return 'file:////' + this.path;
+  }
+
   getWidth(): string {
     // apparently, not all drive photos have dimensions
     if (!this.dimensions) {

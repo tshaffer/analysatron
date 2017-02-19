@@ -68,6 +68,43 @@ class ComparePhotos extends Component {
         this.setState( { identicalPhotoItemsCollection });
         break;
       }
+      case 'identicalDrivePhotos':
+        {
+          const drivePhotosByHash : PhotosByHash = this.props.drivePhotosByHash;
+
+          for (let hash in drivePhotosByHash) {
+
+            if (drivePhotosByHash.hasOwnProperty(hash)) {
+              const identicalPhotos : IdenticalPhotos = drivePhotosByHash[hash];
+              const identicalPhotoItems : PhotoItems = identicalPhotos.photoItems;
+              if (identicalPhotoItems.length > 1) {
+                let photoItemsWithinIdenticalPhotosThatMayMatch : PhotoItems = [];
+                identicalPhotoItems.forEach( (photoItem: PhotoItem) => {
+                  if (photoItem.matchedPhotoGroupIndex === null || photoItem.matchedPhotoGroupIndex === undefined) {
+                    if (photoItem.photo.path.startsWith('E:\\RemovableMedia\\')) {
+                      let newPath = photoItem.photo.path.replace('E:\\RemovableMedia\\', '/Users/tedshaffer/Documents/RemovableMedia/');
+                      newPath = this.replaceAll(newPath, '\\', '/');
+                      if (fs.existsSync(newPath)) {
+                        photoItem.photo.path = newPath;
+                        photoItemsWithinIdenticalPhotosThatMayMatch.push(photoItem);
+                      }
+                    }
+                    // photoItemsWithinIdenticalPhotosThatMayMatch.push(photoItem);
+                  }
+                });
+
+                if (photoItemsWithinIdenticalPhotosThatMayMatch.length > 1) {
+                  identicalPhotoItemsCollection.push(photoItemsWithinIdenticalPhotosThatMayMatch);
+                }
+              }
+            }
+          }
+
+          this.setState( { identicalPhotoItemsCollection });
+          break;
+        }
+
+
       default: {
         debugger;
       }
@@ -75,6 +112,15 @@ class ComparePhotos extends Component {
   }
 
   selectedPhotos: Object;
+
+
+  escapeRegExp(str) {
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  }
+
+  replaceAll(str, find, replace) {
+    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
+  }
 
   nextIdenticalPhotoCollection() {
 
@@ -215,11 +261,13 @@ class ComparePhotos extends Component {
       let exifDateTime = photo.getExifDateTime();
       let formattedExifDateTime = self.formatDateTime(exifDateTime);
 
+      // src={photo.getUrl()}
+
       return (
         <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
           <img
             className="thumbImg"
-            src={photo.getUrl()}
+            src={photo.getPath()}
             width={width}
             height={height}
           />

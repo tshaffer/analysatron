@@ -81,33 +81,9 @@ export function analyzePhotos() {
             googlePhotosByHash[hash] = identicalPhotos;
           }
         }
-        dispatch(setGooglePhotosByHash(googlePhotosByHash));
-        console.log('Number of google photos with unique keys: ', Object.keys(googlePhotosByHash).length);
 
-        let drivePhotos  = state.drivePhotos.drivePhotos;
-        const drivePhotosByHash : PhotosByHash = getMatchingPhotos(drivePhotos);
-        dispatch(setDrivePhotosByHash(drivePhotosByHash));
-        console.log('Number of drivePhotos: ', drivePhotos.length);
-        console.log('Number of drive photos with unique keys: ', Object.keys(drivePhotosByHash).length);
+        postGooglePhotosByHashAnalysis(googlePhotosByHash, dispatch, state);
 
-        let photoComparisonResults : PhotoComparisonResults =
-          getMatchesByExactHash(drivePhotosByHash, googlePhotosByHash);
-
-        console.log('Number of drive photos with exact hash matches: ', photoComparisonResults.matchedPhotos.length);
-        console.log('Number of drive photos without an exact hash match: ',
-          photoComparisonResults.unmatchedPhotos.length);
-
-        console.log(photoComparisonResults);
-
-        readFile('unmatchedDrivePhotos.json').then((unmatchedDrivePhotosBuffer) => {
-          let unmatchedDrivePhotosStr = decoder.write(unmatchedDrivePhotosBuffer);
-          let unmatchedDrivePhotos = JSON.parse(unmatchedDrivePhotosStr);
-          photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotos;
-          analyzeHashDifferences(photoComparisonResults);
-        }).catch( (err) => {
-          console.log(err);
-          debugger;
-        });
       }).catch( (err) => {
         console.log(err);
         debugger;
@@ -197,7 +173,38 @@ Results:
   };
 }
 
-function analyzeHashDifferences(photoComparisonResults) {
+function postGooglePhotosByHashAnalysis(googlePhotosByHash, dispatch, state) {
+
+  dispatch(setGooglePhotosByHash(googlePhotosByHash));
+  console.log('Number of google photos with unique keys: ', Object.keys(googlePhotosByHash).length);
+
+  let drivePhotos  = state.drivePhotos.drivePhotos;
+  const drivePhotosByHash : PhotosByHash = getMatchingPhotos(drivePhotos);
+  dispatch(setDrivePhotosByHash(drivePhotosByHash));
+  console.log('Number of drivePhotos: ', drivePhotos.length);
+  console.log('Number of drive photos with unique keys: ', Object.keys(drivePhotosByHash).length);
+
+  let photoComparisonResults : PhotoComparisonResults =
+    getMatchesByExactHash(drivePhotosByHash, googlePhotosByHash);
+
+  console.log('Number of drive photos with exact hash matches: ', photoComparisonResults.matchedPhotos.length);
+  console.log('Number of drive photos without an exact hash match: ',
+    photoComparisonResults.unmatchedPhotos.length);
+
+  console.log(photoComparisonResults);
+
+  readFile('unmatchedDrivePhotos.json').then((unmatchedDrivePhotosBuffer) => {
+    let unmatchedDrivePhotosStr = decoder.write(unmatchedDrivePhotosBuffer);
+    let unmatchedDrivePhotos = JSON.parse(unmatchedDrivePhotosStr);
+    photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotos;
+    analyzeHashDifferences(photoComparisonResults);
+  }).catch( (err) => {
+    console.log(err);
+    debugger;
+  });
+}
+
+function analyzeHashDifferences(photoComparisonResults : PhotoComparisonResults) {
 
   // const hashThreshold = 0.04;
   const hashThreshold = 0.05;
@@ -300,13 +307,10 @@ function getMatchesByExactHash(
     if (drivePhotosByHash.hasOwnProperty(key)) {
       const drivePhotos : IdenticalPhotos = drivePhotosByHash[key];
 
-      // TODO - hash should be a property of drivePhotos. i.e., drivePhotos should be an object, not an array
-      const drivePhotoHash = drivePhotos.hash;
-
       // is there a google photo match
-      if (googlePhotosByHash[drivePhotoHash]) {
+      if (googlePhotosByHash[key]) {
 
-        let matchedGooglePhotos: IdenticalPhotos = googlePhotosByHash[drivePhotoHash];
+        let matchedGooglePhotos: IdenticalPhotos = googlePhotosByHash[key];
         let matchedPhoto : MatchedPhoto = {
           drivePhotos,
           matchedGooglePhotos,

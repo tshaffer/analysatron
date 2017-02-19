@@ -23,6 +23,10 @@ export default class Photo {
     return '';
   }
 
+  getPath() : string {
+    return '';
+  }
+
   getWidth(): string {
     return '';
   }
