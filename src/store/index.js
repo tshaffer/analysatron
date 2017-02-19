@@ -34,13 +34,12 @@ from '../types';
 
 export function analyzePhotos() {
 
-  return function (dispatch: Function, getState: Function) {
+  return (dispatch: Function, getState: Function) => {
 
     let readGooglePhotosPromise = dispatch(readGooglePhotos());
     let readDrivePhotosPromise = dispatch(readDrivePhotos());
 
-    Promise.all([readGooglePhotosPromise, readDrivePhotosPromise]).then( () => {
-
+    Promise.all([readGooglePhotosPromise, readDrivePhotosPromise]).then(() => {
 
       // checks for duplicates in drivePhotos db?
       dispatch(buildDrivePhotoDictionaries());
@@ -50,43 +49,16 @@ export function analyzePhotos() {
       let googlePhotos = state.googlePhotos.googlePhotos;
       console.log('Number of googlePhotos: ', googlePhotos.length);
 
-      // const googlePhotosByHash : PhotosByHash  = getMatchingPhotos(googlePhotos);
-      readFile('googlePhotosByHash.json').then((googlePhotosByHashBuffer) => {
-        let googlePhotosByHashStr = decoder.write(googlePhotosByHashBuffer);
-        let googlePhotosByHashRaw = JSON.parse(googlePhotosByHashStr);
-
-        let googlePhotosByHash = {};
-        for (let hash in googlePhotosByHashRaw) {
-          if (googlePhotosByHashRaw.hasOwnProperty(hash)) {
-            // const identicalPhotos : IdenticalPhotos = googlePhotosByHashRaw[hash];
-            const identicalPhotos = googlePhotosByHashRaw[hash];
-            const photoItems = identicalPhotos.photoItems;
-            photoItems.forEach( (photoItem) => {
-              const photo = new GooglePhoto(
-                {
-                  name: photoItem.photo.name,
-                  hash: photoItem.photo.hash,
-                  url: photoItem.photo.url,
-                  width: photoItem.photo.width,
-                  height: photoItem.photo.height,
-                  dateTime: photoItem.photo.dateTime,
-                  exifDateTime: photoItem.photo.exifDateTime
-                }
-              );
-              photoItem.photo = photo;
-            });
-
-            googlePhotosByHash[hash] = identicalPhotos;
-          }
-        }
-
+      const rebuildGooglePhotosByHash = false;
+      getGooglePhotosByHash(rebuildGooglePhotosByHash, googlePhotos).then((googlePhotosByHash) => {
         postGooglePhotosByHashAnalysis(googlePhotosByHash, dispatch, state);
-
-      }).catch( (err) => {
-        console.log(err);
-        debugger;
       });
-
+    }).catch((err) => {
+      console.log(err);
+      debugger;
+    });
+  };
+}
 
 
 
@@ -165,10 +137,49 @@ Results:
  Number of photos that don't match at all:  3347
 
  */
-    }).catch( (err) => {
-      throw(err);
-    });
-  };
+
+
+function getGooglePhotosByHash(rebuildGooglePhotosByHash: boolean, googlePhotos) {
+
+  return new Promise((resolve, reject) => {
+    if (rebuildGooglePhotosByHash) {
+      const googlePhotosByHash: PhotosByHash = getMatchingPhotos(googlePhotos);
+      resolve(googlePhotosByHash);
+    }
+    else {
+      readFile('googlePhotosByHash.json').then((googlePhotosByHashBuffer) => {
+        let googlePhotosByHashStr = decoder.write(googlePhotosByHashBuffer);
+        let googlePhotosByHashRaw = JSON.parse(googlePhotosByHashStr);
+
+        let googlePhotosByHash = {};
+        for (let hash in googlePhotosByHashRaw) {
+          if (googlePhotosByHashRaw.hasOwnProperty(hash)) {
+            const identicalPhotos = googlePhotosByHashRaw[hash];
+            const photoItems = identicalPhotos.photoItems;
+            photoItems.forEach((photoItem) => {
+              const photo = new GooglePhoto(
+                {
+                  name: photoItem.photo.name,
+                  hash: photoItem.photo.hash,
+                  url: photoItem.photo.url,
+                  width: photoItem.photo.width,
+                  height: photoItem.photo.height,
+                  dateTime: photoItem.photo.dateTime,
+                  exifDateTime: photoItem.photo.exifDateTime
+                }
+              );
+              photoItem.photo = photo;
+            });
+
+            googlePhotosByHash[hash] = identicalPhotos;
+          }
+        }
+        resolve(googlePhotosByHash);
+      }).catch((err) => {
+        reject(err);
+      });
+    }
+  });
 }
 
 function postGooglePhotosByHashAnalysis(googlePhotosByHash, dispatch, state) {
