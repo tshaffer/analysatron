@@ -41,10 +41,8 @@ export function analyzePhotos() {
 
     Promise.all([readGooglePhotosPromise, readDrivePhotosPromise]).then( () => {
 
-      // both google photos and drive photos have been read in and added to the store,
-      // now begin analysis
 
-      // any duplicates in drivePhotos db?
+      // checks for duplicates in drivePhotos db?
       dispatch(buildDrivePhotoDictionaries());
 
       let state = getState();

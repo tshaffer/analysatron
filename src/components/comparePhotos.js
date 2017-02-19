@@ -215,18 +215,14 @@ class ComparePhotos extends Component {
         photoItem.matchedPhotoGroupIndex = newIndex;
       }
     }
-
-    // TODO - how to redisplay?
-    // let identicalPhotoItemsCollectionIndex = this.state.identicalPhotoItemsCollectionIndex;
-    // identicalPhotoItemsCollectionIndex++;
-    // this.setState( { identicalPhotoItemsCollectionIndex });
-    // identicalPhotoItemsCollectionIndex--;
-    // this.setState( { identicalPhotoItemsCollectionIndex });
-
   }
 
   formatDateTime(dateTimeStr : string) {
+
     const dateTime = new Date(dateTimeStr);
+    if (dateTime.toString().startsWith("Invalid")) {
+      return dateTimeStr;
+    }
     return dateTime.toDateString() + ', ' + dateTime.toLocaleTimeString();
   }
 

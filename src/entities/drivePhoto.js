@@ -50,15 +50,18 @@ export default class DrivePhoto extends Photo {
     return this.dimensions.height.toString();
   }
 
-  // getName(): string {
-  //   return this.name;
-  // }
-  //
-  // getDateTime(): string {
-  //   return this.dateTime;
-  // }
-  //
-  // getExifDateTime(): string {
-  //   return this.exifDateTime;
-  // }
+  getDateTime(): string {
+    return this.lastModified;
+  }
+
+  getExifDateTime(): string {
+    if (this.exifCreateDate && this.exifCreateDate !== '') {
+      return this.exifCreateDate;
+    }
+    else if (this.exifDateTimeOriginal) {
+      return this.exifDateTimeOriginal;
+    }
+    return '';
+  }
+
 }
