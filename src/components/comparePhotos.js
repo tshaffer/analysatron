@@ -34,12 +34,12 @@ class ComparePhotos extends Component {
 
     switch(this.comparisonType) {
       case 'identicalGooglePhotos': {
-        const googlePhotosByHash : PhotosByHash = this.props.googlePhotosByHash;
+        const photosByHash : PhotosByHash = this.props.googlePhotosByHash;
 
-        for (let hash in googlePhotosByHash) {
+        for (let hash in photosByHash) {
 
-          if (googlePhotosByHash.hasOwnProperty(hash)) {
-            const identicalPhotos : IdenticalPhotos = googlePhotosByHash[hash];
+          if (photosByHash.hasOwnProperty(hash)) {
+            const identicalPhotos : IdenticalPhotos = photosByHash[hash];
             const identicalPhotoItems : PhotoItems = identicalPhotos.photoItems;
             if (identicalPhotoItems.length > 1) {
               let photoItemsWithinIdenticalPhotosThatMayMatch : PhotoItems = [];
