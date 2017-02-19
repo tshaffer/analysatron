@@ -50,10 +50,8 @@ export function analyzePhotos() {
       console.log('Number of googlePhotos: ', googlePhotos.length);
 
       const rebuildGooglePhotosByHash = false;
-      getGooglePhotosByHash(rebuildGooglePhotosByHash, googlePhotos).then((googlePhotosByHash) => {
-        postGooglePhotosByHashAnalysis(googlePhotos, googlePhotosByHash, dispatch, state);
-      });
-    }).catch((err) => {
+      getGooglePhotosByHash(rebuildGooglePhotosByHash, googlePhotos, dispatch, state);
+    }).catch( (err) => {
       console.log(err);
       debugger;
     });
@@ -81,50 +79,49 @@ Results:
  */
 
 
-function getGooglePhotosByHash(rebuildGooglePhotosByHash: boolean, googlePhotos) {
+function getGooglePhotosByHash(rebuildGooglePhotosByHash: boolean, googlePhotos, dispatch, state) {
 
-  return new Promise((resolve, reject) => {
-    if (rebuildGooglePhotosByHash) {
-      const googlePhotosByHash: PhotosByHash = getMatchingPhotos(googlePhotos);
-      resolve(googlePhotosByHash);
-    }
-    else {
-      readFile('googlePhotosByHash.json').then((googlePhotosByHashBuffer) => {
-        let googlePhotosByHashStr = decoder.write(googlePhotosByHashBuffer);
-        let googlePhotosByHashRaw = JSON.parse(googlePhotosByHashStr);
+  let googlePhotosByHash : PhotosByHash = {};
 
-        let googlePhotosByHash = {};
-        for (let hash in googlePhotosByHashRaw) {
-          if (googlePhotosByHashRaw.hasOwnProperty(hash)) {
-            const identicalPhotos = googlePhotosByHashRaw[hash];
-            const photoItems = identicalPhotos.photoItems;
-            photoItems.forEach((photoItem) => {
-              const photo = new GooglePhoto(
-                {
-                  name: photoItem.photo.name,
-                  hash: photoItem.photo.hash,
-                  url: photoItem.photo.url,
-                  width: photoItem.photo.width,
-                  height: photoItem.photo.height,
-                  dateTime: photoItem.photo.dateTime,
-                  exifDateTime: photoItem.photo.exifDateTime
-                }
-              );
-              photoItem.photo = photo;
-            });
+  if (rebuildGooglePhotosByHash) {
+    googlePhotosByHash = getMatchingPhotos(googlePhotos);
+    getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state);
 
-            googlePhotosByHash[hash] = identicalPhotos;
-          }
+  }
+  else {
+    readFile('googlePhotosByHash.json').then((googlePhotosByHashBuffer) => {
+      let googlePhotosByHashStr = decoder.write(googlePhotosByHashBuffer);
+      let googlePhotosByHashRaw = JSON.parse(googlePhotosByHashStr);
+
+      for (let hash in googlePhotosByHashRaw) {
+        if (googlePhotosByHashRaw.hasOwnProperty(hash)) {
+          const identicalPhotos = googlePhotosByHashRaw[hash];
+          const photoItems = identicalPhotos.photoItems;
+          photoItems.forEach((photoItem) => {
+            const photo = new GooglePhoto(
+              {
+                name: photoItem.photo.name,
+                hash: photoItem.photo.hash,
+                url: photoItem.photo.url,
+                width: photoItem.photo.width,
+                height: photoItem.photo.height,
+                dateTime: photoItem.photo.dateTime,
+                exifDateTime: photoItem.photo.exifDateTime
+              }
+            );
+            photoItem.photo = photo;
+          });
+
+          googlePhotosByHash[hash] = identicalPhotos;
         }
-        resolve(googlePhotosByHash);
-      }).catch((err) => {
-        reject(err);
-      });
-    }
-  });
+      }
+      getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state);
+    });
+  }
 }
 
-function postGooglePhotosByHashAnalysis(googlePhotos, googlePhotosByHash, dispatch, state) {
+
+function getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state) {
 
   dispatch(setGooglePhotosByHash(googlePhotosByHash));
   console.log('Number of google photos with unique keys: ', Object.keys(googlePhotosByHash).length);
