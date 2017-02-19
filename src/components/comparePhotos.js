@@ -26,15 +26,18 @@ class ComparePhotos extends Component {
 
   componentWillMount() {
 
+    debugger;
     const parameters = this.props.parameters.ids.split(",");
     this.comparisonType = parameters[0];
     this.outputFileName = parameters[1];
+    const photosByHashStr = parameters[2].replace('|', ',');
+    this.photosByHash = JSON.parse(photosByHashStr);
 
     let identicalPhotoItemsCollection : Array<PhotoItems> = [];
 
     switch(this.comparisonType) {
       case 'identicalGooglePhotos': {
-        const photosByHash : PhotosByHash = this.props.googlePhotosByHash;
+        const photosByHash : PhotosByHash = this.photosByHash;
 
         for (let hash in photosByHash) {
 
@@ -61,7 +64,7 @@ class ComparePhotos extends Component {
       }
       case 'identicalDrivePhotos':
         {
-          const drivePhotosByHash : PhotosByHash = this.props.drivePhotosByHash;
+          const drivePhotosByHash : PhotosByHash = this.photosByHash;
 
           for (let hash in drivePhotosByHash) {
 
@@ -173,7 +176,7 @@ class ComparePhotos extends Component {
   }
 
   handleSave() {
-    const googlePhotosByHash = this.props.googlePhotosByHash;
+    const googlePhotosByHash = this.photosByHash;
     const googlePhotosByHashStr = JSON.stringify(googlePhotosByHash, null, 2);
     fs.writeFileSync(this.outputFileName, googlePhotosByHashStr);
     console.log('googlePhotosByHash write complete.');
@@ -361,9 +364,8 @@ class ComparePhotos extends Component {
 }
 
 ComparePhotos.propTypes = {
-  googlePhotos: React.PropTypes.array.isRequired,
-  drivePhotosByHash: React.PropTypes.object.isRequired,
-  googlePhotosByHash: React.PropTypes.object.isRequired,
+  // drivePhotosByHash: React.PropTypes.object.isRequired,
+  // googlePhotosByHash: React.PropTypes.object.isRequired,
   parameters: React.PropTypes.object.isRequired,
 };
 

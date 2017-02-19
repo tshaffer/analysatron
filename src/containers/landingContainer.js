@@ -6,11 +6,12 @@ import Landing from '../components/landing';
 
 import { analyzePhotos } from '../store/index';
 
-// function mapStateToProps (state) {
-//   return {
-//     googlePhotos: state.googlePhotos.googlePhotos,
-//   };
-// }
+function mapStateToProps (state) {
+  return {
+    googlePhotosByHash: state.googlePhotos.googlePhotosByHash,
+    drivePhotosByHash: state.drivePhotos.drivePhotosByHash,
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -21,7 +22,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const LandingContainer = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Landing);
 

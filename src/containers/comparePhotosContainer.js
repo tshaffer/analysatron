@@ -19,11 +19,12 @@ class ComparePhotosContainer extends Component {
   }
 }
 
+// drivePhotosByHash: state.drivePhotos.drivePhotosByHash,
+//   googlePhotosByHash: state.googlePhotos.googlePhotosByHash,
+
 function mapStateToProps (state, ownProps) {
   return {
     googlePhotos: state.googlePhotos.googlePhotos,
-    drivePhotosByHash: state.drivePhotos.drivePhotosByHash,
-    googlePhotosByHash: state.googlePhotos.googlePhotosByHash,
     parameters: ownProps.params
   };
 }

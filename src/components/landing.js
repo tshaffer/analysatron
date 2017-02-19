@@ -15,21 +15,31 @@ class Landing extends Component {
     this.props.onAnalyzePhotos();
   }
 
+  // drivePhotosByHash: state.drivePhotos.drivePhotosByHash,
+//   googlePhotosByHash: state.googlePhotos.googlePhotosByHash,
+
   handleCompareIdenticalGooglePhotos() {
 
     const parameters = [
       'identicalGooglePhotos',
-      'googlePhotosByHash.json'
+      'googlePhotosByHash.json',
+      this.props.googlePhotosByHash
     ];
+    debugger;
     hashHistory.push('/comparePhotosContainer/' + parameters);
   }
 
   handleCompareIdenticalDrivePhotos() {
 
+    let drivePhotosByHashStr = JSON.stringify(this.props.drivePhotosByHash, null, 2);
+    let drivePhotosByHashStrNoCommas = drivePhotosByHashStr.replace(',', '|');
+
     const parameters = [
       'identicalDrivePhotos',
-      'drivePhotosByHash.json'
+      'drivePhotosByHash.json',
+      drivePhotosByHashStrNoCommas
     ];
+    debugger;
     hashHistory.push('/comparePhotosContainer/' + parameters);
   }
 
@@ -64,6 +74,9 @@ class Landing extends Component {
 }
 
 Landing.propTypes = {
+  drivePhotosByHash: React.PropTypes.object.isRequired,
+  googlePhotosByHash: React.PropTypes.object.isRequired,
+
   // onReadGooglePhotos: React.PropTypes.func.isRequired,
   // onReadDrivePhotos: React.PropTypes.func.isRequired,
   onAnalyzePhotos: React.PropTypes.func.isRequired
