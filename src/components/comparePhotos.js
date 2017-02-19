@@ -34,12 +34,13 @@ class ComparePhotos extends Component {
 
     switch(this.comparisonType) {
       case 'identicalGooglePhotos': {
-        const photosByHash : PhotosByHash = this.props.googlePhotosByHash;
 
-        for (let hash in photosByHash) {
+        this.photosByHash = this.props.googlePhotosByHash;
 
-          if (photosByHash.hasOwnProperty(hash)) {
-            const identicalPhotos : IdenticalPhotos = photosByHash[hash];
+        for (let hash in this.photosByHash) {
+
+          if (this.photosByHash.hasOwnProperty(hash)) {
+            const identicalPhotos : IdenticalPhotos = this.photosByHash[hash];
             const identicalPhotoItems : PhotoItems = identicalPhotos.photoItems;
             if (identicalPhotoItems.length > 1) {
               let photoItemsWithinIdenticalPhotosThatMayMatch : PhotoItems = [];
@@ -61,12 +62,12 @@ class ComparePhotos extends Component {
       }
       case 'identicalDrivePhotos':
         {
-          const drivePhotosByHash : PhotosByHash = this.props.drivePhotosByHash;
+          this.photosByHash = this.props.drivePhotosByHash;
 
-          for (let hash in drivePhotosByHash) {
+          for (let hash in this.photosByHash) {
 
-            if (drivePhotosByHash.hasOwnProperty(hash)) {
-              const identicalPhotos : IdenticalPhotos = drivePhotosByHash[hash];
+            if (this.photosByHash.hasOwnProperty(hash)) {
+              const identicalPhotos : IdenticalPhotos = this.photosByHash[hash];
               const identicalPhotoItems : PhotoItems = identicalPhotos.photoItems;
               if (identicalPhotoItems.length > 1) {
                 let photoItemsWithinIdenticalPhotosThatMayMatch : PhotoItems = [];
@@ -104,6 +105,7 @@ class ComparePhotos extends Component {
   }
 
   selectedPhotos: Object;
+  photosByHash : PhotosByHash;
 
 
   escapeRegExp(str) {
@@ -173,10 +175,9 @@ class ComparePhotos extends Component {
   }
 
   handleSave() {
-    const googlePhotosByHash = this.props.googlePhotosByHash;
-    const googlePhotosByHashStr = JSON.stringify(googlePhotosByHash, null, 2);
-    fs.writeFileSync(this.outputFileName, googlePhotosByHashStr);
-    console.log('googlePhotosByHash write complete.');
+    const photosByHashStr = JSON.stringify(this.photosByHash, null, 2);
+    fs.writeFileSync(this.outputFileName, photosByHashStr);
+    console.log('photosByHash write complete.');
   }
 
   togglePhotoSelection(photoItem : PhotoItem) {
