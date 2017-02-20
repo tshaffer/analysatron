@@ -25,11 +25,13 @@ class Landing extends Component {
 
   handleCompareIdenticalGooglePhotos() {
 
-    const parameters = [
+    const parameters : Array<string> = [
       'identicalGooglePhotos',
       'googlePhotosByHash.json'
     ];
-    hashHistory.push('/comparePhotosContainer/' + parameters);
+    const params = parameters.join();
+    const url = '/comparePhotosContainer/'.concat(params);
+    hashHistory.push(url);
   }
 
   handleCompareIdenticalDrivePhotos() {
@@ -38,7 +40,9 @@ class Landing extends Component {
       'identicalDrivePhotos',
       'drivePhotosByHash.json'
     ];
-    hashHistory.push('/comparePhotosContainer/' + parameters);
+    const params = parameters.join();
+    const url = '/comparePhotosContainer/'.concat(params);
+    hashHistory.push(url);
   }
 
 
