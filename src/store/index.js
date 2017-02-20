@@ -208,7 +208,7 @@ function getMatchingPhotos(photos) : PhotosByHash {
 
     if (!photosByHash[key]) {
       // TODO - any better way to do this other than by making this a class?
-      let closestGooglePhoto: ClosestHashSearchResult = { minHashDistance: 1, googlePhotoIndexOfMinHashDistance: -1};
+      let closestGooglePhoto: ClosestHashSearchResult = { minHashDistance: 1, googlePhotoHash: ''};
       let identicalPhotos : IdenticalPhotos = { hash: '', key: '', photoItems: [], closestGooglePhoto};
       identicalPhotos.hash = hash;
       identicalPhotos.key = key;

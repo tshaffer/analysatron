@@ -106,13 +106,14 @@ class ComparePhotos extends Component {
 
   selectedPhotos: Object;
   photosByHash : PhotosByHash;
+  comparisonType: string;
+  outputFileName: string;
 
-
-  escapeRegExp(str) {
+  escapeRegExp(str : string) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
   }
 
-  replaceAll(str, find, replace) {
+  replaceAll(str : string, find : string, replace: string) {
     return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
   }
 
