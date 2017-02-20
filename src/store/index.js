@@ -10,7 +10,8 @@ const decoder = new StringDecoder('utf8');
 import {
   readDrivePhotos,
   setDrivePhotosByHash,
-  buildDrivePhotoDictionaries
+  buildDrivePhotoDictionaries,
+  setPhotoComparisonResults
 } from './drivePhotos';
 
 import {
@@ -143,10 +144,10 @@ function getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state) {
   console.log(photoComparisonResults);
 
   const rebuildUnmatchedDrivePhotos = false;
-  getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos, photoComparisonResults, googlePhotos);
+  getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos, photoComparisonResults, googlePhotos, dispatch);
 }
 
-function getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos: boolean, photoComparisonResults, googlePhotos) {
+function getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos: boolean, photoComparisonResults, googlePhotos, dispatch) {
   if (rebuildUnmatchedDrivePhotos) {
     photoComparisonResults.unmatchedPhotos.forEach( (identicalDrivePhotos) => {
       identicalDrivePhotos.closestGooglePhoto = getClosestGooglePhotoByHash(identicalDrivePhotos, googlePhotos);
@@ -155,6 +156,8 @@ function getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos: boolean, photoComp
     const unmatchedDrivePhotosStr = JSON.stringify(photoComparisonResults.unmatchedPhotos, null, 2);
     fs.writeFileSync('unmatchedDrivePhotos.json', unmatchedDrivePhotosStr);
 
+    dispatch(setPhotoComparisonResults(photoComparisonResults));
+
     analyzeHashDifferences(photoComparisonResults);
   }
   else {
@@ -162,6 +165,7 @@ function getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos: boolean, photoComp
       let unmatchedDrivePhotosStr = decoder.write(unmatchedDrivePhotosBuffer);
       let unmatchedDrivePhotos = JSON.parse(unmatchedDrivePhotosStr);
       photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotos;
+      dispatch(setPhotoComparisonResults(photoComparisonResults));
       analyzeHashDifferences(photoComparisonResults);
     }).catch( (err) => {
       console.log(err);

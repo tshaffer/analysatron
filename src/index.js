@@ -15,6 +15,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducers from './store/reducers';
 
 import App from './components/App';
+import CompareMatchedDriveToGooglePhotosContainer from './containers/compareMatchedDriveToGooglePhotosContainer';
+import CompareUnmatchedDriveToGooglePhotosContainer from './containers/compareUnmatchedDriveToGooglePhotosContainer';
 import ComparePhotosContainer from './containers/comparePhotosContainer';
 
 const store = createStore(
@@ -32,6 +34,10 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App} />
+      <Route path="/compareMatchedDriveToGooglePhotosContainer"
+        component={CompareMatchedDriveToGooglePhotosContainer}/>
+      <Route path="/compareUnmatchedDriveToGooglePhotosContainer"
+        component={CompareUnmatchedDriveToGooglePhotosContainer}/>
       <Route path="/comparePhotosContainer/:ids" component={ComparePhotosContainer}/>
     </Router>
   </Provider>

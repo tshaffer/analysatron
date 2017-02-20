@@ -1,6 +1,6 @@
 // @flow
 
-import type { PhotosByHash } from '../types';
+import type { PhotosByHash, PhotoComparisonResults } from '../types';
 
 import { readFile } from '../utilities/utils';
 
@@ -15,6 +15,7 @@ const decoder = new StringDecoder('utf8');
 // ------------------------------------
 const ADD_DRIVE_PHOTOS = 'ADD_DRIVE_PHOTOS';
 const SET_DRIVE_PHOTOS_BY_HASH = 'SET_DRIVE_PHOTOS_BY_HASH';
+const SET_PHOTO_COMPARISON_RESULTS = 'SET_PHOTO_COMPARISON_RESULTS';
 
 // ------------------------------------
 // Action Creators
@@ -89,12 +90,21 @@ export function setDrivePhotosByHash(drivePhotosByHash : PhotosByHash) {
     payload: drivePhotosByHash
   };
 }
+
+export function setPhotoComparisonResults(photoComparisonResults: PhotoComparisonResults) {
+  return {
+    type: SET_PHOTO_COMPARISON_RESULTS,
+    payload: photoComparisonResults
+  };
+}
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState: Object = {
   drivePhotos: [],
-  drivePhotosByHash: {}
+  drivePhotosByHash: {},
+  photoComparisonResults: {}
 };
 
 export default function(state: Object = initialState, action: Object) {
@@ -106,6 +116,7 @@ export default function(state: Object = initialState, action: Object) {
         let newState = Object.assign({}, state);
         newState.drivePhotos = action.payload;
         newState.drivePhotosByHash = state.drivePhotosByHash;
+        newState.photoComparisonResults = state.photoComparisonResults;
         return newState;
       }
 
@@ -114,6 +125,16 @@ export default function(state: Object = initialState, action: Object) {
         let newState = Object.assign({}, state);
         newState.drivePhotos = state.drivePhotos;
         newState.drivePhotosByHash = action.payload;
+        newState.photoComparisonResults = state.photoComparisonResults;
+        return newState;
+      }
+
+    case SET_PHOTO_COMPARISON_RESULTS:
+      {
+        let newState = Object.assign({}, state);
+        newState.drivePhotos = state.drivePhotos;
+        newState.drivePhotosByHash = action.drivePhotosByHash;
+        newState.photoComparisonResults = action.payload;
         return newState;
       }
   }

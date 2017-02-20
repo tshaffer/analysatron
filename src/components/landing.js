@@ -15,6 +15,14 @@ class Landing extends Component {
     this.props.onAnalyzePhotos();
   }
 
+  handleCompareMatchedDriveToGooglePhotos() {
+    hashHistory.push('/compareMatchedDriveToGooglePhotosContainer');
+  }
+
+  handleCompareUnmatchedDriveToGooglePhotos() {
+    hashHistory.push('/compareUnmatchedDriveToGooglePhotosContainer');
+  }
+
   handleCompareIdenticalGooglePhotos() {
 
     const parameters = [
@@ -46,6 +54,16 @@ class Landing extends Component {
       <MuiThemeProvider>
         <div>
           <h1>Pizza!</h1>
+          <RaisedButton
+            onClick={this.handleCompareMatchedDriveToGooglePhotos.bind(this)}
+            label="Confirm Matched DrivePhotos to GooglePhotos"
+            style={style}
+          />
+          <RaisedButton
+            onClick={this.handleCompareUnmatchedDriveToGooglePhotos.bind(this)}
+            label="Compare Unmatched DrivePhotos to GooglePhotos"
+            style={style}
+          />
           <RaisedButton
             onClick={this.handleCompareIdenticalGooglePhotos.bind(this)}
             label="Compare 'Identical' Google Photos"
