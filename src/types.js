@@ -15,7 +15,7 @@ export type PhotoItems = Array<PhotoItem>;
 
 export type ClosestHashSearchResult = {
   minHashDistance: number,
-  googlePhotoIndexOfMinHashDistance: number
+  googlePhotoHash: string
 };
 
 export type IdenticalPhotos = {
