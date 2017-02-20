@@ -2,6 +2,7 @@
 
 import type {
   MatchedPhoto,
+  Photo,
   PhotoItem,
   PhotoItems,
   IdenticalPhotos,
@@ -12,6 +13,8 @@ import React, { Component } from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+
+import ComparePhotoItems from './comparePhotoItems';
 
 class CompareMatchedDriveToGooglePhotos extends Component {
 
@@ -90,7 +93,7 @@ export type PhotoComparisonResults = {
   }
 
 
-  getPhotoUrl(photo) {
+  getPhotoUrl(photo: Photo) {
 
     let url = photo.getUrl();
 
@@ -246,9 +249,9 @@ export type PhotoComparisonResults = {
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
-              <ul className="flex-container wrap">
-                {this.getPhotosToDisplay(photoItems)}
-              </ul>
+              <ComparePhotoItems
+                photoItems={photoItems}
+              />
             </div>
           </div>
         </div>
