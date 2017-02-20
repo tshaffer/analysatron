@@ -139,6 +139,7 @@ class CompareMatchedDriveToGooglePhotos extends Component {
               />
               <ComparePhotoItems
                 photoItems={photoItems}
+                displayCheckBoxes={false}
               />
             </div>
           </div>

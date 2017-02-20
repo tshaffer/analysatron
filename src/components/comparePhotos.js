@@ -291,6 +291,7 @@ class ComparePhotos extends Component {
               />
               <ComparePhotoItems
                 photoItems={photoItems}
+                displayCheckBoxes={true}
               />
             </div>
           </div>
