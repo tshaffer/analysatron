@@ -27,11 +27,6 @@ function mapStateToProps (state, ownProps) {
     parameters: ownProps.params
   };
 }
-//
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({saveResults, manualMatchFound, noMatchFound },
-//     dispatch);
-// }
 
 export default connect(mapStateToProps)(ComparePhotosContainer);
 

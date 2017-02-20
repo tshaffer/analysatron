@@ -9,6 +9,8 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import ComparePhotoItems from './comparePhotoItems';
+
 class ComparePhotos extends Component {
 
   constructor(props: Object) {
@@ -218,66 +220,6 @@ class ComparePhotos extends Component {
     }
   }
 
-  formatDateTime(dateTimeStr : string) {
-
-    const dateTime = new Date(dateTimeStr);
-    if (dateTime.toString().startsWith("Invalid")) {
-      return dateTimeStr;
-    }
-    return dateTime.toDateString() + ', ' + dateTime.toLocaleTimeString();
-  }
-
-  getPhotosToDisplay(photoItems : PhotoItems) {
-
-    let self = this;
-
-    const maxHeight = 400;
-
-    let photosJSX = photoItems.map(function(photoItem: PhotoItem) {
-
-      const photo = photoItem.photo;
-      let width = Number(photo.getWidth());
-      let height = Number(photo.getHeight());
-
-      let aspectRatio = width / height;
-      if (height > maxHeight) {
-        height = maxHeight;
-        width = aspectRatio * height;
-      }
-
-      let dateTime = photo.getDateTime();
-      let formattedDateTime = self.formatDateTime(dateTime);
-
-      let exifDateTime = photo.getExifDateTime();
-      let formattedExifDateTime = self.formatDateTime(exifDateTime);
-
-      // src={photo.getUrl()}
-
-      return (
-        <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
-          <img
-            className="thumbImg"
-            src={photo.getUrl()}
-            width={width}
-            height={height}
-          />
-          <input id={photo.getUrl()} type="checkbox" className="thumbSelector"
-            onClick={() => self.togglePhotoSelection(photoItem)}
-          />
-          <p>{'Name: ' + photo.getName()}</p>
-          <p>{'DateTime: ' + formattedDateTime}</p>
-          <p>{'ExifDateTime: ' + formattedExifDateTime}</p>
-          <p>{'Width: ' + photo.getWidth()}</p>
-          <p>{'Height: ' + photo.getHeight()}</p>
-          <p>{'Aspect ratio: ' + aspectRatio}</p>
-          <p>{photo.getHash()}</p>
-        </li>
-      );
-    });
-
-    return photosJSX;
-  }
-
   getButtonStyle() {
     return {
       height: '24px',
@@ -347,9 +289,9 @@ class ComparePhotos extends Component {
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
-              <ul className="flex-container wrap">
-                {this.getPhotosToDisplay(photoItems)}
-              </ul>
+              <ComparePhotoItems
+                photoItems={photoItems}
+              />
             </div>
           </div>
         </div>

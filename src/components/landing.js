@@ -56,12 +56,12 @@ class Landing extends Component {
           <h1>Pizza!</h1>
           <RaisedButton
             onClick={this.handleCompareMatchedDriveToGooglePhotos.bind(this)}
-            label="Confirm Matched DrivePhotos to GooglePhotos"
+            label="Confirm DrivePhotos to GooglePhotos"
             style={style}
           />
           <RaisedButton
             onClick={this.handleCompareUnmatchedDriveToGooglePhotos.bind(this)}
-            label="Compare Unmatched DrivePhotos to GooglePhotos"
+            label="Compare DrivePhotos to GooglePhotos"
             style={style}
           />
           <RaisedButton

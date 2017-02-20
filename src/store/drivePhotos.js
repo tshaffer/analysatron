@@ -133,7 +133,7 @@ export default function(state: Object = initialState, action: Object) {
       {
         let newState = Object.assign({}, state);
         newState.drivePhotos = state.drivePhotos;
-        newState.drivePhotosByHash = action.drivePhotosByHash;
+        newState.drivePhotosByHash = state.drivePhotosByHash;
         newState.photoComparisonResults = action.payload;
         return newState;
       }

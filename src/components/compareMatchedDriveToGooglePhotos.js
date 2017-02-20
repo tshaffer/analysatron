@@ -2,7 +2,6 @@
 
 import type {
   MatchedPhoto,
-  Photo,
   PhotoItem,
   PhotoItems,
   IdenticalPhotos,
@@ -30,37 +29,6 @@ class CompareMatchedDriveToGooglePhotos extends Component {
 
   state: Object;
 
-/*
-export type PhotoItem = {
- photo: Photo,
- matchedPhotoGroupIndex: ?number
- }
-
-export type PhotoItems = Array<PhotoItem>;
-
-export type IdenticalPhotos = {
-  hash: string,
-  key: string,
-  photoItems: PhotoItems,
-  closestGooglePhoto: ClosestHashSearchResult
-};
-
-export type MatchedPhoto = {
- drivePhotos: IdenticalPhotos,
- matchedGooglePhotos: IdenticalPhotos
- };
-
-export type PhotoComparisonResults = {
-  matchedPhotos: Array<MatchedPhoto>,
-  unmatchedPhotos: Array<IdenticalPhotos>
-};
-*/
-
-  // componentWillMount() {
-  //
-  //   let identicalPhotoItemsCollection : Array<PhotoItems> = [];
-  //
-  // }
 
   handleMatch() {
   }
@@ -81,86 +49,6 @@ export type PhotoComparisonResults = {
   }
 
   handleHome() {
-  }
-
-  formatDateTime(dateTimeStr : string) {
-
-    const dateTime = new Date(dateTimeStr);
-    if (dateTime.toString().startsWith("Invalid")) {
-      return dateTimeStr;
-    }
-    return dateTime.toDateString() + ', ' + dateTime.toLocaleTimeString();
-  }
-
-
-  getPhotoUrl(photo: Photo) {
-
-    let url = photo.getUrl();
-
-    if (url.startsWith('file:////E:')) {
-      let newPath = photo.getPath().replace('E:\\RemovableMedia\\',
-        '/Users/tedshaffer/Documents/RemovableMedia/');
-      url = this.replaceAll(newPath, '\\', '/');
-      url = 'file://' + url;
-    }
-
-    return url;
-  }
-
-  escapeRegExp(str : string) {
-    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-  }
-
-  replaceAll(str : string, find : string, replace: string) {
-    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
-  }
-
-
-  getPhotosToDisplay(photoItems : PhotoItems) {
-
-    let self = this;
-
-    const maxHeight = 400;
-
-    let photosJSX = photoItems.map(function(photoItem: PhotoItem) {
-
-      const photo = photoItem.photo;
-      let width = Number(photo.getWidth());
-      let height = Number(photo.getHeight());
-
-      let aspectRatio = width / height;
-      if (height > maxHeight) {
-        height = maxHeight;
-        width = aspectRatio * height;
-      }
-
-      let dateTime = photo.getDateTime();
-      let formattedDateTime = self.formatDateTime(dateTime);
-
-      let exifDateTime = photo.getExifDateTime();
-      let formattedExifDateTime = self.formatDateTime(exifDateTime);
-
-      return (
-        <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
-          <img
-            className="thumbImg"
-            src={self.getPhotoUrl(photo)}
-            width={width}
-            height={height}
-          />
-          <p>{'Name: ' + photo.getName()}</p>
-          <p>{'DateTime: ' + formattedDateTime}</p>
-          <p>{'ExifDateTime: ' + formattedExifDateTime}</p>
-          <p>{'Width: ' + photo.getWidth()}</p>
-          <p>{'Height: ' + photo.getHeight()}</p>
-          <p>{'Aspect ratio: ' + aspectRatio}</p>
-          <p>{photo.getHash()}</p>
-        </li>
-      );
-    });
-
-    return photosJSX;
-
   }
 
   getButtonStyle() {
