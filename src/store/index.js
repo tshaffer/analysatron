@@ -172,15 +172,26 @@ function getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos: boolean, photoComp
       // that's what it needs to do, however this is entirely ridiculous code.
       let unmatchedDrivePhotosRealObjects : Array<IdenticalPhotos> = [];
 
-      debugger;
-
       unmatchedDrivePhotos.forEach( (identicalPhotos) => {
+
+        let identicalPhotosNew = {};
+        identicalPhotosNew.hash = identicalPhotos.hash;
+        identicalPhotosNew.key = identicalPhotos.key;
+        identicalPhotosNew.closestGooglePhoto = {};
+        identicalPhotosNew.closestGooglePhoto.minHashDistance = identicalPhotos.closestGooglePhoto.minHashDistance;
+        identicalPhotosNew.closestGooglePhoto.googlePhotoHash = identicalPhotos.closestGooglePhoto.googlePhotoHash;
+        identicalPhotosNew.photoItems = [];
 
         let photoItems : PhotoItems = identicalPhotos.photoItems;
         photoItems.forEach( (photoItem) => {
           let drivePhoto = new DrivePhoto(photoItem.photo);
+          let newPhotoItem = {};
+          newPhotoItem.photo = drivePhoto;
+          newPhotoItem.matchedPhotoGroupIndex = photoItem.matchedPhotoGroupIndex;
+          identicalPhotosNew.photoItems.push(newPhotoItem);
         });
-        // unmatchedDrivePhotosRealObjects.push( new DrivePhoto(unmatchedDrivePhoto));
+
+        unmatchedDrivePhotosRealObjects.push(identicalPhotosNew);
       });
 
       // photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotos;
