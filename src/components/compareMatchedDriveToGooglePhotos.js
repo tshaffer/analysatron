@@ -9,6 +9,7 @@ import type {
 } from '../types';
 
 import React, { Component } from 'react';
+import { hashHistory } from 'react-router';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -21,14 +22,22 @@ class CompareMatchedDriveToGooglePhotos extends Component {
     super(props);
 
     this.state = {
-      // identicalPhotoItemsCollectionIndex: 0,
-      // identicalPhotoItemsCollection: []
       drivePhotoIndex: 0
     };
   }
 
   state: Object;
 
+
+  moveToNext() {
+
+    let drivePhotoIndex = this.state.drivePhotoIndex + 1;
+    if (drivePhotoIndex >= this.props.photoComparisonResults.matchedPhotos.length) {
+      drivePhotoIndex = 0;
+    }
+
+    this.setState( { drivePhotoIndex });
+  }
 
   handleMatch() {
   }
@@ -43,12 +52,21 @@ class CompareMatchedDriveToGooglePhotos extends Component {
   }
 
   handleNext() {
+    this.moveToNext();
   }
 
   handlePrev() {
+
+    let drivePhotoIndex = this.state.drivePhotoIndex - 1;
+    if (drivePhotoIndex < 0) {
+      drivePhotoIndex = this.props.photoComparisonResults.matchedPhotos.length - 1;
+    }
+
+    this.setState( { drivePhotoIndex });
   }
 
   handleHome() {
+    hashHistory.push('/');
   }
 
   getButtonStyle() {

@@ -18,12 +18,10 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
   }
 }
 
-function mapStateToProps (state, ownProps) {
+function mapStateToProps (state) {
   return {
-    googlePhotos: state.googlePhotos.googlePhotos,
-    drivePhotosByHash: state.drivePhotos.drivePhotosByHash,
+    photoComparisonResults: state.drivePhotos.photoComparisonResults,
     googlePhotosByHash: state.googlePhotos.googlePhotosByHash,
-    parameters: ownProps.params
   };
 }
 

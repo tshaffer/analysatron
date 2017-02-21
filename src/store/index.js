@@ -4,6 +4,8 @@ const fs = require('fs');
 const Jimp = require('jimp');
 
 import { readFile } from '../utilities/utils';
+import DrivePhoto from '../entities/drivePhoto';
+
 const StringDecoder = require('string_decoder').StringDecoder;
 const decoder = new StringDecoder('utf8');
 
@@ -29,7 +31,8 @@ import type {
   PhotosByHash,
   MatchedPhoto,
   PhotoComparisonResults,
-  ClosestHashSearchResult
+  ClosestHashSearchResult,
+  PhotoItems
 }
 from '../types';
 
@@ -164,7 +167,25 @@ function getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos: boolean, photoComp
     readFile('unmatchedDrivePhotos.json').then((unmatchedDrivePhotosBuffer) => {
       let unmatchedDrivePhotosStr = decoder.write(unmatchedDrivePhotosBuffer);
       let unmatchedDrivePhotos = JSON.parse(unmatchedDrivePhotosStr);
-      photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotos;
+
+      // TODO - iterate through unmatchedDrivePhotos, creating actual drive photo objects
+      // that's what it needs to do, however this is entirely ridiculous code.
+      let unmatchedDrivePhotosRealObjects : Array<IdenticalPhotos> = [];
+
+      debugger;
+
+      unmatchedDrivePhotos.forEach( (identicalPhotos) => {
+
+        let photoItems : PhotoItems = identicalPhotos.photoItems;
+        photoItems.forEach( (photoItem) => {
+          let drivePhoto = new DrivePhoto(photoItem.photo);
+        });
+        // unmatchedDrivePhotosRealObjects.push( new DrivePhoto(unmatchedDrivePhoto));
+      });
+
+      // photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotos;
+      photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotosRealObjects;
+
       dispatch(setPhotoComparisonResults(photoComparisonResults));
       analyzeHashDifferences(photoComparisonResults);
     }).catch( (err) => {
@@ -285,8 +306,13 @@ function getClosestGooglePhotoByHash(
     if (hash) {
       let hashDistance = Jimp.distanceByHash(drivePhotoHash, hash);
       if (hashDistance < minHashDistance) {
+
         minHashDistance = hashDistance;
-        googlePhotoHash = hash;
+
+        const aspectRatio = (Number(googlePhoto.getWidth()) / Number(googlePhoto.getHeight())).toString();
+        const key = hash + '-' + aspectRatio;
+
+        googlePhotoHash = key;
       }
     }
   });
