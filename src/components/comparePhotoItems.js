@@ -41,11 +41,17 @@ class ComparePhotoItems extends Component {
 // onClick={() => this.togglePhotoSelection(photoItem)}
 // />
 
+  togglePhotoSelection(photoItem: PhotoItem) {
+    console.log('poo');
+    console.log(photoItem);
+  }
+
   renderCheckBoxes(displayCheckBoxes: boolean, photoItem: PhotoItem) {
 
     if (displayCheckBoxes) {
       return (
         <input id={photoItem.photo.getUrl()} type="checkbox" className="thumbSelector"
+          onClick={() => this.togglePhotoSelection(photoItem)}
         />
       );
     }
