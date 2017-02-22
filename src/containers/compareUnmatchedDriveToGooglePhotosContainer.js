@@ -7,12 +7,23 @@ import CompareUnmatchedDriveToGooglePhotos from '../components/compareUnmatchedD
 
 class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
 
+  handleMatch(drivePhotoItems) {
+    console.log('handleMatch: ', drivePhotoItems);
+  }
+
+  handleNotAMatch(drivePhotoItems) {
+    console.log('handleNotAMatch: ', drivePhotoItems);
+  }
+
+
   render() {
     console.log("ComparePhotosContainer render invoked");
 
     return (
       <CompareUnmatchedDriveToGooglePhotos
         {...this.props}
+        onMatch={this.handleMatch.bind(this)}
+        onNotAMatch={this.handleNotAMatch.bind(this)}
       />
     );
   }
@@ -20,7 +31,9 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
 
 function mapStateToProps (state) {
   return {
-    photoComparisonResults: state.drivePhotos.photoComparisonResults,
+    photoComparisonResults: state.photoComparisonResults.photoComparisonResults,
+    drivePhotoToGooglePhotoComparisonResults:
+      state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults,
     googlePhotosByHash: state.googlePhotos.googlePhotosByHash,
   };
 }

@@ -13,7 +13,6 @@ import {
   readDrivePhotos,
   setDrivePhotosByHash,
   buildDrivePhotoDictionaries,
-  setPhotoComparisonResults
 } from './drivePhotos';
 
 import {
@@ -21,6 +20,9 @@ import {
   setGooglePhotosByHash,
 } from './googlePhotos';
 
+import {
+  setPhotoComparisonResults
+} from './photoComparisonResults';
 
 // import Photo from '../entities/photo';
 import GooglePhoto from '../entities/googlePhoto';

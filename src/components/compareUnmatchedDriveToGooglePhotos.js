@@ -79,9 +79,11 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
   }
 
   handleMatch() {
+    this.props.onMatch(this.drivePhotoItems);
   }
 
-  handleNotMatch() {
+  handleNotAMatch() {
+    this.props.onNotAMatch(this.drivePhotoItems);
   }
 
   handleSave() {
@@ -131,9 +133,9 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
     }
 
     const identicalDrivePhotos: IdenticalPhotos = this.unmatchedPhotos[this.state.drivePhotoIndex];
-    const drivePhotoItems: PhotoItems = identicalDrivePhotos.photoItems;
+    this.drivePhotoItems = identicalDrivePhotos.photoItems;
     // TODO, for now ignore matchedPhotoGroupIndex
-    const drivePhotoItem : PhotoItem = drivePhotoItems[0];
+    const drivePhotoItem : PhotoItem = this.drivePhotoItems[0];
     // const drivePhotoHash: string = identicalDrivePhotos.hash;
     // const drivePhotoKey: string = identicalDrivePhotos.key;
 
@@ -167,7 +169,7 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
               />
               <RaisedButton
                 label='Not a match'
-                onClick={this.handleNotMatch.bind(this)}
+                onClick={this.handleNotAMatch.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
@@ -210,7 +212,10 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 
 CompareUnmatchedDriveToGooglePhotos.propTypes = {
   googlePhotosByHash: React.PropTypes.object.isRequired,
-  photoComparisonResults: React.PropTypes.object.isRequired
+  photoComparisonResults: React.PropTypes.object.isRequired,
+  drivePhotoToGooglePhotoComparisonResults: React.PropTypes.array.isRequired,
+  onMatch: React.PropTypes.func.isRequired,
+  onNotAMatch: React.PropTypes.func.isRequired,
 };
 
 export default CompareUnmatchedDriveToGooglePhotos;
