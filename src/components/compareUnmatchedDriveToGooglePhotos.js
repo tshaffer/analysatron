@@ -1,5 +1,7 @@
 // @flow
 
+const fs = require('fs');
+
 import type {
   PhotoItem,
   PhotoItems,
@@ -27,6 +29,44 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
   }
 
   state: Object;
+
+  componentWillMount() {
+
+    const unmatchedPhotos: Array<IdenticalPhotos> = this.props.photoComparisonResults.unmatchedPhotos;
+    if (!unmatchedPhotos) {
+      debugger;
+    }
+
+    // strip out photos that don't exist
+    let unmatchedExistingPhotos = unmatchedPhotos.map( (unmatchedPhoto) => {
+      const photoItems = unmatchedPhoto.photoItems;
+      const photoItem = photoItems[0];
+      if (photoItem.photo.path.startsWith('E:\\RemovableMedia\\')) {
+        let newPath = photoItem.photo.path.replace('E:\\RemovableMedia\\',
+          '/Users/tedshaffer/Documents/RemovableMedia/');
+        newPath = this.replaceAll(newPath, '\\', '/');
+        if (fs.existsSync(newPath)) {
+          return unmatchedPhoto;
+        }
+      }
+    });
+
+    unmatchedExistingPhotos.sort( (identicalPhotosA, identicalPhotosB) => {
+      const minHashDistanceA : Number = identicalPhotosA.closestGooglePhoto.minHashDistance;
+      const minHashDistanceB : Number = identicalPhotosB.closestGooglePhoto.minHashDistance;
+      return minHashDistanceA - minHashDistanceB;
+    });
+
+    this.unmatchedPhotos = unmatchedExistingPhotos;
+  }
+
+  escapeRegExp(str : string) {
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  }
+
+  replaceAll(str : string, find : string, replace: string) {
+    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
+  }
 
   moveToNext() {
 
@@ -90,8 +130,7 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
       );
     }
 
-    const unmatchedPhotos: Array<IdenticalPhotos> = this.props.photoComparisonResults.unmatchedPhotos;
-    const identicalDrivePhotos: IdenticalPhotos = unmatchedPhotos[this.state.drivePhotoIndex];
+    const identicalDrivePhotos: IdenticalPhotos = this.unmatchedPhotos[this.state.drivePhotoIndex];
     const drivePhotoItems: PhotoItems = identicalDrivePhotos.photoItems;
     // TODO, for now ignore matchedPhotoGroupIndex
     const drivePhotoItem : PhotoItem = drivePhotoItems[0];
@@ -168,6 +207,11 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   }
 }
+
+CompareUnmatchedDriveToGooglePhotos.propTypes = {
+  googlePhotosByHash: React.PropTypes.object.isRequired,
+  photoComparisonResults: React.PropTypes.object.isRequired
+};
 
 export default CompareUnmatchedDriveToGooglePhotos;
 
