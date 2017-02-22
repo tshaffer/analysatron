@@ -28,13 +28,21 @@ export function readGooglePhotos() {
       readFile('googlePhotos.json').then((googlePhotosBuf) => {
 
         let googlePhotosStr = decoder.write(googlePhotosBuf);
-        let googlePhotosSpec = JSON.parse(googlePhotosStr);
 
-        let googlePhotos = [];
-        googlePhotosSpec.forEach( (googlePhotoSpec ) => {
-          let googlePhoto = new GooglePhoto(googlePhotoSpec);
-          googlePhotos.push(googlePhoto);
+        let googlePhotoSpec = {};
+        let googlePhotos : Array<GooglePhoto> = [];
+
+        JSON.parse(googlePhotosStr, (key, value) => {
+          if (!isNaN(key)) {
+            let googlePhoto : GooglePhoto = new GooglePhoto(googlePhotoSpec);
+            googlePhotos.push(googlePhoto);
+          }
+          else {
+            googlePhotoSpec[key] = value;
+          }
         });
+
+        debugger;
 
         dispatch(addGooglePhotos(googlePhotos));
 
