@@ -1,6 +1,8 @@
 // @flow
 
-import type { Photo, PhotoItem, PhotoItems } from '../types';
+import Photo from '../entities/photo';
+
+import type { PhotoItem, PhotoItems } from '../types';
 
 import React, { Component } from 'react';
 

@@ -1,6 +1,6 @@
 // @flow
 
-import type { PhotosByHash, PhotoComparisonResults } from '../types';
+import type { DrivePhotosByHash, PhotoComparisonResults } from '../types';
 
 import { readFile } from '../utilities/utils';
 
@@ -27,6 +27,8 @@ export function readDrivePhotos() {
     return new Promise( (resolve, reject) => {
 
       readFile('drivePhotos.json').then((drivePhotosBuf) => {
+
+        // TODO - use reviver
 
         let drivePhotosStr = decoder.write(drivePhotosBuf);
         let drivePhotosSpec = JSON.parse(drivePhotosStr);
@@ -84,7 +86,7 @@ function addDrivePhotos(drivePhotos) {
   };
 }
 
-export function setDrivePhotosByHash(drivePhotosByHash : PhotosByHash) {
+export function setDrivePhotosByHash(drivePhotosByHash : DrivePhotosByHash) {
   return {
     type: SET_DRIVE_PHOTOS_BY_HASH,
     payload: drivePhotosByHash

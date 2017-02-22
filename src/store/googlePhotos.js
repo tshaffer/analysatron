@@ -36,7 +36,7 @@ export function readGooglePhotos() {
         // http://jacksondunstan.com/articles/2335
 
         // TODO - figure out how to use reviver properly
-        let poo = JSON.parse(googlePhotosStr, (key, value) => {
+        JSON.parse(googlePhotosStr, (key, value) => {
           if (!isNaN(key)) {
             let googlePhoto : GooglePhoto = new GooglePhoto(googlePhotoSpec);
             googlePhotos.push(googlePhoto);

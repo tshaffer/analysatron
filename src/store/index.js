@@ -26,6 +26,8 @@ import {
 import GooglePhoto from '../entities/googlePhoto';
 
 import type {
+  DrivePhotosByHash,
+  IdenticalDrivePhotos,
   PhotoItem,
   IdenticalPhotos,
   PhotosByHash,
@@ -84,18 +86,20 @@ Results:
  */
 
 
-function getGooglePhotosByHash(rebuildGooglePhotosByHash: boolean, googlePhotos, dispatch, state) {
+function getGooglePhotosByHash(rebuildGooglePhotosByHash: boolean, googlePhotos : Array<GooglePhoto>, dispatch, state) {
 
   let googlePhotosByHash : PhotosByHash = {};
 
   if (rebuildGooglePhotosByHash) {
-    googlePhotosByHash = getMatchingPhotos(googlePhotos);
+    const googlePhotosByHash : PhotosByHash = getMatchingPhotos(googlePhotos);
     getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state);
 
   }
   else {
     readFile('googlePhotosByHash.json').then((googlePhotosByHashBuffer) => {
-      let googlePhotosByHashStr = decoder.write(googlePhotosByHashBuffer);
+      let googlePhotosByHashStr : string = decoder.write(googlePhotosByHashBuffer);
+
+      // TODO - use reviver
       let googlePhotosByHashRaw = JSON.parse(googlePhotosByHashStr);
 
       for (let hash in googlePhotosByHashRaw) {
@@ -103,18 +107,8 @@ function getGooglePhotosByHash(rebuildGooglePhotosByHash: boolean, googlePhotos,
           const identicalPhotos = googlePhotosByHashRaw[hash];
           const photoItems = identicalPhotos.photoItems;
           photoItems.forEach((photoItem) => {
-            const photo = new GooglePhoto(
-              {
-                name: photoItem.photo.name,
-                hash: photoItem.photo.hash,
-                url: photoItem.photo.url,
-                width: photoItem.photo.width,
-                height: photoItem.photo.height,
-                dateTime: photoItem.photo.dateTime,
-                exifDateTime: photoItem.photo.exifDateTime
-              }
-            );
-            photoItem.photo = photo;
+            const googlePhoto : GooglePhoto = new GooglePhoto(photoItem.photo);
+            photoItem.photo = googlePhoto;
           });
 
           googlePhotosByHash[hash] = identicalPhotos;
@@ -132,7 +126,7 @@ function getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state) {
   console.log('Number of google photos with unique keys: ', Object.keys(googlePhotosByHash).length);
 
   let drivePhotos  = state.drivePhotos.drivePhotos;
-  const drivePhotosByHash : PhotosByHash = getMatchingPhotos(drivePhotos);
+  const drivePhotosByHash : DrivePhotosByHash = getMatchingPhotos(drivePhotos);
   dispatch(setDrivePhotosByHash(drivePhotosByHash));
   console.log('Number of drivePhotos: ', drivePhotos.length);
   console.log('Number of drive photos with unique keys: ', Object.keys(drivePhotosByHash).length);
@@ -270,7 +264,7 @@ function getMatchingPhotos(photos) : PhotosByHash {
 }
 
 function getMatchesByExactHash(
-  drivePhotosByHash: PhotosByHash,
+  drivePhotosByHash: DrivePhotosByHash,
   googlePhotosByHash: PhotosByHash) : PhotoComparisonResults {
 
   let matchedPhotos : Array<MatchedPhoto> = [];
@@ -278,7 +272,7 @@ function getMatchesByExactHash(
 
   for (let key in drivePhotosByHash) {
     if (drivePhotosByHash.hasOwnProperty(key)) {
-      const drivePhotos : IdenticalPhotos = drivePhotosByHash[key];
+      const drivePhotos : IdenticalDrivePhotos = drivePhotosByHash[key];
 
       // is there a google photo match
       if (googlePhotosByHash[key]) {
