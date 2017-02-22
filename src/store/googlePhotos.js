@@ -28,12 +28,24 @@ export function readGooglePhotos() {
       readFile('googlePhotos.json').then((googlePhotosBuf) => {
 
         let googlePhotosStr = decoder.write(googlePhotosBuf);
-        let googlePhotosSpec = JSON.parse(googlePhotosStr);
 
-        let googlePhotos = [];
-        googlePhotosSpec.forEach( (googlePhotoSpec ) => {
-          let googlePhoto = new GooglePhoto(googlePhotoSpec);
-          googlePhotos.push(googlePhoto);
+        let googlePhotoSpec = {};
+        let googlePhotos : Array<GooglePhoto> = [];
+
+        // read this
+        // http://jacksondunstan.com/articles/2335
+
+        // TODO - figure out how to use reviver properly
+        let poo = JSON.parse(googlePhotosStr, (key, value) => {
+          if (!isNaN(key)) {
+            let googlePhoto : GooglePhoto = new GooglePhoto(googlePhotoSpec);
+            googlePhotos.push(googlePhoto);
+            // return new GooglePhoto(googlePhotoSpec);
+          }
+          else {
+            googlePhotoSpec[key] = value;
+            // return value;
+          }
         });
 
         dispatch(addGooglePhotos(googlePhotos));
