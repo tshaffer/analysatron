@@ -38,7 +38,8 @@ export type PhotoComparisonResults = {
 };
 
 export type DrivePhotoToGooglePhotoComparisonResult = {
-  driveFilePath: string,
+  name: string,
+  path: string,
   result: string
 }
 

@@ -14,19 +14,21 @@ import type {
   from '../types';
 
 import {
-  setDrivePhotoToGooglePhotoComparisonResults
+  setDrivePhotoToGooglePhotoComparisonResults,
+  saveDrivePhotoToGooglePhotoComparisonResults,
 } from '../store/photoComparisonResults';
 
 class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
 
-  handleMatch(drivePhotoItems : PhotoItems) {
-
+  buildResults( drivePhotoItems : PhotoItems, result : string )
+  {
     const drivePhotoToGooglePhotoComparisonResults : DrivePhotoToGooglePhotoComparisonResults = [];
 
     drivePhotoItems.forEach( (drivePhotoItem : PhotoItem) => {
       const drivePhotoToGooglePhotoComparisonResult : DrivePhotoToGooglePhotoComparisonResult = {
-        driveFilePath : drivePhotoItem.photo.path,
-        result: 'match'
+        name : drivePhotoItem.photo.getName(),
+        path : drivePhotoItem.photo.getPath(),
+        result
       };
       drivePhotoToGooglePhotoComparisonResults.push(drivePhotoToGooglePhotoComparisonResult);
     });
@@ -34,9 +36,16 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
     this.props.setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults);
   }
 
-  handleNotAMatch(drivePhotoItems) {
+  handleMatch(drivePhotoItems : PhotoItems) {
+    this.buildResults(drivePhotoItems, 'match');
+  }
 
-    console.log('handleNotAMatch: ', drivePhotoItems);
+  handleNotAMatch(drivePhotoItems) {
+    this.buildResults(drivePhotoItems, 'notAMatch');
+  }
+
+  handleSave() {
+    this.props.saveDrivePhotoToGooglePhotoComparisonResults();
   }
 
   render() {
@@ -47,6 +56,7 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
         {...this.props}
         onMatch={this.handleMatch.bind(this)}
         onNotAMatch={this.handleNotAMatch.bind(this)}
+        onSave={this.handleSave.bind(this)}
       />
     );
   }
@@ -62,10 +72,17 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setDrivePhotoToGooglePhotoComparisonResults },
+  return bindActionCreators({
+    setDrivePhotoToGooglePhotoComparisonResults,
+    saveDrivePhotoToGooglePhotoComparisonResults
+  },
     dispatch);
 }
 
+CompareUnmatchedDriveToGooglePhotosContainer.propTypes = {
+  setDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
+  saveDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompareUnmatchedDriveToGooglePhotosContainer);
 

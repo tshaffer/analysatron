@@ -1,5 +1,7 @@
 // @flow
 
+const fs = require('fs');
+
 import type {
   PhotoComparisonResults,
   DrivePhotoToGooglePhotoComparisonResults
@@ -14,6 +16,16 @@ const SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS = 'SET_DRIVE_PHOTO_TO_G
 // ------------------------------------
 // Action Creators
 // ------------------------------------
+export function saveDrivePhotoToGooglePhotoComparisonResults() {
+
+  return function (_: Function, getState: Function) {
+
+    const drivePhotoToGooglePhotoComparisonResultsStr =
+      JSON.stringify(getState().photoComparisonResults.drivePhotoToGooglePhotoComparisonResults, null, 2);
+    fs.writeFileSync('drivePhotoToGooglePhotoComparisonResults.json', drivePhotoToGooglePhotoComparisonResultsStr);
+
+  };
+}
 
 // ------------------------------------
 // Helpers
@@ -62,7 +74,8 @@ export default function(state: Object = initialState, action: Object) {
       {
         let newState = Object.assign({}, state);
         newState.photoComparisonResults = state.photoComparisonResults;
-        newState.drivePhotoToGooglePhotoComparisonResults = action.payload;
+        newState.drivePhotoToGooglePhotoComparisonResults =
+          newState.drivePhotoToGooglePhotoComparisonResults.concat(action.payload);
         console.log(newState);
         return newState;
       }

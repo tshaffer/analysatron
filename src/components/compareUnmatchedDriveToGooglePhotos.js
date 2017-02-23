@@ -83,13 +83,16 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   handleMatch() {
     this.props.onMatch(this.drivePhotoItems);
+    this.moveToNext();
   }
 
   handleNotAMatch() {
     this.props.onNotAMatch(this.drivePhotoItems);
+    this.moveToNext();
   }
 
   handleSave() {
+    this.props.onSave();
     // const photosByHashStr = JSON.stringify(this.photosByHash, null, 2);
     // fs.writeFileSync(this.outputFileName, photosByHashStr);
     // console.log('photosByHash write complete.');
@@ -219,6 +222,7 @@ CompareUnmatchedDriveToGooglePhotos.propTypes = {
   drivePhotoToGooglePhotoComparisonResults: React.PropTypes.array.isRequired,
   onMatch: React.PropTypes.func.isRequired,
   onNotAMatch: React.PropTypes.func.isRequired,
+  onSave: React.PropTypes.func.isRequired,
 };
 
 export default CompareUnmatchedDriveToGooglePhotos;
