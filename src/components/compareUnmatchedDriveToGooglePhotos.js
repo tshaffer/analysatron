@@ -71,14 +71,6 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
   drivePhotoItems: PhotoItems;
   unmatchedPhotos: Array<IdenticalPhotos>;
 
-  escapeRegExp(str : string) {
-    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-  }
-
-  replaceAll(str : string, find : string, replace: string) {
-    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
-  }
-
   moveToNext() {
 
     let drivePhotoIndex = this.state.drivePhotoIndex + 1;

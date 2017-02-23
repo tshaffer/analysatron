@@ -1,6 +1,9 @@
 // @flow
 
-import type { PhotoComparisonResults } from '../types';
+import type {
+  PhotoComparisonResults,
+  DrivePhotoToGooglePhotoComparisonResults
+} from '../types';
 
 // ------------------------------------
 // Constants
@@ -26,7 +29,9 @@ export function setPhotoComparisonResults(photoComparisonResults: PhotoCompariso
   };
 }
 
-export function setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults: Object) {
+export function setDrivePhotoToGooglePhotoComparisonResults(
+  drivePhotoToGooglePhotoComparisonResults: DrivePhotoToGooglePhotoComparisonResults) {
+
   return {
     type: SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS,
     payload: drivePhotoToGooglePhotoComparisonResults
@@ -58,6 +63,7 @@ export default function(state: Object = initialState, action: Object) {
         let newState = Object.assign({}, state);
         newState.photoComparisonResults = state.photoComparisonResults;
         newState.drivePhotoToGooglePhotoComparisonResults = action.payload;
+        console.log(newState);
         return newState;
       }
   }

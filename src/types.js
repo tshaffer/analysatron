@@ -37,3 +37,9 @@ export type PhotoComparisonResults = {
   unmatchedPhotos: Array<IdenticalPhotos>
 };
 
+export type DrivePhotoToGooglePhotoComparisonResult = {
+  driveFilePath: string,
+  result: string
+}
+
+export type DrivePhotoToGooglePhotoComparisonResults = Array<DrivePhotoToGooglePhotoComparisonResult>;

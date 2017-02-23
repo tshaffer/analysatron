@@ -107,11 +107,19 @@ class ComparePhotoItems extends Component {
   }
 
 
-  renderHash(photo: Photo) {
-    return (
-      <p>{photo.getHash()}</p>
-    );
-  }
+  // renderHash(photo: Photo) {
+  //   return (
+  //     <p>{photo.getHash()}</p>
+  //   );
+  // }
+
+  // renderPhotoSrc(photoSrc : string) {
+  //   return (
+  //     <p>{photoSrc}</p>
+  //   );
+  // }
+
+// {self.renderPhotoSrc(photoSrc)}
 
   getDimensions(photo: Photo) {
 
@@ -144,11 +152,13 @@ class ComparePhotoItems extends Component {
 
       const dimensions = self.getDimensions(photo);
 
+      const photoSrc : string = self.getPhotoUrl(photo);
+
       return (
         <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
           <img
             className="thumbImg"
-            src={self.getPhotoUrl(photo)}
+            src={photoSrc}
             width={dimensions.width}
             height={dimensions.height}
           />
@@ -159,7 +169,6 @@ class ComparePhotoItems extends Component {
           {self.renderWidth(photo)}
           {self.renderHeight(photo)}
           {self.renderAspectRatio(dimensions.aspectRatio)}
-          {self.renderHash(photo)}
         </li>
       );
     });
