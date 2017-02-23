@@ -21,7 +21,8 @@ import {
 } from './googlePhotos';
 
 import {
-  setPhotoComparisonResults
+  setPhotoComparisonResults,
+  readDrivePhotoToGooglePhotoComparisonResults,
 } from './photoComparisonResults';
 
 // import Photo from '../entities/photo';
@@ -200,7 +201,7 @@ function getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos: boolean, photoComp
       photoComparisonResults.unmatchedPhotos = unmatchedDrivePhotosRealObjects;
 
       dispatch(setPhotoComparisonResults(photoComparisonResults));
-      analyzeHashDifferences(photoComparisonResults);
+      analyzeHashDifferences(photoComparisonResults, dispatch);
     }).catch( (err) => {
       console.log(err);
       debugger;
@@ -208,7 +209,7 @@ function getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos: boolean, photoComp
   }
 }
 
-function analyzeHashDifferences(photoComparisonResults : PhotoComparisonResults) {
+function analyzeHashDifferences(photoComparisonResults : PhotoComparisonResults, dispatch : Function) {
 
   // const hashThreshold = 0.04;
   const hashThreshold = 0.05;
@@ -228,6 +229,8 @@ function analyzeHashDifferences(photoComparisonResults : PhotoComparisonResults)
 
   console.log('Number of photos whose hashes are close enough to qualify for a match: ', numCloseEnoughHashes);
   console.log('Number of photos that don\'t match at all: ', numNotEvenCloseHashes);
+
+  dispatch(readDrivePhotoToGooglePhotoComparisonResults);
 }
 
 function getMatchingPhotos(photos) : PhotosByHash {

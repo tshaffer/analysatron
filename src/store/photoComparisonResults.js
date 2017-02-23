@@ -7,6 +7,11 @@ import type {
   DrivePhotoToGooglePhotoComparisonResults
 } from '../types';
 
+import { readFile } from '../utilities/utils';
+
+const StringDecoder = require('string_decoder').StringDecoder;
+const decoder = new StringDecoder('utf8');
+
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -23,9 +28,22 @@ export function saveDrivePhotoToGooglePhotoComparisonResults() {
     const drivePhotoToGooglePhotoComparisonResultsStr =
       JSON.stringify(getState().photoComparisonResults.drivePhotoToGooglePhotoComparisonResults, null, 2);
     fs.writeFileSync('drivePhotoToGooglePhotoComparisonResults.json', drivePhotoToGooglePhotoComparisonResultsStr);
-
   };
 }
+
+export function readDrivePhotoToGooglePhotoComparisonResults() {
+
+  // return function (_: Function, __: Function) {
+
+    readFile('drivePhotoToGooglePhotoComparisonResults.json').then((drivePhotoToGooglePhotoComparisonResultsBuf) => {
+
+      let drivePhotoToGooglePhotoComparisonResultsStr = decoder.write(drivePhotoToGooglePhotoComparisonResultsBuf);
+      let drivePhotoToGooglePhotoComparisonResultsSpec = JSON.parse(drivePhotoToGooglePhotoComparisonResultsStr);
+
+    });
+  // };
+}
+
 
 // ------------------------------------
 // Helpers
