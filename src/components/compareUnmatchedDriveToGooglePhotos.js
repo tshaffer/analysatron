@@ -35,23 +35,41 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
       debugger;
     }
 
+    // let unmatchedExistingPhotos : Array<IdenticalPhotos> = unmatchedPhotos.map( function (unmatchedPhoto : IdenticalPhotos) : IdenticalPhotos {
+    //   const photoItems : PhotoItems = unmatchedPhoto.photoItems;
+    //   const photoItem : PhotoItem = photoItems[0];
+    //   if (photoItem.photo.fileExists()) {
+    //     return unmatchedPhoto;
+    //   }
+    //   else {
+    //     return null;
+    //   }
+    // });
+
     // strip out photos that don't exist
-    let unmatchedExistingPhotos = unmatchedPhotos.map( (unmatchedPhoto) => {
-      const photoItems = unmatchedPhoto.photoItems;
-      const photoItem = photoItems[0];
+    let unmatchedExistingPhotos : Array<IdenticalPhotos> = [];
+    unmatchedPhotos.forEach( (unmatchedPhoto) => {
+      const photoItems : PhotoItems = unmatchedPhoto.photoItems;
+      const photoItem : PhotoItem = photoItems[0];
       if (photoItem.photo.fileExists()) {
-        return unmatchedPhoto;
+        unmatchedExistingPhotos.push(unmatchedPhoto);
       }
     });
 
     unmatchedExistingPhotos.sort( (identicalPhotosA, identicalPhotosB) => {
-      const minHashDistanceA : Number = identicalPhotosA.closestGooglePhoto.minHashDistance;
-      const minHashDistanceB : Number = identicalPhotosB.closestGooglePhoto.minHashDistance;
-      return minHashDistanceA - minHashDistanceB;
+      if (identicalPhotosA && identicalPhotosB) {
+        const minHashDistanceA : number = identicalPhotosA.closestGooglePhoto.minHashDistance;
+        const minHashDistanceB : number = identicalPhotosB.closestGooglePhoto.minHashDistance;
+        return minHashDistanceA - minHashDistanceB;
+      }
+      return 0;
     });
 
     this.unmatchedPhotos = unmatchedExistingPhotos;
   }
+
+  drivePhotoItems: PhotoItems;
+  unmatchedPhotos: Array<IdenticalPhotos>;
 
   escapeRegExp(str : string) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");

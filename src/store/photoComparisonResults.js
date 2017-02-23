@@ -26,7 +26,7 @@ export function setPhotoComparisonResults(photoComparisonResults: PhotoCompariso
   };
 }
 
-export function setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults) {
+export function setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults: Object) {
   return {
     type: SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS,
     payload: drivePhotoToGooglePhotoComparisonResults
