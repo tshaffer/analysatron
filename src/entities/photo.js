@@ -27,6 +27,10 @@ export default class Photo {
     return '';
   }
 
+  updatePath() {
+    console.log('base class updatePath');
+  }
+
   getWidth(): string {
     return '';
   }

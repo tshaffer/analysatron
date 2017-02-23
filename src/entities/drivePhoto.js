@@ -1,5 +1,7 @@
 // @flow
 
+const fs = require('fs');
+
 import Photo from './photo';
 
 export default class DrivePhoto extends Photo {
@@ -63,5 +65,27 @@ export default class DrivePhoto extends Photo {
     }
     return '';
   }
+
+  updatePath() {
+
+    if (this.path.startsWith('E:\\RemovableMedia\\')) {
+      let newPath = this.path.replace('E:\\RemovableMedia\\',
+        '/Users/tedshaffer/Documents/RemovableMedia/');
+      newPath = this.replaceAll(newPath, '\\', '/');
+      if (fs.existsSync(newPath)) {
+        this.path = newPath;
+      }
+    }
+  }
+
+  escapeRegExp(str : string) {
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  }
+
+  replaceAll(str : string, find : string, replace: string) {
+    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
+  }
+
+
 
 }

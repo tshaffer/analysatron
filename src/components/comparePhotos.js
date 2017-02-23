@@ -75,16 +75,8 @@ class ComparePhotos extends Component {
                 let photoItemsWithinIdenticalPhotosThatMayMatch : PhotoItems = [];
                 identicalPhotoItems.forEach( (photoItem: PhotoItem) => {
                   if (photoItem.matchedPhotoGroupIndex === null || photoItem.matchedPhotoGroupIndex === undefined) {
-                    if (photoItem.photo.path.startsWith('E:\\RemovableMedia\\')) {
-                      let newPath = photoItem.photo.path.replace('E:\\RemovableMedia\\',
-                        '/Users/tedshaffer/Documents/RemovableMedia/');
-                      newPath = this.replaceAll(newPath, '\\', '/');
-                      if (fs.existsSync(newPath)) {
-                        photoItem.photo.path = newPath;
-                        photoItemsWithinIdenticalPhotosThatMayMatch.push(photoItem);
-                      }
-                    }
-                    // photoItemsWithinIdenticalPhotosThatMayMatch.push(photoItem);
+                    photoItem.photo.updatePath();
+                    photoItemsWithinIdenticalPhotosThatMayMatch.push(photoItem);
                   }
                 });
 
@@ -110,14 +102,6 @@ class ComparePhotos extends Component {
   photosByHash : PhotosByHash;
   comparisonType: string;
   outputFileName: string;
-
-  escapeRegExp(str : string) {
-    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-  }
-
-  replaceAll(str : string, find : string, replace: string) {
-    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
-  }
 
   nextIdenticalPhotoCollection() {
 
