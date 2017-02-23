@@ -31,6 +31,11 @@ export default class Photo {
     console.log('base class updatePath');
   }
 
+  fileExists(): boolean {
+    return true;
+  }
+
+
   getWidth(): string {
     return '';
   }

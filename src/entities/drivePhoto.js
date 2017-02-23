@@ -78,6 +78,22 @@ export default class DrivePhoto extends Photo {
     }
   }
 
+  fileExists(): boolean {
+    
+    if (this.path.startsWith('E:\\RemovableMedia\\')) {
+      let newPath = this.path.replace('E:\\RemovableMedia\\',
+        '/Users/tedshaffer/Documents/RemovableMedia/');
+      newPath = this.replaceAll(newPath, '\\', '/');
+      if (fs.existsSync(newPath)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    return false;
+  }
+  
   escapeRegExp(str : string) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
   }

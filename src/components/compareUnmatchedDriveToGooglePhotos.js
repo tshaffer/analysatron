@@ -1,7 +1,5 @@
 // @flow
 
-const fs = require('fs');
-
 import type {
   PhotoItem,
   PhotoItems,
@@ -41,13 +39,8 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
     let unmatchedExistingPhotos = unmatchedPhotos.map( (unmatchedPhoto) => {
       const photoItems = unmatchedPhoto.photoItems;
       const photoItem = photoItems[0];
-      if (photoItem.photo.path.startsWith('E:\\RemovableMedia\\')) {
-        let newPath = photoItem.photo.path.replace('E:\\RemovableMedia\\',
-          '/Users/tedshaffer/Documents/RemovableMedia/');
-        newPath = this.replaceAll(newPath, '\\', '/');
-        if (fs.existsSync(newPath)) {
-          return unmatchedPhoto;
-        }
+      if (photoItem.photo.fileExists()) {
+        return unmatchedPhoto;
       }
     });
 
