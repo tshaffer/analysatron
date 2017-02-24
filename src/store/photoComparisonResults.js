@@ -73,7 +73,7 @@ export function setDrivePhotoToGooglePhotoComparisonResults(
 // ------------------------------------
 const initialState: Object = {
   photoComparisonResults: {},
-  drivePhotoToGooglePhotoComparisonResults: []
+  drivePhotoToGooglePhotoComparisonResults: {}
 };
 
 export default function(state: Object = initialState, action: Object) {
@@ -84,16 +84,14 @@ export default function(state: Object = initialState, action: Object) {
       {
         let newState = Object.assign({}, state);
         newState.photoComparisonResults = action.payload;
-        newState.drivePhotoToGooglePhotoComparisonResults = state.drivePhotoToGooglePhotoComparisonResults;
+        // newState.drivePhotoToGooglePhotoComparisonResults = state.drivePhotoToGooglePhotoComparisonResults;
         return newState;
       }
 
     case SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS:
       {
         let newState = Object.assign({}, state);
-        newState.photoComparisonResults = state.photoComparisonResults;
-        newState.drivePhotoToGooglePhotoComparisonResults =
-          newState.drivePhotoToGooglePhotoComparisonResults.concat(action.payload);
+        newState.drivePhotoToGooglePhotoComparisonResults = Object.assign(newState.drivePhotoToGooglePhotoComparisonResults, action.payload);
         console.log(newState);
         return newState;
       }

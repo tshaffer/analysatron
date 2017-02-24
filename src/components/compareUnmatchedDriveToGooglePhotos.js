@@ -219,7 +219,7 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 CompareUnmatchedDriveToGooglePhotos.propTypes = {
   googlePhotosByHash: React.PropTypes.object.isRequired,
   photoComparisonResults: React.PropTypes.object.isRequired,
-  drivePhotoToGooglePhotoComparisonResults: React.PropTypes.array.isRequired,
+  drivePhotoToGooglePhotoComparisonResults: React.PropTypes.object.isRequired,
   onMatch: React.PropTypes.func.isRequired,
   onNotAMatch: React.PropTypes.func.isRequired,
   onSave: React.PropTypes.func.isRequired,

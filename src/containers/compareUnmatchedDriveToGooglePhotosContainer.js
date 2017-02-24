@@ -22,15 +22,18 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
 
   buildResults( drivePhotoItems : PhotoItems, result : string )
   {
-    const drivePhotoToGooglePhotoComparisonResults : DrivePhotoToGooglePhotoComparisonResults = [];
+    const drivePhotoToGooglePhotoComparisonResults : DrivePhotoToGooglePhotoComparisonResults = {};
 
     drivePhotoItems.forEach( (drivePhotoItem : PhotoItem) => {
+
+      const path = drivePhotoItem.photo.getPath();
+
       const drivePhotoToGooglePhotoComparisonResult : DrivePhotoToGooglePhotoComparisonResult = {
         name : drivePhotoItem.photo.getName(),
-        path : drivePhotoItem.photo.getPath(),
+        path,
         result
       };
-      drivePhotoToGooglePhotoComparisonResults.push(drivePhotoToGooglePhotoComparisonResult);
+      drivePhotoToGooglePhotoComparisonResults[path] = drivePhotoToGooglePhotoComparisonResult;
     });
 
     this.props.setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults);

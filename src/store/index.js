@@ -164,7 +164,7 @@ function getUnmatchedDrivePhotos(rebuildUnmatchedDrivePhotos: boolean, photoComp
 
     dispatch(setPhotoComparisonResults(photoComparisonResults));
 
-    analyzeHashDifferences(photoComparisonResults);
+    analyzeHashDifferences(photoComparisonResults, dispatch);
   }
   else {
     readFile('unmatchedDrivePhotos.json').then((unmatchedDrivePhotosBuffer) => {

@@ -1,92 +1,462 @@
-[
-  {
+{
+  "E:\\RemovableMedia\\Photos2004-Jan-Jun\\2004\\06_June_1\\DSC_0017.JPG": {
     "name": "DSC_0017.JPG",
     "path": "E:\\RemovableMedia\\Photos2004-Jan-Jun\\2004\\06_June_1\\DSC_0017.JPG",
-    "result": "match"
+    "result": "notAMatch"
   },
-  {
+  "E:\\RemovableMedia\\Photos4-2\\In Progress\\7_00_SantaCruz\\P7010083.JPG": {
     "name": "P7010083.JPG",
     "path": "E:\\RemovableMedia\\Photos4-2\\In Progress\\7_00_SantaCruz\\P7010083.JPG",
     "result": "match"
   },
-  {
+  "E:\\RemovableMedia\\Photos Pre 2004\\2000\\07_Santa Cruz\\P7010083.JPG": {
     "name": "P7010083.JPG",
     "path": "E:\\RemovableMedia\\Photos Pre 2004\\2000\\07_Santa Cruz\\P7010083.JPG",
     "result": "match"
   },
-  {
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\07_Santa Cruz\\P7010083.JPG": {
     "name": "P7010083.JPG",
     "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\07_Santa Cruz\\P7010083.JPG",
     "result": "match"
   },
-  {
+  "E:\\RemovableMedia\\Photos 3\\7_00_SantaCruz\\P7010083.JPG": {
     "name": "P7010083.JPG",
     "path": "E:\\RemovableMedia\\Photos 3\\7_00_SantaCruz\\P7010083.JPG",
     "result": "match"
   },
-  {
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1383.jpg": {
     "name": "DSC_1383.jpg",
     "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1383.jpg",
     "result": "match"
   },
-  {
+  "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1383.jpg": {
     "name": "DSC_1383.jpg",
     "path": "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1383.jpg",
     "result": "match"
   },
-  {
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1383.jpg": {
     "name": "DSC_1383.jpg",
     "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1383.jpg",
     "result": "match"
   },
-  {
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1383.jpg": {
     "name": "DSC_1383.jpg",
     "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1383.jpg",
     "result": "match"
   },
-  {
+  "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA070437.JPG": {
     "name": "PA070437.JPG",
     "path": "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA070437.JPG",
     "result": "notAMatch"
   },
-  {
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1350.jpg": {
     "name": "DSC_1350.jpg",
     "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1350.jpg",
     "result": "match"
   },
-  {
+  "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1350.jpg": {
     "name": "DSC_1350.jpg",
     "path": "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1350.jpg",
     "result": "match"
   },
-  {
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1350.jpg": {
     "name": "DSC_1350.jpg",
     "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1350.jpg",
     "result": "match"
   },
-  {
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1350.jpg": {
     "name": "DSC_1350.jpg",
     "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1350.jpg",
     "result": "match"
   },
-  {
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1344.jpg": {
     "name": "DSC_1344.jpg",
     "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1344.jpg",
     "result": "match"
   },
-  {
+  "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1344.jpg": {
     "name": "DSC_1344.jpg",
     "path": "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1344.jpg",
     "result": "match"
   },
-  {
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1344.jpg": {
     "name": "DSC_1344.jpg",
     "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1344.jpg",
     "result": "match"
   },
-  {
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1344.jpg": {
     "name": "DSC_1344.jpg",
     "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1344.jpg",
     "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\New2\\7.JPG": {
+    "name": "7.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\New2\\7.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\New2\\7.JPG": {
+    "name": "7.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\New2\\7.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\New2\\7.JPG": {
+    "name": "7.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\New2\\7.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090511.JPG": {
+    "name": "PA090511.JPG",
+    "path": "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090511.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\2000\\10_ZionBryce\\PA090511.JPG": {
+    "name": "PA090511.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\2000\\10_ZionBryce\\PA090511.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\10_ZionBryce\\PA090511.JPG": {
+    "name": "PA090511.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\10_ZionBryce\\PA090511.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos 3\\10_00_ZionBryce\\PA090511.JPG": {
+    "name": "PA090511.JPG",
+    "path": "E:\\RemovableMedia\\Photos 3\\10_00_ZionBryce\\PA090511.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1347.jpg": {
+    "name": "DSC_1347.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1347.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1347.jpg": {
+    "name": "DSC_1347.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1347.jpg",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1347.jpg": {
+    "name": "DSC_1347.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1347.jpg",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1347.jpg": {
+    "name": "DSC_1347.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1347.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\NEW1\\10.JPG": {
+    "name": "10.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\NEW1\\10.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\NEW1\\10.JPG": {
+    "name": "10.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\NEW1\\10.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\NEW1\\10.JPG": {
+    "name": "10.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\NEW1\\10.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S120\\21.JPG": {
+    "name": "21.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S120\\21.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S120\\21.JPG": {
+    "name": "21.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S120\\21.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S120\\21.JPG": {
+    "name": "21.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S120\\21.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090519.JPG": {
+    "name": "PA090519.JPG",
+    "path": "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090519.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\2000\\10_ZionBryce\\PA090519.JPG": {
+    "name": "PA090519.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\2000\\10_ZionBryce\\PA090519.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\10_ZionBryce\\PA090519.JPG": {
+    "name": "PA090519.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\10_ZionBryce\\PA090519.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos 3\\10_00_ZionBryce\\PA090519.JPG": {
+    "name": "PA090519.JPG",
+    "path": "E:\\RemovableMedia\\Photos 3\\10_00_ZionBryce\\PA090519.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1336.jpg": {
+    "name": "DSC_1336.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1336.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1336.jpg": {
+    "name": "DSC_1336.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1336.jpg",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1336.jpg": {
+    "name": "DSC_1336.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1336.jpg",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1336.jpg": {
+    "name": "DSC_1336.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1336.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090535.JPG": {
+    "name": "PA090535.JPG",
+    "path": "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090535.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\2000\\10_ZionBryce\\PA090535.JPG": {
+    "name": "PA090535.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\2000\\10_ZionBryce\\PA090535.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\10_ZionBryce\\PA090535.JPG": {
+    "name": "PA090535.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\10_ZionBryce\\PA090535.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos 3\\10_00_ZionBryce\\PA090535.JPG": {
+    "name": "PA090535.JPG",
+    "path": "E:\\RemovableMedia\\Photos 3\\10_00_ZionBryce\\PA090535.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\11_November_3\\DSC_1713.jpg": {
+    "name": "DSC_1713.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\11_November_3\\DSC_1713.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\11_November_3\\DSC_1713.jpg": {
+    "name": "DSC_1713.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\11_November_3\\DSC_1713.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\11_November_3\\DSC_1713.jpg": {
+    "name": "DSC_1713.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\11_November_3\\DSC_1713.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\11_November_3\\DSC_1713.jpg": {
+    "name": "DSC_1713.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\11_November_3\\DSC_1713.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S119\\15.JPG": {
+    "name": "15.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S119\\15.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S119\\15.JPG": {
+    "name": "15.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S119\\15.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S119\\15.JPG": {
+    "name": "15.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S119\\15.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S119\\6.JPG": {
+    "name": "6.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S119\\6.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S119\\6.JPG": {
+    "name": "6.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S119\\6.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S119\\6.JPG": {
+    "name": "6.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S119\\6.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos4-2\\In Progress\\7_00_2\\P7080208.JPG": {
+    "name": "P7080208.JPG",
+    "path": "E:\\RemovableMedia\\Photos4-2\\In Progress\\7_00_2\\P7080208.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\2000\\07_July\\P7080208.JPG": {
+    "name": "P7080208.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\2000\\07_July\\P7080208.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\07_July\\P7080208.JPG": {
+    "name": "P7080208.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\07_July\\P7080208.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos 3\\7_00_2\\P7080208.JPG": {
+    "name": "P7080208.JPG",
+    "path": "E:\\RemovableMedia\\Photos 3\\7_00_2\\P7080208.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos4-2\\In Progress\\7_00_2\\P7080215.JPG": {
+    "name": "P7080215.JPG",
+    "path": "E:\\RemovableMedia\\Photos4-2\\In Progress\\7_00_2\\P7080215.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\2000\\07_July\\P7080215.JPG": {
+    "name": "P7080215.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\2000\\07_July\\P7080215.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\07_July\\P7080215.JPG": {
+    "name": "P7080215.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\07_July\\P7080215.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos 3\\7_00_2\\P7080215.JPG": {
+    "name": "P7080215.JPG",
+    "path": "E:\\RemovableMedia\\Photos 3\\7_00_2\\P7080215.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S119\\9.JPG": {
+    "name": "9.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S119\\9.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S119\\9.JPG": {
+    "name": "9.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S119\\9.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S119\\9.JPG": {
+    "name": "9.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S119\\9.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\1.JPG": {
+    "name": "1.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\1.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\1.JPG": {
+    "name": "1.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\1.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\1.JPG": {
+    "name": "1.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\1.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\12SPOT.JPG": {
+    "name": "12SPOT.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\12SPOT.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\12SPOT.JPG": {
+    "name": "12SPOT.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\12SPOT.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\12SPOT.JPG": {
+    "name": "12SPOT.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\12SPOT.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\20.JPG": {
+    "name": "20.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\20.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\20.JPG": {
+    "name": "20.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\20.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\20.JPG": {
+    "name": "20.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\20.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1328.jpg": {
+    "name": "DSC_1328.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1328.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1328.jpg": {
+    "name": "DSC_1328.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1328.jpg",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1328.jpg": {
+    "name": "DSC_1328.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\09_September_7\\DSC_1328.jpg",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1328.jpg": {
+    "name": "DSC_1328.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\09_September_7\\DSC_1328.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\29.JPG": {
+    "name": "29.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\29.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\29.JPG": {
+    "name": "29.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\29.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\29.JPG": {
+    "name": "29.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\29.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\8.JPG": {
+    "name": "8.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\S118\\8.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\8.JPG": {
+    "name": "8.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\S118\\8.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\8.JPG": {
+    "name": "8.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\S118\\8.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\Filoli\\6.JPG": {
+    "name": "6.JPG",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\Filoli\\6.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\Filoli\\6.JPG": {
+    "name": "6.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\Filoli\\6.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\Filoli\\6.JPG": {
+    "name": "6.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\Filoli\\6.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_5\\_DSC2205.jpg": {
+    "name": "_DSC2205.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_5\\_DSC2205.jpg",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_5\\_DSC2205.jpg": {
+    "name": "_DSC2205.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_5\\_DSC2205.jpg",
+    "result": "match"
   }
-]
+}

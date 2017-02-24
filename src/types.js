@@ -43,4 +43,4 @@ export type DrivePhotoToGooglePhotoComparisonResult = {
   result: string
 }
 
-export type DrivePhotoToGooglePhotoComparisonResults = Array<DrivePhotoToGooglePhotoComparisonResult>;
+export type DrivePhotoToGooglePhotoComparisonResults = { [path:string]: DrivePhotoToGooglePhotoComparisonResult };
