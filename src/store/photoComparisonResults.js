@@ -16,6 +16,7 @@ const decoder = new StringDecoder('utf8');
 // Constants
 // ------------------------------------
 const SET_PHOTO_COMPARISON_RESULTS = 'SET_PHOTO_COMPARISON_RESULTS';
+const ADD_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS = 'ADD_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS';
 const SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS = 'SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS';
 
 // ------------------------------------
@@ -33,15 +34,15 @@ export function saveDrivePhotoToGooglePhotoComparisonResults() {
 
 export function readDrivePhotoToGooglePhotoComparisonResults() {
 
-  // return function (_: Function, __: Function) {
+  return function (dispatch: Function, __: Function) {
 
     readFile('drivePhotoToGooglePhotoComparisonResults.json').then((drivePhotoToGooglePhotoComparisonResultsBuf) => {
 
       let drivePhotoToGooglePhotoComparisonResultsStr = decoder.write(drivePhotoToGooglePhotoComparisonResultsBuf);
       let drivePhotoToGooglePhotoComparisonResultsSpec = JSON.parse(drivePhotoToGooglePhotoComparisonResultsStr);
-
+      dispatch(setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResultsSpec));
     });
-  // };
+  };
 }
 
 
@@ -68,6 +69,15 @@ export function setDrivePhotoToGooglePhotoComparisonResults(
   };
 }
 
+export function addDrivePhotoToGooglePhotoComparisonResults(
+  drivePhotoToGooglePhotoComparisonResults: DrivePhotoToGooglePhotoComparisonResults) {
+
+  return {
+    type: ADD_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS,
+    payload: drivePhotoToGooglePhotoComparisonResults
+  };
+}
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
@@ -88,10 +98,21 @@ export default function(state: Object = initialState, action: Object) {
         return newState;
       }
 
+    case ADD_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS:
+      {
+        let newState = Object.assign({}, state);
+        newState.drivePhotoToGooglePhotoComparisonResults =
+          Object.assign(newState.drivePhotoToGooglePhotoComparisonResults, action.payload);
+        console.log('ADD_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS');
+        console.log(newState);
+        return newState;
+      }
+
     case SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS:
       {
         let newState = Object.assign({}, state);
-        newState.drivePhotoToGooglePhotoComparisonResults = Object.assign(newState.drivePhotoToGooglePhotoComparisonResults, action.payload);
+        newState.drivePhotoToGooglePhotoComparisonResults = action.payload;
+        console.log('SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS');
         console.log(newState);
         return newState;
       }

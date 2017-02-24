@@ -14,8 +14,9 @@ import type {
   from '../types';
 
 import {
-  setDrivePhotoToGooglePhotoComparisonResults,
+  addDrivePhotoToGooglePhotoComparisonResults,
   saveDrivePhotoToGooglePhotoComparisonResults,
+  readDrivePhotoToGooglePhotoComparisonResults,
 } from '../store/photoComparisonResults';
 
 class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
@@ -36,7 +37,7 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
       drivePhotoToGooglePhotoComparisonResults[path] = drivePhotoToGooglePhotoComparisonResult;
     });
 
-    this.props.setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults);
+    this.props.addDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults);
   }
 
   handleMatch(drivePhotoItems : PhotoItems) {
@@ -76,15 +77,16 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setDrivePhotoToGooglePhotoComparisonResults,
-    saveDrivePhotoToGooglePhotoComparisonResults
-  },
-    dispatch);
+    addDrivePhotoToGooglePhotoComparisonResults,
+    saveDrivePhotoToGooglePhotoComparisonResults,
+    readDrivePhotoToGooglePhotoComparisonResults
+  }, dispatch);
 }
 
 CompareUnmatchedDriveToGooglePhotosContainer.propTypes = {
-  setDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
+  addDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
   saveDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
+  readDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompareUnmatchedDriveToGooglePhotosContainer);

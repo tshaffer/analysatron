@@ -30,6 +30,8 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   componentWillMount() {
 
+    this.props.readDrivePhotoToGooglePhotoComparisonResults();
+
     const unmatchedPhotos: Array<IdenticalPhotos> = this.props.photoComparisonResults.unmatchedPhotos;
     if (!unmatchedPhotos) {
       debugger;
@@ -223,6 +225,7 @@ CompareUnmatchedDriveToGooglePhotos.propTypes = {
   onMatch: React.PropTypes.func.isRequired,
   onNotAMatch: React.PropTypes.func.isRequired,
   onSave: React.PropTypes.func.isRequired,
+  readDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
 };
 
 export default CompareUnmatchedDriveToGooglePhotos;
