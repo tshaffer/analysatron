@@ -18,6 +18,7 @@ const decoder = new StringDecoder('utf8');
 const SET_PHOTO_COMPARISON_RESULTS = 'SET_PHOTO_COMPARISON_RESULTS';
 const ADD_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS = 'ADD_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS';
 const SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS = 'SET_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS';
+const SET_DRIVE_PHOTO_INDEX = 'SET_DRIVE_PHOTO_INDEX';
 
 // ------------------------------------
 // Action Creators
@@ -41,6 +42,8 @@ export function readDrivePhotoToGooglePhotoComparisonResults() {
       let drivePhotoToGooglePhotoComparisonResultsStr = decoder.write(drivePhotoToGooglePhotoComparisonResultsBuf);
       let drivePhotoToGooglePhotoComparisonResultsSpec = JSON.parse(drivePhotoToGooglePhotoComparisonResultsStr);
       dispatch(setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResultsSpec));
+
+      dispatch(setDrivePhotoIndex(0));
     });
   };
 }
@@ -78,17 +81,32 @@ export function addDrivePhotoToGooglePhotoComparisonResults(
   };
 }
 
+export function setDrivePhotoIndex(drivePhotoIndex : number) {
+
+  return {
+    type: SET_DRIVE_PHOTO_INDEX,
+    payload: drivePhotoIndex
+  };
+}
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState: Object = {
   photoComparisonResults: {},
-  drivePhotoToGooglePhotoComparisonResults: {}
+  drivePhotoToGooglePhotoComparisonResults: {},
+  drivePhotoIndex: 0
 };
 
 export default function(state: Object = initialState, action: Object) {
 
   switch (action.type) {
+
+    case SET_DRIVE_PHOTO_INDEX: {
+      let newState = Object.assign({}, state);
+      newState.drivePhotoIndex = action.payload;
+      return newState;
+    }
 
     case SET_PHOTO_COMPARISON_RESULTS:
       {

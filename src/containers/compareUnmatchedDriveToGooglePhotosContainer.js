@@ -17,6 +17,7 @@ import {
   addDrivePhotoToGooglePhotoComparisonResults,
   saveDrivePhotoToGooglePhotoComparisonResults,
   readDrivePhotoToGooglePhotoComparisonResults,
+  setDrivePhotoIndex,
 } from '../store/photoComparisonResults';
 
 class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
@@ -52,6 +53,10 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
     this.props.saveDrivePhotoToGooglePhotoComparisonResults();
   }
 
+  handleSetDrivePhotoIndex(drivePhotoIndex : number) {
+    this.props.setDrivePhotoIndex(drivePhotoIndex);
+  }
+
   render() {
     console.log("ComparePhotosContainer render invoked");
 
@@ -61,6 +66,7 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
         onMatch={this.handleMatch.bind(this)}
         onNotAMatch={this.handleNotAMatch.bind(this)}
         onSave={this.handleSave.bind(this)}
+        onSetDrivePhotoIndex={this.handleSetDrivePhotoIndex.bind(this)}
       />
     );
   }
@@ -72,6 +78,7 @@ function mapStateToProps (state) {
     drivePhotoToGooglePhotoComparisonResults:
       state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults,
     googlePhotosByHash: state.googlePhotos.googlePhotosByHash,
+    drivePhotoIndex: state.photoComparisonResults.drivePhotoIndex,
   };
 }
 
@@ -79,7 +86,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     addDrivePhotoToGooglePhotoComparisonResults,
     saveDrivePhotoToGooglePhotoComparisonResults,
-    readDrivePhotoToGooglePhotoComparisonResults
+    readDrivePhotoToGooglePhotoComparisonResults,
+    setDrivePhotoIndex,
   }, dispatch);
 }
 
@@ -87,6 +95,7 @@ CompareUnmatchedDriveToGooglePhotosContainer.propTypes = {
   addDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
   saveDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
   readDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
+  setDrivePhotoIndex: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompareUnmatchedDriveToGooglePhotosContainer);

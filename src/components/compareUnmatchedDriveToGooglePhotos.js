@@ -18,16 +18,6 @@ import ComparePhotoItems from './comparePhotoItems';
 
 class CompareUnmatchedDriveToGooglePhotos extends Component {
 
-  constructor(props: Object) {
-    super(props);
-
-    this.state = {
-      drivePhotoIndex: 0
-    };
-  }
-
-  state: Object;
-
   componentWillMount() {
 
     this.props.readDrivePhotoToGooglePhotoComparisonResults();
@@ -75,12 +65,12 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   moveToNext() {
 
-    let drivePhotoIndex = this.state.drivePhotoIndex + 1;
-    if (drivePhotoIndex >= this.props.photoComparisonResults.matchedPhotos.length) {
+    let drivePhotoIndex = this.props.drivePhotoIndex + 1;
+    if (drivePhotoIndex >= this.props.photoComparisonResults.unmatchedPhotos.length) {
       drivePhotoIndex = 0;
     }
 
-    this.setState( { drivePhotoIndex });
+    this.props.onSetDrivePhotoIndex(drivePhotoIndex);
   }
 
   handleMatch() {
@@ -95,9 +85,6 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   handleSave() {
     this.props.onSave();
-    // const photosByHashStr = JSON.stringify(this.photosByHash, null, 2);
-    // fs.writeFileSync(this.outputFileName, photosByHashStr);
-    // console.log('photosByHash write complete.');
   }
 
   handleNext() {
@@ -106,12 +93,12 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   handlePrev() {
 
-    let drivePhotoIndex = this.state.drivePhotoIndex - 1;
+    let drivePhotoIndex = this.props.drivePhotoIndex - 1;
     if (drivePhotoIndex < 0) {
-      drivePhotoIndex = this.props.photoComparisonResults.matchedPhotos.length - 1;
+      drivePhotoIndex = this.props.photoComparisonResults.unmatchedPhotos.length - 1;
     }
 
-    this.setState( { drivePhotoIndex });
+    this.props.onSetDrivePhotoIndex(drivePhotoIndex);
   }
 
   handleHome() {
@@ -134,18 +121,42 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   render() {
 
-    if (!this.props.photoComparisonResults) {
+    if (!this.props.photoComparisonResults.unmatchedPhotos) {
       return (
-        <div>Loading...</div>
+        <div>Loading photoComparisonResults...</div>
       );
     }
 
-    const identicalDrivePhotos: IdenticalPhotos = this.unmatchedPhotos[this.state.drivePhotoIndex];
+    if (!this.props.drivePhotoToGooglePhotoComparisonResults ||
+          Object.keys(this.props.drivePhotoToGooglePhotoComparisonResults).length === 0) {
+      return (
+        <div>Loading drivePhotoToGooglePhotoComparisonResults...</div>
+      );
+    }
+
+    let identicalDrivePhotos : IdenticalPhotos;
+    let drivePhotoItem : PhotoItem;
+
+    let drivePhotoIndex = this.props.drivePhotoIndex;
+
+    // let haveUncheckedPhoto = false;
+    // while (!haveUncheckedPhoto) {
+    //   identicalDrivePhotos = this.unmatchedPhotos[drivePhotoIndex];
+    //   this.drivePhotoItems = identicalDrivePhotos.photoItems;
+    //   // TODO, for now ignore matchedPhotoGroupIndex
+    //   drivePhotoItem = this.drivePhotoItems[0];
+    //
+    //   if (!this.props.drivePhotoToGooglePhotoComparisonResults[drivePhotoItem.photo.path]) {
+    //     haveUncheckedPhoto = true;
+    //   }
+    //   else {
+    //     drivePhotoIndex++;
+    //   }
+    // }
+
+    identicalDrivePhotos = this.unmatchedPhotos[drivePhotoIndex];
     this.drivePhotoItems = identicalDrivePhotos.photoItems;
-    // TODO, for now ignore matchedPhotoGroupIndex
-    const drivePhotoItem : PhotoItem = this.drivePhotoItems[0];
-    // const drivePhotoHash: string = identicalDrivePhotos.hash;
-    // const drivePhotoKey: string = identicalDrivePhotos.key;
+    drivePhotoItem = this.drivePhotoItems[0];
 
     const closestGooglePhoto : ClosestHashSearchResult = identicalDrivePhotos.closestGooglePhoto;
 
@@ -226,6 +237,8 @@ CompareUnmatchedDriveToGooglePhotos.propTypes = {
   onNotAMatch: React.PropTypes.func.isRequired,
   onSave: React.PropTypes.func.isRequired,
   readDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
+  drivePhotoIndex: React.PropTypes.number.isRequired,
+  onSetDrivePhotoIndex: React.PropTypes.func.isRequired,
 };
 
 export default CompareUnmatchedDriveToGooglePhotos;
