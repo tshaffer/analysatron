@@ -47,6 +47,8 @@ export function initUnmatchedDrivePhotoComparisons() {
 
     const state = getState();
 
+    console.log('length in initUnmatchedDrivePhotoComparisons: ', Object.keys(state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults).length);
+
     // unmatched photos - strip out those that don't exist (due to debugging configuration)
     const unmatchedPhotos: Array<IdenticalPhotos> =
       state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
@@ -80,9 +82,16 @@ export function initUnmatchedDrivePhotoComparisons() {
 
 export function readDrivePhotoToGooglePhotoComparisonResults() {
 
-  return function (dispatch: Function, _: Function) {
+  return function (dispatch: Function, getState: Function) {
 
     return new Promise( (resolve, reject) => {
+
+      // only perform the read on startup
+      const state = getState();
+      if (Object.keys(state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults).length !== 0) {
+        resolve();
+        return;
+      }
 
       readFile('drivePhotoToGooglePhotoComparisonResults.json').then((drivePhotoToGooglePhotoComparisonResultsBuf) => {
 
@@ -231,8 +240,12 @@ export default function(state: Object = initialState, action: Object) {
     case ADD_DRIVE_PHOTO_TO_GOOGLE_PHOTO_COMPARISON_RESULTS:
       {
         let newState = Object.assign({}, state);
+        console.log('length before: ', Object.keys(newState.drivePhotoToGooglePhotoComparisonResults).length);
+        console.log(newState);
         newState.drivePhotoToGooglePhotoComparisonResults =
           Object.assign(newState.drivePhotoToGooglePhotoComparisonResults, action.payload);
+        console.log(newState);
+        console.log('length after: ', Object.keys(newState.drivePhotoToGooglePhotoComparisonResults).length);
         return newState;
       }
 
