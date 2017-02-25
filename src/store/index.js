@@ -39,29 +39,35 @@ import type {
 from '../types';
 
 
+import {
+  readDrivePhotoToGooglePhotoComparisonResults,
+} from '../store/photoComparisonResults';
+
 export function analyzePhotos() {
 
   return (dispatch: Function, getState: Function) => {
 
     let readGooglePhotosPromise = dispatch(readGooglePhotos());
     let readDrivePhotosPromise = dispatch(readDrivePhotos());
+    let readDrivePhotoToGooglePhotoComparisonResultsPromise = dispatch(readDrivePhotoToGooglePhotoComparisonResults());
 
-    Promise.all([readGooglePhotosPromise, readDrivePhotosPromise]).then(() => {
+    Promise.all([readGooglePhotosPromise, readDrivePhotosPromise,
+      readDrivePhotoToGooglePhotoComparisonResultsPromise]).then(() => {
 
-      // checks for duplicates in drivePhotos db?
-      dispatch(buildDrivePhotoDictionaries());
+        // checks for duplicates in drivePhotos db?
+        dispatch(buildDrivePhotoDictionaries());
 
-      let state = getState();
+        let state = getState();
 
-      let googlePhotos = state.googlePhotos.googlePhotos;
-      console.log('Number of googlePhotos: ', googlePhotos.length);
+        let googlePhotos = state.googlePhotos.googlePhotos;
+        console.log('Number of googlePhotos: ', googlePhotos.length);
 
-      const rebuildGooglePhotosByHash = false;
-      getGooglePhotosByHash(rebuildGooglePhotosByHash, googlePhotos, dispatch, state);
-    }).catch( (err) => {
-      console.log(err);
-      debugger;
-    });
+        const rebuildGooglePhotosByHash = false;
+        getGooglePhotosByHash(rebuildGooglePhotosByHash, googlePhotos, dispatch, state);
+      }).catch( (err) => {
+        console.log(err);
+        debugger;
+      });
   };
 }
 

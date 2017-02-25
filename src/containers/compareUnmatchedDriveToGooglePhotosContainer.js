@@ -16,7 +16,7 @@ import type {
 import {
   addDrivePhotoToGooglePhotoComparisonResults,
   saveDrivePhotoToGooglePhotoComparisonResults,
-  readDrivePhotoToGooglePhotoComparisonResults,
+  initUnmatchedDrivePhotoComparisons,
   setDrivePhotoIndex,
   navigateForward,
   navigateBackward,
@@ -99,7 +99,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     addDrivePhotoToGooglePhotoComparisonResults,
     saveDrivePhotoToGooglePhotoComparisonResults,
-    readDrivePhotoToGooglePhotoComparisonResults,
+    initUnmatchedDrivePhotoComparisons,
     setDrivePhotoIndex,
     navigateForward,
     navigateBackward,
@@ -109,7 +109,7 @@ function mapDispatchToProps(dispatch) {
 CompareUnmatchedDriveToGooglePhotosContainer.propTypes = {
   addDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
   saveDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
-  readDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
+  initUnmatchedDrivePhotoComparisons: React.PropTypes.func.isRequired,
   setDrivePhotoIndex: React.PropTypes.func.isRequired,
   navigateForward: React.PropTypes.func.isRequired,
   navigateBackward: React.PropTypes.func.isRequired,

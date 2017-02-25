@@ -37,6 +37,72 @@ export function saveDrivePhotoToGooglePhotoComparisonResults() {
   };
 }
 
+export function navigateBackward() {
+  return navigate(-1);
+}
+
+export function initUnmatchedDrivePhotoComparisons() {
+
+  return function (dispatch: Function, getState: Function) {
+
+    const state = getState();
+
+    // unmatched photos - strip out those that don't exist (due to debugging configuration)
+    const unmatchedPhotos: Array<IdenticalPhotos> =
+      state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
+    if (!unmatchedPhotos) {
+      debugger;
+    }
+
+    let unmatchedExistingPhotos: Array<IdenticalPhotos> = [];
+    unmatchedPhotos.forEach((unmatchedPhoto) => {
+      const photoItems: PhotoItems = unmatchedPhoto.photoItems;
+      const photoItem: PhotoItem = photoItems[0];
+      if (photoItem.photo.fileExists()) {
+        unmatchedExistingPhotos.push(unmatchedPhoto);
+      }
+    });
+
+    unmatchedExistingPhotos.sort((identicalPhotosA, identicalPhotosB) => {
+      if (identicalPhotosA && identicalPhotosB) {
+        const minHashDistanceA: number = identicalPhotosA.closestGooglePhoto.minHashDistance;
+        const minHashDistanceB: number = identicalPhotosB.closestGooglePhoto.minHashDistance;
+        return minHashDistanceA - minHashDistanceB;
+      }
+      return 0;
+    });
+
+    dispatch(setDrivePhotoIndex(-1));
+    dispatch(setUnmatchedExistingPhotos(unmatchedExistingPhotos));
+    dispatch(navigateForward());
+  };
+}
+
+export function readDrivePhotoToGooglePhotoComparisonResults() {
+
+  return function (dispatch: Function, _: Function) {
+
+    return new Promise( (resolve, reject) => {
+
+      readFile('drivePhotoToGooglePhotoComparisonResults.json').then((drivePhotoToGooglePhotoComparisonResultsBuf) => {
+
+        let drivePhotoToGooglePhotoComparisonResultsStr = decoder.write(drivePhotoToGooglePhotoComparisonResultsBuf);
+        let drivePhotoToGooglePhotoComparisonResults = JSON.parse(drivePhotoToGooglePhotoComparisonResultsStr);
+
+        dispatch(setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults));
+
+        resolve();
+      }).catch( (err) => {
+        reject(err);
+      });
+    });
+  };
+}
+
+
+// ------------------------------------
+// Helpers
+// ------------------------------------
 function navigate(increment : number) {
 
   return function(dispatch: Function, getState: Function) {
@@ -84,60 +150,6 @@ export function navigateForward() {
   return navigate(1);
 }
 
-export function navigateBackward() {
-  return navigate(-1);
-}
-
-export function readDrivePhotoToGooglePhotoComparisonResults() {
-
-  return function (dispatch: Function, getState: Function) {
-
-    readFile('drivePhotoToGooglePhotoComparisonResults.json').then((drivePhotoToGooglePhotoComparisonResultsBuf) => {
-
-      let drivePhotoToGooglePhotoComparisonResultsStr = decoder.write(drivePhotoToGooglePhotoComparisonResultsBuf);
-      let drivePhotoToGooglePhotoComparisonResults = JSON.parse(drivePhotoToGooglePhotoComparisonResultsStr);
-
-      const state = getState();
-
-      // unmatched photos - strip out those that don't exist (due to debugging configuration)
-      const unmatchedPhotos: Array<IdenticalPhotos> =
-        state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
-      if (!unmatchedPhotos) {
-        debugger;
-      }
-
-      let unmatchedExistingPhotos : Array<IdenticalPhotos> = [];
-      unmatchedPhotos.forEach( (unmatchedPhoto) => {
-        const photoItems : PhotoItems = unmatchedPhoto.photoItems;
-        const photoItem : PhotoItem = photoItems[0];
-        if (photoItem.photo.fileExists()) {
-          unmatchedExistingPhotos.push(unmatchedPhoto);
-        }
-      });
-
-      unmatchedExistingPhotos.sort( (identicalPhotosA, identicalPhotosB) => {
-        if (identicalPhotosA && identicalPhotosB) {
-          const minHashDistanceA : number = identicalPhotosA.closestGooglePhoto.minHashDistance;
-          const minHashDistanceB : number = identicalPhotosB.closestGooglePhoto.minHashDistance;
-          return minHashDistanceA - minHashDistanceB;
-        }
-        return 0;
-      });
-
-
-      dispatch(setDrivePhotoIndex(-1));
-      dispatch(setUnmatchedExistingPhotos(unmatchedExistingPhotos));
-      dispatch(setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults));
-
-      dispatch(navigateForward());
-    });
-  };
-}
-
-
-// ------------------------------------
-// Helpers
-// ------------------------------------
 
 // ------------------------------------
 // Actions

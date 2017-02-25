@@ -19,7 +19,7 @@ import ComparePhotoItems from './comparePhotoItems';
 class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   componentWillMount() {
-    this.props.readDrivePhotoToGooglePhotoComparisonResults();
+    this.props.initUnmatchedDrivePhotoComparisons();
   }
 
   drivePhotoItems: PhotoItems;
@@ -175,7 +175,7 @@ CompareUnmatchedDriveToGooglePhotos.propTypes = {
   onMatch: React.PropTypes.func.isRequired,
   onNotAMatch: React.PropTypes.func.isRequired,
   onSave: React.PropTypes.func.isRequired,
-  readDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
+  initUnmatchedDrivePhotoComparisons: React.PropTypes.func.isRequired,
   drivePhotoIndex: React.PropTypes.number.isRequired,
   unmatchedExistingPhotos: React.PropTypes.array.isRequired,
   onSetDrivePhotoIndex: React.PropTypes.func.isRequired,
