@@ -1,6 +1,7 @@
 // @flow
 
 const fs = require('fs');
+const path = require('path');
 const Jimp = require('jimp');
 
 import { readFile } from '../utilities/utils';
@@ -156,13 +157,37 @@ function getDrivePhotos(rebuildDrivePhotosByHash, googlePhotos, googlePhotosByHa
 
           const identicalPhotos = drivePhotosByHashRaw[hash];
           const photoItems = identicalPhotos.photoItems;
-          photoItems.forEach((photoItem) => {
-            photoItem.photo =  new DrivePhoto(photoItem.photo)
-          });
-
+          let index = 0;
+          while (index < photoItems.length) {
+            let photoItem = photoItems[index];
+            if (path.extname(photoItem.photo.path).toLowerCase() !== '.tif') {
+              photoItem.photo = new DrivePhoto(photoItem.photo);
+              index++;
+            }
+            else {
+              photoItems.splice(index, 1);
+            }
+          }
           drivePhotosByHash[hash] = identicalPhotos;
         }
       }
+
+      // for (let poo in drivePhotosByHash) {
+      //   if (drivePhotosByHash.hasOwnProperty(poo)) {
+      //     let drivePhotoByHash : IdenticalPhotos = drivePhotosByHash[poo];
+      //     let photoItems = drivePhotoByHash.photoItems;
+      //     photoItems.forEach( (photoItem) => {
+      //       if (!(photoItem.photo instanceof DrivePhoto)) {
+      //         console.log(drivePhotosByHash);
+      //         console.log(poo);
+      //         console.log(drivePhotoByHash);
+      //         console.log(photoItems);
+      //         console.log(photoItem);
+      //         debugger;
+      //       }
+      //     })
+      //   }
+      // }
       processDrivePhotosByHash(drivePhotosByHash, googlePhotos, googlePhotosByHash, dispatch);
     });
   }
