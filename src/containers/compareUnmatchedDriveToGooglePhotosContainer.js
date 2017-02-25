@@ -18,6 +18,8 @@ import {
   saveDrivePhotoToGooglePhotoComparisonResults,
   readDrivePhotoToGooglePhotoComparisonResults,
   setDrivePhotoIndex,
+  navigateForward,
+  navigateBackward,
 } from '../store/photoComparisonResults';
 
 class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
@@ -57,6 +59,14 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
     this.props.setDrivePhotoIndex(drivePhotoIndex);
   }
 
+  handleNavigateForward() {
+    this.props.navigateForward();
+  }
+
+  handleNavigateBackward() {
+    this.props.navigateBackward();
+  }
+
   render() {
     console.log("ComparePhotosContainer render invoked");
 
@@ -67,6 +77,8 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
         onNotAMatch={this.handleNotAMatch.bind(this)}
         onSave={this.handleSave.bind(this)}
         onSetDrivePhotoIndex={this.handleSetDrivePhotoIndex.bind(this)}
+        onNavigateForward={this.handleNavigateForward.bind(this)}
+        onNavigateBackward={this.handleNavigateBackward.bind(this)}
       />
     );
   }
@@ -89,6 +101,8 @@ function mapDispatchToProps(dispatch) {
     saveDrivePhotoToGooglePhotoComparisonResults,
     readDrivePhotoToGooglePhotoComparisonResults,
     setDrivePhotoIndex,
+    navigateForward,
+    navigateBackward,
   }, dispatch);
 }
 
@@ -97,6 +111,8 @@ CompareUnmatchedDriveToGooglePhotosContainer.propTypes = {
   saveDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
   readDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
   setDrivePhotoIndex: React.PropTypes.func.isRequired,
+  navigateForward: React.PropTypes.func.isRequired,
+  navigateBackward: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompareUnmatchedDriveToGooglePhotosContainer);

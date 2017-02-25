@@ -37,14 +37,23 @@ export function saveDrivePhotoToGooglePhotoComparisonResults() {
   };
 }
 
-export function navigateForward() {
+function navigate(increment : number) {
 
   return function(dispatch: Function, getState: Function) {
 
     const state = getState();
 
-    let drivePhotoIndex : number = state.photoComparisonResults.drivePhotoIndex;
     let unmatchedExistingPhotos : Array<IdenticalPhotos> = state.photoComparisonResults.unmatchedExistingPhotos;
+
+    let drivePhotoIndex : number = state.photoComparisonResults.drivePhotoIndex;
+    drivePhotoIndex += increment;
+    if (drivePhotoIndex >= unmatchedExistingPhotos.length) {
+      drivePhotoIndex = 0;
+    }
+    else if (drivePhotoIndex < 0) {
+      drivePhotoIndex = unmatchedExistingPhotos.length - 1;
+    }
+
     let drivePhotoToGooglePhotoComparisonResults : Object =
       state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults;
 
@@ -57,15 +66,26 @@ export function navigateForward() {
         haveUnreviewedPhoto = true;
       }
       else {
-        drivePhotoIndex++;
+        drivePhotoIndex += increment;
         if (drivePhotoIndex >= unmatchedExistingPhotos.length) {
           drivePhotoIndex = 0;
+        }
+        else if (drivePhotoIndex < 0) {
+          drivePhotoIndex = unmatchedExistingPhotos.length - 1;
         }
       }
     }
 
     dispatch(setDrivePhotoIndex(drivePhotoIndex));
   };
+
+}
+export function navigateForward() {
+  return navigate(1);
+}
+
+export function navigateBackward() {
+  return navigate(-1);
 }
 
 export function readDrivePhotoToGooglePhotoComparisonResults() {
@@ -105,7 +125,7 @@ export function readDrivePhotoToGooglePhotoComparisonResults() {
       });
 
 
-      dispatch(setDrivePhotoIndex(0));
+      dispatch(setDrivePhotoIndex(-1));
       dispatch(setUnmatchedExistingPhotos(unmatchedExistingPhotos));
       dispatch(setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults));
 
@@ -169,7 +189,7 @@ export function setUnmatchedExistingPhotos(unmatchedExistingPhotos : Array<Ident
 const initialState: Object = {
   photoComparisonResults: {},
   drivePhotoToGooglePhotoComparisonResults: {},
-  drivePhotoIndex: 0,
+  drivePhotoIndex: -1,
   unmatchedExistingPhotos: [],
 };
 

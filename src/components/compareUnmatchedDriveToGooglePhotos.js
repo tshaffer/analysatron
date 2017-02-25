@@ -19,68 +19,24 @@ import ComparePhotoItems from './comparePhotoItems';
 class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   componentWillMount() {
-
     this.props.readDrivePhotoToGooglePhotoComparisonResults();
-
-    const unmatchedPhotos: Array<IdenticalPhotos> = this.props.photoComparisonResults.unmatchedPhotos;
-    if (!unmatchedPhotos) {
-      debugger;
-    }
-
-    // let unmatchedExistingPhotos : Array<IdenticalPhotos> = unmatchedPhotos.map( function (unmatchedPhoto : IdenticalPhotos) : IdenticalPhotos {
-    //   const photoItems : PhotoItems = unmatchedPhoto.photoItems;
-    //   const photoItem : PhotoItem = photoItems[0];
-    //   if (photoItem.photo.fileExists()) {
-    //     return unmatchedPhoto;
-    //   }
-    //   else {
-    //     return null;
-    //   }
-    // });
-
-    // strip out photos that don't exist
-    let unmatchedExistingPhotos : Array<IdenticalPhotos> = [];
-    unmatchedPhotos.forEach( (unmatchedPhoto) => {
-      const photoItems : PhotoItems = unmatchedPhoto.photoItems;
-      const photoItem : PhotoItem = photoItems[0];
-      if (photoItem.photo.fileExists()) {
-        unmatchedExistingPhotos.push(unmatchedPhoto);
-      }
-    });
-
-    unmatchedExistingPhotos.sort( (identicalPhotosA, identicalPhotosB) => {
-      if (identicalPhotosA && identicalPhotosB) {
-        const minHashDistanceA : number = identicalPhotosA.closestGooglePhoto.minHashDistance;
-        const minHashDistanceB : number = identicalPhotosB.closestGooglePhoto.minHashDistance;
-        return minHashDistanceA - minHashDistanceB;
-      }
-      return 0;
-    });
-
-    this.unmatchedPhotos = unmatchedExistingPhotos;
   }
 
   drivePhotoItems: PhotoItems;
   unmatchedPhotos: Array<IdenticalPhotos>;
 
   moveToNext() {
-
-    let drivePhotoIndex = this.props.drivePhotoIndex + 1;
-    if (drivePhotoIndex >= this.props.photoComparisonResults.unmatchedPhotos.length) {
-      drivePhotoIndex = 0;
-    }
-
-    this.props.onSetDrivePhotoIndex(drivePhotoIndex);
+    this.props.onNavigateForward();
   }
 
   handleMatch() {
     this.props.onMatch(this.drivePhotoItems);
-    this.moveToNext();
+    this.props.onNavigateForward();
   }
 
   handleNotAMatch() {
     this.props.onNotAMatch(this.drivePhotoItems);
-    this.moveToNext();
+    this.props.onNavigateForward();
   }
 
   handleSave() {
@@ -88,17 +44,11 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
   }
 
   handleNext() {
-    this.moveToNext();
+    this.props.onNavigateForward();
   }
 
   handlePrev() {
-
-    let drivePhotoIndex = this.props.drivePhotoIndex - 1;
-    if (drivePhotoIndex < 0) {
-      drivePhotoIndex = this.props.photoComparisonResults.unmatchedPhotos.length - 1;
-    }
-
-    this.props.onSetDrivePhotoIndex(drivePhotoIndex);
+    this.props.onNavigateBackward();
   }
 
   handleHome() {
@@ -136,6 +86,11 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
       );
     }
 
+    if (this.props.drivePhotoIndex < 0) {
+      return (
+        <div>Loading drivePhotoIndex...</div>
+      );
+    }
     // is the following true?? closestGooglePhoto.googlePhotoHash - doesn't include aspectRatio, but it needs to.
 
     // get drivePhoto
@@ -224,6 +179,8 @@ CompareUnmatchedDriveToGooglePhotos.propTypes = {
   drivePhotoIndex: React.PropTypes.number.isRequired,
   unmatchedExistingPhotos: React.PropTypes.array.isRequired,
   onSetDrivePhotoIndex: React.PropTypes.func.isRequired,
+  onNavigateForward: React.PropTypes.func.isRequired,
+  onNavigateBackward: React.PropTypes.func.isRequired,
 };
 
 export default CompareUnmatchedDriveToGooglePhotos;
