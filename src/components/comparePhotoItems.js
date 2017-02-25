@@ -19,25 +19,27 @@ class ComparePhotoItems extends Component {
 
   getPhotoUrl(photo: Photo) {
 
-    let url = photo.getUrl();
+    return photo.getUrl();
 
-    if (url.startsWith('file:////E:')) {
-      let newPath = photo.getPath().replace('E:\\RemovableMedia\\',
-        '/Users/tedshaffer/Documents/RemovableMedia/');
-      url = this.replaceAll(newPath, '\\', '/');
-      url = 'file://' + url;
-    }
-
-    return url;
+    // let url = photo.getUrl();
+    //
+    // if (url.startsWith('file:////E:')) {
+    //   let newPath = photo.getPath().replace('E:\\RemovableMedia\\',
+    //     '/Users/tedshaffer/Documents/RemovableMedia/');
+    //   url = this.replaceAll(newPath, '\\', '/');
+    //   url = 'file://' + url;
+    // }
+    //
+    // return url;
   }
 
-  escapeRegExp(str : string) {
-    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-  }
-
-  replaceAll(str : string, find : string, replace: string) {
-    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
-  }
+  // escapeRegExp(str : string) {
+  //   return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  // }
+  //
+  // replaceAll(str : string, find : string, replace: string) {
+  //   return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
+  // }
 
 // <input id={photoItem.photo.getUrl()} type="checkbox" className="thumbSelector"
 // onClick={() => this.togglePhotoSelection(photoItem)}

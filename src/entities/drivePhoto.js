@@ -68,39 +68,43 @@ export default class DrivePhoto extends Photo {
 
   updatePath() {
 
-    if (this.path.startsWith('E:\\RemovableMedia\\')) {
-      let newPath = this.path.replace('E:\\RemovableMedia\\',
-        '/Users/tedshaffer/Documents/RemovableMedia/');
-      newPath = this.replaceAll(newPath, '\\', '/');
-      if (fs.existsSync(newPath)) {
-        this.path = newPath;
-      }
-    }
+    return;
+
+    // if (this.path.startsWith('E:\\RemovableMedia\\')) {
+    //   let newPath = this.path.replace('E:\\RemovableMedia\\',
+    //     '/Users/tedshaffer/Documents/RemovableMedia/');
+    //   newPath = this.replaceAll(newPath, '\\', '/');
+    //   if (fs.existsSync(newPath)) {
+    //     this.path = newPath;
+    //   }
+    // }
   }
 
   fileExists(): boolean {
-    
-    if (this.path.startsWith('E:\\RemovableMedia\\')) {
-      let newPath = this.path.replace('E:\\RemovableMedia\\',
-        '/Users/tedshaffer/Documents/RemovableMedia/');
-      newPath = this.replaceAll(newPath, '\\', '/');
-      if (fs.existsSync(newPath)) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    }
-    return false;
+
+    return true;
+
+    // if (this.path.startsWith('E:\\RemovableMedia\\')) {
+    //   let newPath = this.path.replace('E:\\RemovableMedia\\',
+    //     '/Users/tedshaffer/Documents/RemovableMedia/');
+    //   newPath = this.replaceAll(newPath, '\\', '/');
+    //   if (fs.existsSync(newPath)) {
+    //     return true;
+    //   }
+    //   else {
+    //     return false;
+    //   }
+    // }
+    // return false;
   }
   
-  escapeRegExp(str : string) {
-    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-  }
-
-  replaceAll(str : string, find : string, replace: string) {
-    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
-  }
+  // escapeRegExp(str : string) {
+  //   return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  // }
+  //
+  // replaceAll(str : string, find : string, replace: string) {
+  //   return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
+  // }
 
 
 
