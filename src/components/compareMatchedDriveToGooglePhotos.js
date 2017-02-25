@@ -1,11 +1,10 @@
 // @flow
 
 import type {
-  MatchedPhoto,
   PhotoItem,
   PhotoItems,
   IdenticalPhotos,
-  PhotosByHash,
+  MatchedPhoto,
 } from '../types';
 
 import React, { Component } from 'react';
@@ -18,51 +17,36 @@ import ComparePhotoItems from './comparePhotoItems';
 
 class CompareMatchedDriveToGooglePhotos extends Component {
 
-  constructor(props: Object) {
-    super(props);
-
-    this.state = {
-      drivePhotoIndex: 0
-    };
+  componentWillMount() {
+    this.props.initMatchedDrivePhotoComparisons();
   }
 
-  state: Object;
-
+  drivePhotoItems : PhotoItems;
 
   moveToNext() {
-
-    let drivePhotoIndex = this.state.drivePhotoIndex + 1;
-    if (drivePhotoIndex >= this.props.photoComparisonResults.matchedPhotos.length) {
-      drivePhotoIndex = 0;
-    }
-
-    this.setState( { drivePhotoIndex });
+    this.props.onNavigateMatchedForward();
   }
 
   handleMatch() {
+    this.props.onMatch(this.drivePhotoItems);
+    this.props.onNavigateMatchedForward();
   }
 
-  handleNotMatch() {
+  handleNotAMatch() {
+    this.props.onNotAMatch(this.drivePhotoItems);
+    this.props.onNavigateMatchedForward();
   }
 
   handleSave() {
-    // const photosByHashStr = JSON.stringify(this.photosByHash, null, 2);
-    // fs.writeFileSync(this.outputFileName, photosByHashStr);
-    // console.log('photosByHash write complete.');
+    this.props.onSave();
   }
 
   handleNext() {
-    this.moveToNext();
+    this.props.onNavigateMatchedForward();
   }
 
   handlePrev() {
-
-    let drivePhotoIndex = this.state.drivePhotoIndex - 1;
-    if (drivePhotoIndex < 0) {
-      drivePhotoIndex = this.props.photoComparisonResults.matchedPhotos.length - 1;
-    }
-
-    this.setState( { drivePhotoIndex });
+    this.props.onNavigateMatchedBackward();
   }
 
   handleHome() {
@@ -85,34 +69,65 @@ class CompareMatchedDriveToGooglePhotos extends Component {
 
   render() {
 
-    if (!this.props.photoComparisonResults) {
+    // display loading until all data is loaded...
+
+    if (!this.props.photoComparisonResults.matchedPhotos) {
       return (
-        <div>Loading...</div>
+        <div>Loading photoComparisonResults...</div>
       );
     }
 
-    const matchedPhotos: Array<MatchedPhoto> = this.props.photoComparisonResults.matchedPhotos;
-    const matchedDrivePhoto: MatchedPhoto = matchedPhotos[this.state.drivePhotoIndex];
-    const identicalDrivePhotos : IdenticalPhotos = matchedDrivePhoto.drivePhotos;
-    const drivePhotoItems: PhotoItems = identicalDrivePhotos.photoItems;
-    // TODO, for now ignore matchedPhotoGroupIndex
-    const drivePhotoItem : PhotoItem = drivePhotoItems[0];
-    // const drivePhotoHash: string = identicalDrivePhotos.hash;
-    const drivePhotoKey: string = identicalDrivePhotos.key;
-
-    const googlePhotosByHash: PhotosByHash = this.props.googlePhotosByHash;
-    const matchingIdenticalGooglePhotos: IdenticalPhotos = googlePhotosByHash[drivePhotoKey];
-    if (!matchingIdenticalGooglePhotos) {
-      debugger;
+    if (!this.props.drivePhotoToGooglePhotoComparisonResults ||
+      Object.keys(this.props.drivePhotoToGooglePhotoComparisonResults).length === 0) {
+      return (
+        <div>Loading drivePhotoToGooglePhotoComparisonResults...</div>
+      );
     }
-    const googlePhotoItems: PhotoItems = matchingIdenticalGooglePhotos.photoItems;
-    // TODO, for now ignore matchedPhotoGroupIndex
-    const googlePhotoItem: PhotoItem = googlePhotoItems[0];
 
+    if (this.props.matchedDrivePhotoIndex < 0) {
+      return (
+        <div>Loading drivePhotoIndex...</div>
+      );
+    }
+
+    // get drivePhoto
+    const identicalDrivePhotos : IdenticalPhotos =
+      this.props.matchedExistingPhotos[this.props.matchedDrivePhotoIndex].drivePhotos;
+    this.drivePhotoItems = identicalDrivePhotos.photoItems;
+    const drivePhotoItem : PhotoItem = this.drivePhotoItems[0];
+
+    // get googlePhoto
+    const matchedGooglePhoto : MatchedPhoto =
+      this.props.matchedExistingPhotos[this.props.matchedDrivePhotoIndex];
+    const matchedGooglePhotos : IdenticalPhotos = matchedGooglePhoto.matchedGooglePhotos;
+    const googlePhotoItems : PhotoItems = matchedGooglePhotos.photoItems;
+    const googlePhotoItem : PhotoItem = googlePhotoItems[0];
+
+    // display drivePhoto, googlePhoto side by side
     const photoItems = [
       drivePhotoItem,
       googlePhotoItem
     ];
+
+
+    // {/*const matchedPhotos: Array<MatchedPhoto> = this.props.photoComparisonResults.matchedPhotos;*/}
+    // // const matchedDrivePhoto: MatchedPhoto = matchedPhotos[this.state.drivePhotoIndex];
+    // // const identicalDrivePhotos : IdenticalPhotos = matchedDrivePhoto.drivePhotos;
+    // // const drivePhotoItems: PhotoItems = identicalDrivePhotos.photoItems;
+    // // // TODO, for now ignore matchedPhotoGroupIndex
+    // // const drivePhotoItem : PhotoItem = drivePhotoItems[0];
+    // // // const drivePhotoHash: string = identicalDrivePhotos.hash;
+    // // const drivePhotoKey: string = identicalDrivePhotos.key;
+
+    // get googlePhoto
+    {/*const closestGooglePhoto : ClosestHashSearchResult = identicalDrivePhotos.closestGooglePhoto;*/}
+    // const googlePhotosByHash: PhotosByHash = this.props.googlePhotosByHash;
+    // const nonMatchingGooglePhotos: IdenticalPhotos = googlePhotosByHash[closestGooglePhoto.googlePhotoHash];
+    // if (!nonMatchingGooglePhotos) {
+    //   debugger;
+    // }
+    // const googlePhotoItems: PhotoItems = nonMatchingGooglePhotos.photoItems;
+    // const googlePhotoItem: PhotoItem = googlePhotoItems[0];
 
     return (
       <MuiThemeProvider>
@@ -127,7 +142,7 @@ class CompareMatchedDriveToGooglePhotos extends Component {
               />
               <RaisedButton
                 label='Not a match'
-                onClick={this.handleNotMatch.bind(this)}
+                onClick={this.handleNotAMatch.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
@@ -168,8 +183,16 @@ class CompareMatchedDriveToGooglePhotos extends Component {
 }
 
 CompareMatchedDriveToGooglePhotos.propTypes = {
-  googlePhotosByHash: React.PropTypes.object.isRequired,
-  photoComparisonResults: React.PropTypes.object.isRequired
+  photoComparisonResults: React.PropTypes.object.isRequired,
+  drivePhotoToGooglePhotoComparisonResults: React.PropTypes.object.isRequired,
+  onMatch: React.PropTypes.func.isRequired,
+  onNotAMatch: React.PropTypes.func.isRequired,
+  onSave: React.PropTypes.func.isRequired,
+  initMatchedDrivePhotoComparisons: React.PropTypes.func.isRequired,
+  matchedDrivePhotoIndex: React.PropTypes.number.isRequired,
+  matchedExistingPhotos: React.PropTypes.array.isRequired,
+  onNavigateMatchedBackward: React.PropTypes.func.isRequired,
+  onNavigateMatchedForward: React.PropTypes.func.isRequired,
 };
 
 export default CompareMatchedDriveToGooglePhotos;
