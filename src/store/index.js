@@ -99,7 +99,6 @@ function getGooglePhotosByHash(rebuildGooglePhotosByHash: boolean, googlePhotos,
   if (rebuildGooglePhotosByHash) {
     googlePhotosByHash = getMatchingPhotos(googlePhotos);
     getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state);
-
   }
   else {
     readFile('googlePhotosByHash.json').then((googlePhotosByHashBuffer) => {
@@ -128,21 +127,50 @@ function getGooglePhotosByHash(rebuildGooglePhotosByHash: boolean, googlePhotos,
           googlePhotosByHash[hash] = identicalPhotos;
         }
       }
-      getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state);
+      getDrivePhotos(false, googlePhotos, googlePhotosByHash, dispatch, state);
     });
   }
 }
 
 
-function getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state) {
+function getDrivePhotos(rebuildDrivePhotosByHash, googlePhotos, googlePhotosByHash, dispatch, state) {
 
   dispatch(setGooglePhotosByHash(googlePhotosByHash));
   console.log('Number of google photos with unique keys: ', Object.keys(googlePhotosByHash).length);
 
-  let drivePhotos  = state.drivePhotos.drivePhotos;
-  const drivePhotosByHash : PhotosByHash = getMatchingPhotos(drivePhotos);
-  dispatch(setDrivePhotosByHash(drivePhotosByHash));
+  let drivePhotosByHash : PhotosByHash = {};
+
+  const drivePhotos  = state.drivePhotos.drivePhotos;
   console.log('Number of drivePhotos: ', drivePhotos.length);
+
+  if (rebuildDrivePhotosByHash) {
+    drivePhotosByHash = getMatchingPhotos(drivePhotos);
+    processDrivePhotosByHash(drivePhotosByHash, googlePhotos, googlePhotosByHash, dispatch);
+  }
+  else {
+    readFile('drivePhotosByHash.json').then((drivePhotosByHashBuffer) => {
+      let drivePhotosByHashStr = decoder.write(drivePhotosByHashBuffer);
+      let drivePhotosByHashRaw = JSON.parse(drivePhotosByHashStr);
+      for (let hash in drivePhotosByHashRaw) {
+        if (drivePhotosByHashRaw.hasOwnProperty(hash)) {
+
+          const identicalPhotos = drivePhotosByHashRaw[hash];
+          const photoItems = identicalPhotos.photoItems;
+          photoItems.forEach((photoItem) => {
+            photoItem.photo =  new DrivePhoto(photoItem.photo)
+          });
+
+          drivePhotosByHash[hash] = identicalPhotos;
+        }
+      }
+      processDrivePhotosByHash(drivePhotosByHash, googlePhotos, googlePhotosByHash, dispatch);
+    });
+  }
+}
+
+function processDrivePhotosByHash(drivePhotosByHash, googlePhotos, googlePhotosByHash, dispatch) {
+
+  dispatch(setDrivePhotosByHash(drivePhotosByHash));
   console.log('Number of drive photos with unique keys: ', Object.keys(drivePhotosByHash).length);
 
   let photoComparisonResults : PhotoComparisonResults =
