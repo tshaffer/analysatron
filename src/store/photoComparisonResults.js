@@ -37,6 +37,37 @@ export function saveDrivePhotoToGooglePhotoComparisonResults() {
   };
 }
 
+export function navigateForward() {
+
+  return function(dispatch: Function, getState: Function) {
+
+    const state = getState();
+
+    let drivePhotoIndex : number = state.photoComparisonResults.drivePhotoIndex;
+    let unmatchedExistingPhotos : Array<IdenticalPhotos> = state.photoComparisonResults.unmatchedExistingPhotos;
+    let drivePhotoToGooglePhotoComparisonResults : Object =
+      state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults;
+
+    let haveUnreviewedPhoto : boolean = false;
+    while (!haveUnreviewedPhoto) {
+      const identicalDrivePhotos: IdenticalPhotos = unmatchedExistingPhotos[drivePhotoIndex];
+      const drivePhotoItems : PhotoItems = identicalDrivePhotos.photoItems;
+      const drivePhotoItem : PhotoItem = drivePhotoItems[0];
+      if (!drivePhotoToGooglePhotoComparisonResults[drivePhotoItem.photo.path]) {
+        haveUnreviewedPhoto = true;
+      }
+      else {
+        drivePhotoIndex++;
+        if (drivePhotoIndex >= unmatchedExistingPhotos.length) {
+          drivePhotoIndex = 0;
+        }
+      }
+    }
+
+    dispatch(setDrivePhotoIndex(drivePhotoIndex));
+  };
+}
+
 export function readDrivePhotoToGooglePhotoComparisonResults() {
 
   return function (dispatch: Function, getState: Function) {
@@ -46,11 +77,11 @@ export function readDrivePhotoToGooglePhotoComparisonResults() {
       let drivePhotoToGooglePhotoComparisonResultsStr = decoder.write(drivePhotoToGooglePhotoComparisonResultsBuf);
       let drivePhotoToGooglePhotoComparisonResults = JSON.parse(drivePhotoToGooglePhotoComparisonResultsStr);
 
-
       const state = getState();
-      
+
       // unmatched photos - strip out those that don't exist (due to debugging configuration)
-      const unmatchedPhotos: Array<IdenticalPhotos> = state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
+      const unmatchedPhotos: Array<IdenticalPhotos> =
+        state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
       if (!unmatchedPhotos) {
         debugger;
       }
@@ -74,30 +105,11 @@ export function readDrivePhotoToGooglePhotoComparisonResults() {
       });
 
 
-      // initialize the drive photo index to the first drive photo that hasn't been reviewed
-      let drivePhotoIndex : number = 0;
-      // let unmatchedPhotos : Array<IdenticalPhotos> =
-      //   state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
-
-      let haveUnreviewedPhoto : boolean = false;
-      while (!haveUnreviewedPhoto) {
-        const identicalDrivePhotos: IdenticalPhotos = unmatchedExistingPhotos[drivePhotoIndex];
-        const drivePhotoItems : PhotoItems = identicalDrivePhotos.photoItems;
-        const drivePhotoItem : PhotoItem = drivePhotoItems[0];
-        if (!drivePhotoToGooglePhotoComparisonResults[drivePhotoItem.photo.path]) {
-          haveUnreviewedPhoto = true;
-        }
-        else {
-          drivePhotoIndex++;
-          if (drivePhotoIndex >= unmatchedExistingPhotos.length) {
-            drivePhotoIndex = 0;
-          }
-        }
-      }
-
-      dispatch(setDrivePhotoIndex(drivePhotoIndex));
+      dispatch(setDrivePhotoIndex(0));
       dispatch(setUnmatchedExistingPhotos(unmatchedExistingPhotos));
       dispatch(setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults));
+
+      dispatch(navigateForward());
     });
   };
 }

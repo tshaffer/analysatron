@@ -121,6 +121,8 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
 
   render() {
 
+    // display loading until all data is loaded...
+
     if (!this.props.photoComparisonResults.unmatchedPhotos) {
       return (
         <div>Loading photoComparisonResults...</div>
@@ -134,24 +136,24 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
       );
     }
 
+    // is the following true?? closestGooglePhoto.googlePhotoHash - doesn't include aspectRatio, but it needs to.
 
-    const drivePhotoIndex = this.props.drivePhotoIndex;
-    const identicalDrivePhotos : IdenticalPhotos = this.props.unmatchedExistingPhotos[drivePhotoIndex];
+    // get drivePhoto
+    const identicalDrivePhotos : IdenticalPhotos = this.props.unmatchedExistingPhotos[this.props.drivePhotoIndex];
     this.drivePhotoItems = identicalDrivePhotos.photoItems;
     const drivePhotoItem : PhotoItem = this.drivePhotoItems[0];
 
+    // get googlePhoto
     const closestGooglePhoto : ClosestHashSearchResult = identicalDrivePhotos.closestGooglePhoto;
-
-    // closestGooglePhoto.googlePhotoHash - doesn't include aspectRatio, but it needs to.
     const googlePhotosByHash: PhotosByHash = this.props.googlePhotosByHash;
     const nonMatchingGooglePhotos: IdenticalPhotos = googlePhotosByHash[closestGooglePhoto.googlePhotoHash];
     if (!nonMatchingGooglePhotos) {
       debugger;
     }
     const googlePhotoItems: PhotoItems = nonMatchingGooglePhotos.photoItems;
-    // TODO, for now ignore matchedPhotoGroupIndex
     const googlePhotoItem: PhotoItem = googlePhotoItems[0];
 
+    // display drivePhoto, googlePhoto side by side
     const photoItems = [
       drivePhotoItem,
       googlePhotoItem
