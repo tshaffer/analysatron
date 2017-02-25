@@ -134,29 +134,11 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
       );
     }
 
-    let identicalDrivePhotos : IdenticalPhotos;
-    let drivePhotoItem : PhotoItem;
 
-    let drivePhotoIndex = this.props.drivePhotoIndex;
-
-    // let haveUncheckedPhoto = false;
-    // while (!haveUncheckedPhoto) {
-    //   identicalDrivePhotos = this.unmatchedPhotos[drivePhotoIndex];
-    //   this.drivePhotoItems = identicalDrivePhotos.photoItems;
-    //   // TODO, for now ignore matchedPhotoGroupIndex
-    //   drivePhotoItem = this.drivePhotoItems[0];
-    //
-    //   if (!this.props.drivePhotoToGooglePhotoComparisonResults[drivePhotoItem.photo.path]) {
-    //     haveUncheckedPhoto = true;
-    //   }
-    //   else {
-    //     drivePhotoIndex++;
-    //   }
-    // }
-
-    identicalDrivePhotos = this.unmatchedPhotos[drivePhotoIndex];
+    const drivePhotoIndex = this.props.drivePhotoIndex;
+    const identicalDrivePhotos : IdenticalPhotos = this.props.unmatchedExistingPhotos[drivePhotoIndex];
     this.drivePhotoItems = identicalDrivePhotos.photoItems;
-    drivePhotoItem = this.drivePhotoItems[0];
+    const drivePhotoItem : PhotoItem = this.drivePhotoItems[0];
 
     const closestGooglePhoto : ClosestHashSearchResult = identicalDrivePhotos.closestGooglePhoto;
 
@@ -238,6 +220,7 @@ CompareUnmatchedDriveToGooglePhotos.propTypes = {
   onSave: React.PropTypes.func.isRequired,
   readDrivePhotoToGooglePhotoComparisonResults: React.PropTypes.func.isRequired,
   drivePhotoIndex: React.PropTypes.number.isRequired,
+  unmatchedExistingPhotos: React.PropTypes.array.isRequired,
   onSetDrivePhotoIndex: React.PropTypes.func.isRequired,
 };
 

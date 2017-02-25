@@ -79,6 +79,7 @@ function mapStateToProps (state) {
       state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults,
     googlePhotosByHash: state.googlePhotos.googlePhotosByHash,
     drivePhotoIndex: state.photoComparisonResults.drivePhotoIndex,
+    unmatchedExistingPhotos: state.photoComparisonResults.unmatchedExistingPhotos,
   };
 }
 
