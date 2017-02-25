@@ -52,6 +52,10 @@ class CompareMatchedDriveToGooglePhotosContainer extends Component {
     this.buildResults(drivePhotoItems, 'notAMatch');
   }
 
+  handleDiscard(drivePhotoItems) {
+    this.buildResults(drivePhotoItems, 'discard');
+  }
+
   handleSave() {
     this.props.saveDrivePhotoToGooglePhotoComparisonResults();
   }
@@ -76,6 +80,7 @@ class CompareMatchedDriveToGooglePhotosContainer extends Component {
         {...this.props}
         onMatch={this.handleMatch.bind(this)}
         onNotAMatch={this.handleNotAMatch.bind(this)}
+        onDiscard={this.handleDiscard.bind(this)}
         onSave={this.handleSave.bind(this)}
         onSetDrivePhotoIndex={this.handleSetDrivePhotoIndex.bind(this)}
         onNavigateMatchedForward={this.handleNavigateMatchedForward.bind(this)}

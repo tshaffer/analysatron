@@ -39,6 +39,11 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
     this.props.onNavigateForward();
   }
 
+  handleDiscard() {
+    this.props.onDiscard(this.drivePhotoItems);
+    this.props.onNavigateForward();
+  }
+
   handleSave() {
     this.props.onSave();
   }
@@ -58,7 +63,7 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
   getButtonStyle() {
     return {
       height: '24px',
-      width: '200px',
+      width: '180px',
       marginLeft: '2px'
     };
   }
@@ -125,6 +130,12 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
                 labelStyle={this.getButtonLabelStyle()}
               />
               <RaisedButton
+                label='Discard'
+                onClick={this.handleDiscard.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
                 label='Save'
                 onClick={this.handleSave.bind(this)}
                 style={this.getButtonStyle()}
@@ -167,6 +178,7 @@ CompareUnmatchedDriveToGooglePhotos.propTypes = {
   drivePhotoToGooglePhotoComparisonResults: React.PropTypes.object.isRequired,
   onMatch: React.PropTypes.func.isRequired,
   onNotAMatch: React.PropTypes.func.isRequired,
+  onDiscard: React.PropTypes.func.isRequired,
   onSave: React.PropTypes.func.isRequired,
   initUnmatchedDrivePhotoComparisons: React.PropTypes.func.isRequired,
   drivePhotoIndex: React.PropTypes.number.isRequired,

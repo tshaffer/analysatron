@@ -37,6 +37,11 @@ class CompareMatchedDriveToGooglePhotos extends Component {
     this.props.onNavigateMatchedForward();
   }
 
+  handleDiscard() {
+    this.props.onDiscard(this.drivePhotoItems);
+    this.props.onNavigateMatchedForward();
+  }
+
   handleSave() {
     this.props.onSave();
   }
@@ -56,7 +61,7 @@ class CompareMatchedDriveToGooglePhotos extends Component {
   getButtonStyle() {
     return {
       height: '24px',
-      width: '200px',
+      width: '180px',
       marginLeft: '2px'
     };
   }
@@ -102,26 +107,6 @@ class CompareMatchedDriveToGooglePhotos extends Component {
       googlePhotoItem
     ];
 
-
-    // {/*const matchedPhotos: Array<MatchedPhoto> = this.props.photoComparisonResults.matchedPhotos;*/}
-    // // const matchedDrivePhoto: MatchedPhoto = matchedPhotos[this.state.drivePhotoIndex];
-    // // const identicalDrivePhotos : IdenticalPhotos = matchedDrivePhoto.drivePhotos;
-    // // const drivePhotoItems: PhotoItems = identicalDrivePhotos.photoItems;
-    // // // TODO, for now ignore matchedPhotoGroupIndex
-    // // const drivePhotoItem : PhotoItem = drivePhotoItems[0];
-    // // // const drivePhotoHash: string = identicalDrivePhotos.hash;
-    // // const drivePhotoKey: string = identicalDrivePhotos.key;
-
-    // get googlePhoto
-    {/*const closestGooglePhoto : ClosestHashSearchResult = identicalDrivePhotos.closestGooglePhoto;*/}
-    // const googlePhotosByHash: PhotosByHash = this.props.googlePhotosByHash;
-    // const nonMatchingGooglePhotos: IdenticalPhotos = googlePhotosByHash[closestGooglePhoto.googlePhotoHash];
-    // if (!nonMatchingGooglePhotos) {
-    //   debugger;
-    // }
-    // const googlePhotoItems: PhotoItems = nonMatchingGooglePhotos.photoItems;
-    // const googlePhotoItem: PhotoItem = googlePhotoItems[0];
-
     return (
       <MuiThemeProvider>
         <div className="photoPageContainer">
@@ -136,6 +121,12 @@ class CompareMatchedDriveToGooglePhotos extends Component {
               <RaisedButton
                 label='Not a match'
                 onClick={this.handleNotAMatch.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
+                label='Discard'
+                onClick={this.handleDiscard.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
@@ -180,6 +171,7 @@ CompareMatchedDriveToGooglePhotos.propTypes = {
   drivePhotoToGooglePhotoComparisonResults: React.PropTypes.object.isRequired,
   onMatch: React.PropTypes.func.isRequired,
   onNotAMatch: React.PropTypes.func.isRequired,
+  onDiscard: React.PropTypes.func.isRequired,
   onSave: React.PropTypes.func.isRequired,
   initMatchedDrivePhotoComparisons: React.PropTypes.func.isRequired,
   matchedDrivePhotoIndex: React.PropTypes.number.isRequired,
