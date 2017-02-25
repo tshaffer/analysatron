@@ -116,7 +116,7 @@ export function readDrivePhotoToGooglePhotoComparisonResults() {
 
   return function (dispatch: Function, getState: Function) {
 
-    return new Promise( (resolve, reject) => {
+    return new Promise( (resolve, _) => {
 
       // only perform the read on startup
       const state = getState();
@@ -133,8 +133,12 @@ export function readDrivePhotoToGooglePhotoComparisonResults() {
         dispatch(setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults));
 
         resolve();
-      }).catch( (err) => {
-        reject(err);
+      // }).catch( (err) => {
+      }).catch( (__) => {
+        // file must not exist yet - TODO - check err
+        let drivePhotoToGooglePhotoComparisonResults = {};
+        dispatch(setDrivePhotoToGooglePhotoComparisonResults(drivePhotoToGooglePhotoComparisonResults));
+        resolve();
       });
     });
   };

@@ -77,13 +77,6 @@ class CompareMatchedDriveToGooglePhotos extends Component {
       );
     }
 
-    if (!this.props.drivePhotoToGooglePhotoComparisonResults ||
-      Object.keys(this.props.drivePhotoToGooglePhotoComparisonResults).length === 0) {
-      return (
-        <div>Loading drivePhotoToGooglePhotoComparisonResults...</div>
-      );
-    }
-
     if (this.props.matchedDrivePhotoIndex < 0) {
       return (
         <div>Loading drivePhotoIndex...</div>
