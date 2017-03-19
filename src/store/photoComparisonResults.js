@@ -163,6 +163,10 @@ function navigateMatched(increment : number) {
 
     let matchedExistingPhotos : Array<MatchedPhoto> = state.photoComparisonResults.matchedExistingPhotos;
 
+    console.log('navigateMatched:');
+    console.log('index: ', state.photoComparisonResults.matchedDrivePhotoIndex);
+    console.log('num matched photos: ', matchedExistingPhotos.length);
+
     let drivePhotoIndex : number = state.photoComparisonResults.matchedDrivePhotoIndex;
     drivePhotoIndex += increment;
     if (drivePhotoIndex >= matchedExistingPhotos.length) {
