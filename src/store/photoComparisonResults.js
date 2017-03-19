@@ -56,14 +56,21 @@ export function initMatchedDrivePhotoComparisons() {
     }
 
     let matchedExistingPhotos: Array<MatchedPhoto> = [];
-    matchedPhotos.forEach((matchedPhoto) => {
+    let numMissingPhotoItems = 0;
+    matchedPhotos.forEach((matchedPhoto, index) => {
       const drivePhotos : IdenticalPhotos = matchedPhoto.drivePhotos;
       const photoItems: PhotoItems = drivePhotos.photoItems;
       const photoItem: PhotoItem = photoItems[0];
-      if (photoItem.photo.fileExists()) {
+      if (!photoItem || !photoItem.photo) {
+        numMissingPhotoItems++;
+      }
+      else if (photoItem.photo.fileExists()) {
         matchedExistingPhotos.push(matchedPhoto);
       }
     });
+
+    console.log("numMissingPhotosItems: ", numMissingPhotoItems);
+    console.log("number of photos to compare: ", matchedPhotos.length);
 
     dispatch(setMatchedDrivePhotoIndex(-1));
     dispatch(setMatchedExistingPhotos(matchedExistingPhotos));

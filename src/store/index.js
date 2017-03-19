@@ -99,7 +99,7 @@ function getGooglePhotosByHash(rebuildGooglePhotosByHash: boolean, googlePhotos,
 
   if (rebuildGooglePhotosByHash) {
     googlePhotosByHash = getMatchingPhotos(googlePhotos);
-    getDrivePhotos(googlePhotos, googlePhotosByHash, dispatch, state);
+    getDrivePhotos(false, googlePhotos, googlePhotosByHash, dispatch, state);
   }
   else {
     readFile('googlePhotosByHash.json').then((googlePhotosByHashBuffer) => {
