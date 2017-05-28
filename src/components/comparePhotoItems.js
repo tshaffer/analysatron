@@ -1,10 +1,17 @@
 // @flow
 
+const path = require('path');
+const fs = require('fs');
+
 import Photo from '../entities/photo';
 
 import type { PhotoItem, PhotoItems } from '../types';
 
 import React, { Component } from 'react';
+
+import { convertPhoto } from '../utilities/photoUtilities';
+
+import * as utils from '../utilities/utils';
 
 class ComparePhotoItems extends Component {
 
@@ -155,6 +162,39 @@ class ComparePhotoItems extends Component {
       const dimensions = self.getDimensions(photo);
 
       const photoSrc : string = self.getPhotoUrl(photo);
+      console.log('photoSrc: ', photoSrc);
+      const extension = path.extname(photoSrc).toLowerCase();
+      if (extension === '.tif' || extension === '.tiff') {
+
+        let photoFilePath = photoSrc;
+        if (photoFilePath.startsWith('file://')) {
+          photoFilePath = photoFilePath.slice(9);
+        }
+
+        let photoName = path.basename(photoFilePath).toLowerCase();
+        let fileNameWithoutExtension = photoName.slice(0, -4);
+        photoName = fileNameWithoutExtension + ".jpg";
+
+        const targetDir = "C:\\Users\\Ted\\Documents\\Projects\\analysatron\\tmpFiles";
+        const guid = utils.guid();
+        let targetPath = path.join(targetDir, fileNameWithoutExtension + guid + ".jpg");
+        console.log('convertPhoto then display it: ', photoFilePath);
+        convertPhoto(photoFilePath, targetPath).then( () => {
+
+          // converted file should be at targetPath
+          // TODO - don't know why, but it appears as though sometimes a '-0' is appended to the photo file name
+          if (!fs.existsSync(targetPath)) {
+            console.log(targetPath, ' converted file does not exist');
+            targetPath = path.join(targetDir, fileNameWithoutExtension + guid + "-0.jpg");
+            if (!fs.existsSync(targetPath)) {
+              debugger;
+            }
+          }}).catch( (err) => {
+            console.log(err);
+            debugger;
+        });
+      }
+      
 
       return (
         <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
