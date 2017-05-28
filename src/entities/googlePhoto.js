@@ -23,6 +23,10 @@ export default class GooglePhoto extends Photo {
     return this.url;
   }
 
+  getDisplayUrl() : string {
+    return this.getUrl();
+  }
+
   getWidth(): string {
     return this.width;
   }

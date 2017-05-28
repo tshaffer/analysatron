@@ -22,7 +22,7 @@ class ComparePhotoItems extends Component {
 
   getPhotoUrl(photo: Photo) {
 
-    return photo.getUrl();
+    return photo.getDisplayUrl();
 
     // let url = photo.getUrl();
     //

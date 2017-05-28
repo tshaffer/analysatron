@@ -7,6 +7,7 @@ import Photo from './photo';
 export default class DrivePhoto extends Photo {
 
   path: string;
+  pathOfConvertedFile : string;
   dimensions: Object;
   exifCreateDate: string;
   exifDateTimeOriginal: string;
@@ -17,6 +18,7 @@ export default class DrivePhoto extends Photo {
   constructor(drivePhotoSpec: Object) {
     super(drivePhotoSpec);
     this.path = drivePhotoSpec.path;
+    this.pathOfConvertedFile = '';
     this.dimensions = drivePhotoSpec.dimensions;
     this.exifCreateDate = drivePhotoSpec.exifCreateDate;
     this.exifDateTimeOriginal = drivePhotoSpec.exifDateTimeOriginal;
@@ -33,6 +35,13 @@ export default class DrivePhoto extends Photo {
       return 'file:////' + this.path;
     }
     return this.path;
+  }
+
+  getDisplayUrl() : string {
+    if (this.pathOfConvertedFile !== '') {
+      return this.pathOfConvertedFile;
+    }
+    return this.getUrl();
   }
 
   getPath() : string {

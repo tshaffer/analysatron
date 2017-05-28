@@ -291,7 +291,7 @@ function navigate(increment : number) {
         }
 
         // assign updated path to the photoItem
-        unmatchedExistingPhotos[drivePhotoIndex].photoItems[0].photo.path = targetPath;
+        unmatchedExistingPhotos[drivePhotoIndex].photoItems[0].photo.pathOfConvertedFile = targetPath;
 
         dispatch(setDrivePhotoIndex(drivePhotoIndex));
 
