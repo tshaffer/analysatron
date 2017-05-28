@@ -9,10 +9,6 @@ import type { PhotoItem, PhotoItems } from '../types';
 
 import React, { Component } from 'react';
 
-import { convertPhoto } from '../utilities/photoUtilities';
-
-import * as utils from '../utilities/utils';
-
 class ComparePhotoItems extends Component {
 
   formatDateTime(dateTimeStr : string) {
@@ -158,63 +154,9 @@ class ComparePhotoItems extends Component {
     return photoItems.map(function(photoItem: PhotoItem) {
 
       const photo = photoItem.photo;
-
       const dimensions = self.getDimensions(photo);
-
       const photoSrc : string = self.getPhotoUrl(photo);
-      console.log('photoSrc: ', photoSrc);
-      const extension = path.extname(photoSrc).toLowerCase();
-      if (extension === '.tif' || extension === '.tiff') {
-
-        // // photoSrc:  file:////E:\RemovableMedia\9-1-2006\My Pictures\2006\01_January_3\_DSC3562.jpg
-        //
-        //    const targetPath = 'file:////C:\\Users\\Ted\\Documents\\Projects\\analysatron\\tmpFiles\\negscan04317443365a-85d7-a53e-5000-db3c34afbae1.jpg';
-        // // const targetPath = 'file:////E:\\RemovableMedia\\9-1-2006\\My Pictures\\2006\\01_January_3\\_DSC3562.jpg';
-        //
-        // return self.renderPhotoLi(targetPath, dimensions, photoItem, photo);
-
-        let photoFilePath = photoSrc;
-        if (photoFilePath.startsWith('file://')) {
-          photoFilePath = photoFilePath.slice(9);
-        }
-
-        let photoName = path.basename(photoFilePath).toLowerCase();
-        let fileNameWithoutExtension = photoName.slice(0, -4);
-        photoName = fileNameWithoutExtension + ".jpg";
-
-        const targetDir = "C:\\Users\\Ted\\Documents\\Projects\\analysatron\\tmpFiles";
-        const guid = utils.guid();
-        let targetPath = path.join(targetDir, fileNameWithoutExtension + guid + ".jpg");
-        console.log('convertPhoto then display it: ', photoFilePath);
-        convertPhoto(photoFilePath, targetPath).then( () => {
-
-          console.log('CONVERSION COMPLETE');
-
-          // converted file should be at targetPath
-          // TODO - don't know why, but it appears as though sometimes a '-0' is appended to the photo file name
-          if (!fs.existsSync(targetPath)) {
-            console.log(targetPath, ' converted file does not exist');
-            targetPath = path.join(targetDir, fileNameWithoutExtension + guid + "-0.jpg");
-            if (!fs.existsSync(targetPath)) {
-              debugger;
-            }
-          }
-
-          // photoSrc:  file:////E:\RemovableMedia\9-1-2006\My Pictures\2006\01_January_3\_DSC3562.jpg
-          // targetPath = 'file:////C:\\Users\\Ted\\Documents\\Projects\\analysatron\\tmpFiles\\negscan04317443365a-85d7-a53e-5000-db3c34afbae1.jpg';
-          if (!targetPath.startsWith('file://')) {
-            targetPath = 'file:////' + targetPath;
-          }
-          // return self.renderPhotoLi(targetPath, dimensions, photoItem, photo);
-
-        }).catch( (err) => {
-          console.log(err);
-          debugger;
-        });
-      }
-      else {
-        return self.renderPhotoLi(photoSrc, dimensions, photoItem, photo);
-      }
+      return self.renderPhotoLi(photoSrc, dimensions, photoItem, photo);
     });
   }
 
@@ -243,8 +185,6 @@ class ComparePhotoItems extends Component {
 
   render() {
     
-    console.log('RENDER invoked');
-
     return (
       <ul className="flex-container wrap">
         {this.getPhotosToDisplay(this.props.photoItems)}

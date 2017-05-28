@@ -276,8 +276,6 @@ function navigate(increment : number) {
 
       convertPhoto(photoFilePath, targetPath).then( () => {
 
-        console.log('CONVERSION COMPLETE');
-
         // converted file should be at targetPath
         // TODO - don't know why, but it appears as though sometimes a '-0' is appended to the photo file name
         if (!fs.existsSync(targetPath)) {
@@ -292,7 +290,7 @@ function navigate(increment : number) {
           targetPath = 'file:////' + targetPath;
         }
 
-        // assign this new path to the item
+        // assign updated path to the photoItem
         unmatchedExistingPhotos[drivePhotoIndex].photoItems[0].photo.path = targetPath;
 
         dispatch(setDrivePhotoIndex(drivePhotoIndex));
