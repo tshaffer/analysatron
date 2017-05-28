@@ -166,6 +166,13 @@ class ComparePhotoItems extends Component {
       const extension = path.extname(photoSrc).toLowerCase();
       if (extension === '.tif' || extension === '.tiff') {
 
+        // // photoSrc:  file:////E:\RemovableMedia\9-1-2006\My Pictures\2006\01_January_3\_DSC3562.jpg
+        //
+        //    const targetPath = 'file:////C:\\Users\\Ted\\Documents\\Projects\\analysatron\\tmpFiles\\negscan04317443365a-85d7-a53e-5000-db3c34afbae1.jpg';
+        // // const targetPath = 'file:////E:\\RemovableMedia\\9-1-2006\\My Pictures\\2006\\01_January_3\\_DSC3562.jpg';
+        //
+        // return self.renderPhotoLi(targetPath, dimensions, photoItem, photo);
+
         let photoFilePath = photoSrc;
         if (photoFilePath.startsWith('file://')) {
           photoFilePath = photoFilePath.slice(9);
@@ -181,6 +188,8 @@ class ComparePhotoItems extends Component {
         console.log('convertPhoto then display it: ', photoFilePath);
         convertPhoto(photoFilePath, targetPath).then( () => {
 
+          console.log('CONVERSION COMPLETE');
+
           // converted file should be at targetPath
           // TODO - don't know why, but it appears as though sometimes a '-0' is appended to the photo file name
           if (!fs.existsSync(targetPath)) {
@@ -189,34 +198,53 @@ class ComparePhotoItems extends Component {
             if (!fs.existsSync(targetPath)) {
               debugger;
             }
-          }}).catch( (err) => {
-            console.log(err);
-            debugger;
+          }
+
+          // photoSrc:  file:////E:\RemovableMedia\9-1-2006\My Pictures\2006\01_January_3\_DSC3562.jpg
+          // targetPath = 'file:////C:\\Users\\Ted\\Documents\\Projects\\analysatron\\tmpFiles\\negscan04317443365a-85d7-a53e-5000-db3c34afbae1.jpg';
+          if (!targetPath.startsWith('file://')) {
+            targetPath = 'file:////' + targetPath;
+          }
+          // return self.renderPhotoLi(targetPath, dimensions, photoItem, photo);
+
+        }).catch( (err) => {
+          console.log(err);
+          debugger;
         });
       }
-      
-
-      return (
-        <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
-          <img
-            className="thumbImg"
-            src={photoSrc}
-            width={dimensions.width}
-            height={dimensions.height}
-          />
-          {self.renderCheckBoxes(self.props.displayCheckBoxes, photoItem)}
-          {self.renderName(photo)}
-          {self.renderDateTime(photo)}
-          {self.renderExifDateTime(photo)}
-          {self.renderWidth(photo)}
-          {self.renderHeight(photo)}
-          {self.renderAspectRatio(dimensions.aspectRatio)}
-        </li>
-      );
+      else {
+        return self.renderPhotoLi(photoSrc, dimensions, photoItem, photo);
+      }
     });
   }
 
+  renderPhotoLi(photoSrc, dimensions, photoItem, photo) {
+
+    let self = this;
+
+    return (
+      <li className="flex-item photoThumbsDiv thumbLi" key={Math.random().toString()}>
+        <img
+          className="thumbImg"
+          src={photoSrc}
+          width={dimensions.width}
+          height={dimensions.height}
+        />
+        {self.renderCheckBoxes(this.props.displayCheckBoxes, photoItem)}
+        {self.renderName(photo)}
+        {self.renderDateTime(photo)}
+        {self.renderExifDateTime(photo)}
+        {self.renderWidth(photo)}
+        {self.renderHeight(photo)}
+        {self.renderAspectRatio(dimensions.aspectRatio)}
+      </li>
+    );
+  }
+
   render() {
+    
+    console.log('RENDER invoked');
+
     return (
       <ul className="flex-container wrap">
         {this.getPhotosToDisplay(this.props.photoItems)}

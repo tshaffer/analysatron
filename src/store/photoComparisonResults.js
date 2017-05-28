@@ -1,6 +1,7 @@
 // @flow
 
 const fs = require('fs');
+const path = require('path');
 
 import type {
   PhotoItem,
@@ -15,6 +16,10 @@ import { readFile } from '../utilities/utils';
 
 const StringDecoder = require('string_decoder').StringDecoder;
 const decoder = new StringDecoder('utf8');
+
+import { convertPhoto } from '../utilities/photoUtilities';
+
+import * as utils from '../utilities/utils';
 
 // ------------------------------------
 // Constants
@@ -250,9 +255,57 @@ function navigate(increment : number) {
       }
     }
 
-    dispatch(setDrivePhotoIndex(drivePhotoIndex));
-  };
+    // convert to tif if necessary
+    const drivePhotoPath = unmatchedExistingPhotos[drivePhotoIndex].photoItems[0].photo.path;
+    const extension = path.extname(drivePhotoPath).toLowerCase();
+    if (extension === '.tif' || extension === '.tiff') {
 
+      let photoFilePath = drivePhotoPath;
+      if (photoFilePath.startsWith('file://')) {
+        photoFilePath = photoFilePath.slice(9);
+      }
+
+      let photoName = path.basename(photoFilePath).toLowerCase();
+      let fileNameWithoutExtension = photoName.slice(0, -4);
+      photoName = fileNameWithoutExtension + ".jpg";
+
+      const targetDir = "C:\\Users\\Ted\\Documents\\Projects\\analysatron\\tmpFiles";
+      const guid = utils.guid();
+      let targetPath = path.join(targetDir, fileNameWithoutExtension + guid + ".jpg");
+      console.log('convertPhoto then display it: ', photoFilePath);
+
+      convertPhoto(photoFilePath, targetPath).then( () => {
+
+        console.log('CONVERSION COMPLETE');
+
+        // converted file should be at targetPath
+        // TODO - don't know why, but it appears as though sometimes a '-0' is appended to the photo file name
+        if (!fs.existsSync(targetPath)) {
+          console.log(targetPath, ' converted file does not exist');
+          targetPath = path.join(targetDir, fileNameWithoutExtension + guid + "-0.jpg");
+          if (!fs.existsSync(targetPath)) {
+            debugger;
+          }
+        }
+
+        if (!targetPath.startsWith('file://')) {
+          targetPath = 'file:////' + targetPath;
+        }
+
+        // assign this new path to the item
+        unmatchedExistingPhotos[drivePhotoIndex].photoItems[0].photo.path = targetPath;
+
+        dispatch(setDrivePhotoIndex(drivePhotoIndex));
+
+      }).catch( (err) => {
+        console.log(err);
+        debugger;
+      });
+    }
+    else {
+      dispatch(setDrivePhotoIndex(drivePhotoIndex));
+    }
+  };
 }
 
 export function navigateForward() {

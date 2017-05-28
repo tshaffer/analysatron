@@ -29,7 +29,10 @@ export default class DrivePhoto extends Photo {
   }
 
   getUrl() : string {
-    return 'file:////' + this.path;
+    if (!this.path.startsWith('file://')) {
+      return 'file:////' + this.path;
+    }
+    return this.path;
   }
 
   getPath() : string {
