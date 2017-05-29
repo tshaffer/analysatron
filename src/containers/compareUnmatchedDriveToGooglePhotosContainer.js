@@ -72,7 +72,6 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
   }
 
   render() {
-    console.log("ComparePhotosContainer render invoked");
 
     return (
       <CompareUnmatchedDriveToGooglePhotos
