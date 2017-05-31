@@ -47,6 +47,10 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
     this.buildResults(drivePhotoItems, 'match');
   }
 
+  handleLowResMatch(drivePhotoItems : PhotoItems) {
+    this.buildResults(drivePhotoItems, 'lowResMatch');
+  }
+
   handleNotAMatch(drivePhotoItems) {
     this.buildResults(drivePhotoItems, 'notAMatch');
   }
@@ -77,6 +81,7 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
       <CompareUnmatchedDriveToGooglePhotos
         {...this.props}
         onMatch={this.handleMatch.bind(this)}
+        onLowResMatch={this.handleLowResMatch.bind(this)}
         onNotAMatch={this.handleNotAMatch.bind(this)}
         onDiscard={this.handleDiscard.bind(this)}
         onSave={this.handleSave.bind(this)}

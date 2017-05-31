@@ -34,6 +34,11 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
     this.props.onNavigateForward();
   }
 
+  handleLowResMatch() {
+    this.props.onLowResMatch(this.drivePhotoItems);
+    this.props.onNavigateForward();
+  }
+
   handleNotAMatch() {
     this.props.onNotAMatch(this.drivePhotoItems);
     this.props.onNavigateForward();
@@ -120,6 +125,12 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
               <RaisedButton
                 label='Match'
                 onClick={this.handleMatch.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
+                label='Low Res Match'
+                onClick={this.handleLowResMatch.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
