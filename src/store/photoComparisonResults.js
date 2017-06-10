@@ -233,6 +233,8 @@ function navigate(increment : number) {
       drivePhotoIndex = unmatchedExistingPhotos.length - 1;
     }
 
+    console.log("**** drivePhotoIndex: ", drivePhotoIndex, " out of " + unmatchedExistingPhotos.length);
+
     let drivePhotoToGooglePhotoComparisonResults : Object =
       state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults;
 
