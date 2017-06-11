@@ -118,9 +118,28 @@ export function initUnmatchedDrivePhotoComparisons() {
       return 0;
     });
 
+    console.log('unmatchedExistingPhotos: ');
+    console.log(unmatchedExistingPhotos);
+
     dispatch(setDrivePhotoIndex(-1));
     dispatch(setUnmatchedExistingPhotos(unmatchedExistingPhotos));
     dispatch(navigateForward());
+
+    // find out how many are yet to be reviewed
+    let drivePhotoIndex : number = state.photoComparisonResults.drivePhotoIndex;
+    if (!drivePhotoIndex || drivePhotoIndex < 0) {
+      drivePhotoIndex = 0;
+    }
+    let remainingPhotosToReview = 0;
+    unmatchedExistingPhotos.forEach( (unmatchedExistingPhoto, drivePhotoIndex) => {
+      const identicalDrivePhotos: IdenticalPhotos = unmatchedExistingPhotos[drivePhotoIndex];
+      const drivePhotoItems : PhotoItems = identicalDrivePhotos.photoItems;
+      const drivePhotoItem : PhotoItem = drivePhotoItems[0];
+      if (!state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults[drivePhotoItem.photo.getPath()]) {
+        remainingPhotosToReview++;
+      }
+    });
+    console.log("Number of drive photos remaining to be reviewed = ", remainingPhotosToReview);
   };
 }
 

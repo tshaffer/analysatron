@@ -34,8 +34,13 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
     this.props.onNavigateForward();
   }
 
-  handleLowResMatch() {
-    this.props.onLowResMatch(this.drivePhotoItems);
+  handleGoogleLowRes() {
+    this.props.onGoogleLowRes(this.drivePhotoItems);
+    this.props.onNavigateForward();
+  }
+
+  handleDrivePhotoLowRes() {
+    this.props.onDrivePhotoLowRes(this.drivePhotoItems);
     this.props.onNavigateForward();
   }
 
@@ -129,8 +134,14 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
                 labelStyle={this.getButtonLabelStyle()}
               />
               <RaisedButton
-                label='Low Res Match'
-                onClick={this.handleLowResMatch.bind(this)}
+                label='Google Low Res'
+                onClick={this.handleGoogleLowRes.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
+                label='Drive Photo Low Res'
+                onClick={this.handleDrivePhotoLowRes.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
@@ -191,7 +202,9 @@ CompareUnmatchedDriveToGooglePhotos.propTypes = {
   onNotAMatch: React.PropTypes.func.isRequired,
   onDiscard: React.PropTypes.func.isRequired,
   onSave: React.PropTypes.func.isRequired,
-  initUnmatchedDrivePhotoComparisons: React.PropTypes.func.isRequired,
+  onMatch: React.PropTypes.func.isRequired,
+  onGoogleLowRes: React.PropTypes.func.isRequired,
+  onDrivePhotoLowRes: React.PropTypes.func.isRequired,
   drivePhotoIndex: React.PropTypes.number.isRequired,
   unmatchedExistingPhotos: React.PropTypes.array.isRequired,
   onSetDrivePhotoIndex: React.PropTypes.func.isRequired,

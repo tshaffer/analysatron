@@ -159,7 +159,7 @@ class ComparePhotoItems extends Component {
       const dimensions = self.getDimensions(photo);
       const photoSrc : string = self.getPhotoUrl(photo);
 
-      console.log('photo under comparison: ', photoSrc);
+      console.log('photo under comparison: ', photoItem);
 
       return self.renderPhotoLi(photoSrc, dimensions, photoItem, photo);
     });
