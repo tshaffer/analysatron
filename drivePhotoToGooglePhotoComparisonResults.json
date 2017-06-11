@@ -69838,5 +69838,620 @@
     "name": "_DSC2499.jpg",
     "path": "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Pictures\\2005\\04_April_1\\_DSC2499.jpg",
     "result": "match"
+  },
+  "E:\\RemovableMedia\\9-1-2006\\My Raw Scans\\1999\\08_August_2\\SlideScan0156.tif": {
+    "name": "SlideScan0156.tif",
+    "path": "E:\\RemovableMedia\\9-1-2006\\My Raw Scans\\1999\\08_August_2\\SlideScan0156.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\11-18-2006\\My Scans\\1998\\01_January_1\\NegScan0471.tif": {
+    "name": "NegScan0471.tif",
+    "path": "E:\\RemovableMedia\\11-18-2006\\My Scans\\1998\\01_January_1\\NegScan0471.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7150005.jpg": {
+    "name": "P7150005.jpg",
+    "path": "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7150005.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 3\\2-27-05\\1994\\11_November-s118\\NegScan0072.tif": {
+    "name": "NegScan0072.tif",
+    "path": "E:\\RemovableMedia\\2005 Photos 3\\2-27-05\\1994\\11_November-s118\\NegScan0072.tif",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Scans Oct-Dec 94\\My Scans\\1994\\11_November-s118\\NegScan0072.tif": {
+    "name": "NegScan0072.tif",
+    "path": "E:\\RemovableMedia\\Scans Oct-Dec 94\\My Scans\\1994\\11_November-s118\\NegScan0072.tif",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2005 Photos 5\\5-22-05\\My Pictures\\1994\\11_November-s118\\NegScan0072.jpg": {
+    "name": "NegScan0072.jpg",
+    "path": "E:\\RemovableMedia\\2005 Photos 5\\5-22-05\\My Pictures\\1994\\11_November-s118\\NegScan0072.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2-27-05\\1994\\11_November-s118\\NegScan0072.tif": {
+    "name": "NegScan0072.tif",
+    "path": "E:\\RemovableMedia\\2-27-05\\1994\\11_November-s118\\NegScan0072.tif",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\1_97\\21.tif": {
+    "name": "21.tif",
+    "path": "E:\\RemovableMedia\\Photos5-2\\Pre 98 Photos\\1_97\\21.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\1_97\\21.tif": {
+    "name": "21.tif",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Photos5\\Pre 98 Photos\\1_97\\21.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\1_97\\21.tif": {
+    "name": "21.tif",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Photos5\\Pre 98 Photos\\1_97\\21.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_3\\_DSC2074.jpg": {
+    "name": "_DSC2074.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_3\\_DSC2074.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_3\\_DSC2074.jpg": {
+    "name": "_DSC2074.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_3\\_DSC2074.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos5-2\\In Progress\\Mar_99_Rachel_BDay\\AGF00009.tif": {
+    "name": "AGF00009.tif",
+    "path": "E:\\RemovableMedia\\Photos5-2\\In Progress\\Mar_99_Rachel_BDay\\AGF00009.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\1999\\03_March_Rachel_BDay_Raw1\\AGF00009.tif": {
+    "name": "AGF00009.tif",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\1999\\03_March_Rachel_BDay_Raw1\\AGF00009.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\1999\\03_March_Rachel_BDay_Raw1\\AGF00009.tif": {
+    "name": "AGF00009.tif",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\1999\\03_March_Rachel_BDay_Raw1\\AGF00009.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\1994\\06_June-s113\\NegScan0239.jpg": {
+    "name": "NegScan0239.jpg",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\1994\\06_June-s113\\NegScan0239.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Scans March-Oct 94\\My Scans\\1994\\06_June-s113\\NegScan0239.tif": {
+    "name": "NegScan0239.tif",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Scans March-Oct 94\\My Scans\\1994\\06_June-s113\\NegScan0239.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7150008.jpg": {
+    "name": "P7150008.jpg",
+    "path": "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7150008.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7150009.jpg": {
+    "name": "P7150009.jpg",
+    "path": "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7150009.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\6-26-2006\\My Raw Scans\\1998\\08_August_1\\SlideScan0068.tif": {
+    "name": "SlideScan0068.tif",
+    "path": "E:\\RemovableMedia\\6-26-2006\\My Raw Scans\\1998\\08_August_1\\SlideScan0068.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0856.jpg": {
+    "name": "DSC_0856.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0856.jpg",
+    "result": "googleLowRes"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Sept-Oct 93\\My Raw Scans\\1993\\09_September-s108\\NegScan0380.tif": {
+    "name": "NegScan0380.tif",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Sept-Oct 93\\My Raw Scans\\1993\\09_September-s108\\NegScan0380.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0853.jpg": {
+    "name": "DSC_0853.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0853.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7180019.JPG": {
+    "name": "P7180019.JPG",
+    "path": "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7180019.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0852.jpg": {
+    "name": "DSC_0852.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0852.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0850.jpg": {
+    "name": "DSC_0850.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0850.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\10-21-2007\\My Scans\\1999\\02_February_1\\NegScan0596.tif": {
+    "name": "NegScan0596.tif",
+    "path": "E:\\RemovableMedia\\10-21-2007\\My Scans\\1999\\02_February_1\\NegScan0596.tif",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2472.jpg": {
+    "name": "_DSC2472.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2472.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7200030.JPG": {
+    "name": "P7200030.JPG",
+    "path": "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7200030.JPG",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0823.jpg": {
+    "name": "DSC_0823.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0823.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\08_August_5\\_DSC3086.JPG": {
+    "name": "_DSC3086.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\08_August_5\\_DSC3086.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 13\\12-21-05\\My Raw Scans\\1999\\08_August_1\\NegScan0445.tif": {
+    "name": "NegScan0445.tif",
+    "path": "E:\\RemovableMedia\\2005 Photos 13\\12-21-05\\My Raw Scans\\1999\\08_August_1\\NegScan0445.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\Photos1\\09_September\\P9280006.JPG": {
+    "name": "P9280006.JPG",
+    "path": "E:\\RemovableMedia\\Photos1\\09_September\\P9280006.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\08_August_5\\_DSC3084.JPG": {
+    "name": "_DSC3084.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\08_August_5\\_DSC3084.JPG",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Dec 94\\My Raw Scans\\1994\\12_December-s119\\NegScan0088.tif": {
+    "name": "NegScan0088.tif",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Dec 94\\My Raw Scans\\1994\\12_December-s119\\NegScan0088.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_2\\_DSC2038.jpg": {
+    "name": "_DSC2038.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_2\\_DSC2038.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_2\\_DSC2038.jpg": {
+    "name": "_DSC2038.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_2\\_DSC2038.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0820.jpg": {
+    "name": "DSC_0820.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0820.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\11-5-2006\\My Raw Scans\\1999\\11_November_2\\SlideScan0225.tif": {
+    "name": "SlideScan0225.tif",
+    "path": "E:\\RemovableMedia\\11-5-2006\\My Raw Scans\\1999\\11_November_2\\SlideScan0225.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\9-1-2006\\My Pictures\\2006\\01_January_3\\_DSC3553.jpg": {
+    "name": "_DSC3553.jpg",
+    "path": "E:\\RemovableMedia\\9-1-2006\\My Pictures\\2006\\01_January_3\\_DSC3553.jpg",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\8-2-2006\\My Raw Scans\\1998\\08_August_3\\SlideScan0131.tif": {
+    "name": "SlideScan0131.tif",
+    "path": "E:\\RemovableMedia\\8-2-2006\\My Raw Scans\\1998\\08_August_3\\SlideScan0131.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\Photos1\\10_October\\PA260004.JPG": {
+    "name": "PA260004.JPG",
+    "path": "E:\\RemovableMedia\\Photos1\\10_October\\PA260004.JPG",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\Photos1\\10_October\\PA260005.JPG": {
+    "name": "PA260005.JPG",
+    "path": "E:\\RemovableMedia\\Photos1\\10_October\\PA260005.JPG",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Dec 94\\My Raw Scans\\1994\\12_December-s119\\NegScan0078.tif": {
+    "name": "NegScan0078.tif",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Dec 94\\My Raw Scans\\1994\\12_December-s119\\NegScan0078.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0810.jpg": {
+    "name": "DSC_0810.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0810.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\08_August_5\\_DSC3065.JPG": {
+    "name": "_DSC3065.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\08_August_5\\_DSC3065.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos 2\\Photos\\In Progress\\Dec_99_1\\DCP_0717.JPG": {
+    "name": "DCP_0717.JPG",
+    "path": "E:\\RemovableMedia\\Photos 2\\Photos\\In Progress\\Dec_99_1\\DCP_0717.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1\\10_October\\PA260014.JPG": {
+    "name": "PA260014.JPG",
+    "path": "E:\\RemovableMedia\\Photos1\\10_October\\PA260014.JPG",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos1\\10_October\\PA260015.JPG": {
+    "name": "PA260015.JPG",
+    "path": "E:\\RemovableMedia\\Photos1\\10_October\\PA260015.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1-2\\2_02\\P2230005.JPG": {
+    "name": "P2230005.JPG",
+    "path": "E:\\RemovableMedia\\Photos1-2\\2_02\\P2230005.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\08_August_5\\_DSC3062.JPG": {
+    "name": "_DSC3062.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\08_August_5\\_DSC3062.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2-5-2006\\My Raw Scans\\1996\\12_December_2\\NegScan0508.tif": {
+    "name": "NegScan0508.tif",
+    "path": "E:\\RemovableMedia\\2-5-2006\\My Raw Scans\\1996\\12_December_2\\NegScan0508.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1-2\\2_02\\P2280017.JPG": {
+    "name": "P2280017.JPG",
+    "path": "E:\\RemovableMedia\\Photos1-2\\2_02\\P2280017.JPG",
+    "result": "googleLowRes"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans May-Sept 93\\My Raw Scans\\1993\\05_May-s101\\NegScan0403.tif": {
+    "name": "NegScan0403.tif",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans May-Sept 93\\My Raw Scans\\1993\\05_May-s101\\NegScan0403.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\9-1-2006\\My Pictures\\2006\\02_February_2\\_DSC3613.jpg": {
+    "name": "_DSC3613.jpg",
+    "path": "E:\\RemovableMedia\\9-1-2006\\My Pictures\\2006\\02_February_2\\_DSC3613.jpg",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\Photos1-2\\2_02\\P2280018.JPG": {
+    "name": "P2280018.JPG",
+    "path": "E:\\RemovableMedia\\Photos1-2\\2_02\\P2280018.JPG",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\12-10-2006\\My Raw Scans\\1999\\02_February_1\\NegScan0596.tif": {
+    "name": "NegScan0596.tif",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\12-10-2006\\My Raw Scans\\1999\\02_February_1\\NegScan0596.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 13\\12-21-05\\My Raw Scans\\1998\\01_January_1\\NegScan0471.tif": {
+    "name": "NegScan0471.tif",
+    "path": "E:\\RemovableMedia\\2005 Photos 13\\12-21-05\\My Raw Scans\\1998\\01_January_1\\NegScan0471.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1-2\\3_02\\P1010002.JPG": {
+    "name": "P1010002.JPG",
+    "path": "E:\\RemovableMedia\\Photos1-2\\3_02\\P1010002.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0752.jpg": {
+    "name": "DSC_0752.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0752.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans April-June 94\\My Raw Scans\\1994\\06_June-s113\\NegScan0239.tif": {
+    "name": "NegScan0239.tif",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans April-June 94\\My Raw Scans\\1994\\06_June-s113\\NegScan0239.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1-2\\3_02\\P1010010.JPG": {
+    "name": "P1010010.JPG",
+    "path": "E:\\RemovableMedia\\Photos1-2\\3_02\\P1010010.JPG",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Oct-Nov 94\\My Raw Scans\\1994\\11_November-s118\\NegScan0044.tif": {
+    "name": "NegScan0044.tif",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Oct-Nov 94\\My Raw Scans\\1994\\11_November-s118\\NegScan0044.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\11-1-2006\\My Scans\\1999\\08_August_2\\SlideScan0158.tif": {
+    "name": "SlideScan0158.tif",
+    "path": "E:\\RemovableMedia\\11-1-2006\\My Scans\\1999\\08_August_2\\SlideScan0158.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\8-6-2006\\My Pictures\\2006\\06_June_1\\_DSC4621.jpg": {
+    "name": "_DSC4621.jpg",
+    "path": "E:\\RemovableMedia\\8-6-2006\\My Pictures\\2006\\06_June_1\\_DSC4621.jpg",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\7-28-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0101.tif": {
+    "name": "SlideScan0101.tif",
+    "path": "E:\\RemovableMedia\\7-28-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0101.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\8-12-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0101.tif": {
+    "name": "SlideScan0101.tif",
+    "path": "E:\\RemovableMedia\\8-12-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0101.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\8-9-2006\\My Raw Scans\\1998\\SlideScan0101.tif": {
+    "name": "SlideScan0101.tif",
+    "path": "E:\\RemovableMedia\\8-9-2006\\My Raw Scans\\1998\\SlideScan0101.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\11-1-2006\\My Scans\\1999\\08_August_2\\SlideScan0156.tif": {
+    "name": "SlideScan0156.tif",
+    "path": "E:\\RemovableMedia\\11-1-2006\\My Scans\\1999\\08_August_2\\SlideScan0156.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\7-28-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0099.tif": {
+    "name": "SlideScan0099.tif",
+    "path": "E:\\RemovableMedia\\7-28-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0099.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\8-12-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0099.tif": {
+    "name": "SlideScan0099.tif",
+    "path": "E:\\RemovableMedia\\8-12-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0099.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\8-9-2006\\My Raw Scans\\1998\\SlideScan0099.tif": {
+    "name": "SlideScan0099.tif",
+    "path": "E:\\RemovableMedia\\8-9-2006\\My Raw Scans\\1998\\SlideScan0099.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\7-28-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0089.tif": {
+    "name": "SlideScan0089.tif",
+    "path": "E:\\RemovableMedia\\7-28-2006\\My Raw Scans\\1998\\08_August_2\\SlideScan0089.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\Photos1-2\\4_02\\Print2.JPG": {
+    "name": "Print2.JPG",
+    "path": "E:\\RemovableMedia\\Photos1-2\\4_02\\Print2.JPG",
+    "result": "drivePhotoLowRes"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0670.jpg": {
+    "name": "DSC_0670.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0670.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos 2\\Photos\\In Progress\\Nov_99_4\\AGF00004.tif": {
+    "name": "AGF00004.tif",
+    "path": "E:\\RemovableMedia\\Photos 2\\Photos\\In Progress\\Nov_99_4\\AGF00004.tif",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Sam Bar Mitvah Raw\\Ross'Picks\\CRW_8062_RJ.jpg": {
+    "name": "CRW_8062_RJ.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Sam Bar Mitvah Raw\\Ross'Picks\\CRW_8062_RJ.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\6-27-2006\\My Raw Scans\\1998\\08_August_1\\SlideScan0085.tif": {
+    "name": "SlideScan0085.tif",
+    "path": "E:\\RemovableMedia\\6-27-2006\\My Raw Scans\\1998\\08_August_1\\SlideScan0085.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0659.jpg": {
+    "name": "DSC_0659.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0659.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos5\\Complete\\Hawaii_01\\P6190012.JPG": {
+    "name": "P6190012.JPG",
+    "path": "E:\\RemovableMedia\\Photos5\\Complete\\Hawaii_01\\P6190012.JPG",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Sam Bar Mitvah Raw\\Ross'Picks\\CRW_8343_RJ.jpg": {
+    "name": "CRW_8343_RJ.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Sam Bar Mitvah Raw\\Ross'Picks\\CRW_8343_RJ.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Miscellaneous\\Please Compress2\\P4210029.JPG": {
+    "name": "P4210029.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Miscellaneous\\Please Compress2\\P4210029.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Miscellaneous\\Please Compress2\\P4210029.JPG": {
+    "name": "P4210029.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Miscellaneous\\Please Compress2\\P4210029.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\1998\\08_Canada\\AGF00016.tif": {
+    "name": "AGF00016.tif",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\1998\\08_Canada\\AGF00016.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\1998\\08_Canada\\AGF00016.tif": {
+    "name": "AGF00016.tif",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\1998\\08_Canada\\AGF00016.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos4\\Complete\\Canada\\AGF00016.tif": {
+    "name": "AGF00016.tif",
+    "path": "E:\\RemovableMedia\\Photos4\\Complete\\Canada\\AGF00016.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\6-26-2006\\My Raw Scans\\1998\\08_August_1\\SlideScan0082.tif": {
+    "name": "SlideScan0082.tif",
+    "path": "E:\\RemovableMedia\\6-26-2006\\My Raw Scans\\1998\\08_August_1\\SlideScan0082.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\11-1-2006\\My Raw Scans\\1998\\08_August_5\\SlideScan0173.tif": {
+    "name": "SlideScan0173.tif",
+    "path": "E:\\RemovableMedia\\11-1-2006\\My Raw Scans\\1998\\08_August_5\\SlideScan0173.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\2000\\10_ZionBryce\\a3.JPG": {
+    "name": "a3.JPG",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\2000\\10_ZionBryce\\a3.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\10_ZionBryce\\a3.JPG": {
+    "name": "a3.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\2000\\10_ZionBryce\\a3.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos 3\\10_00_ZionBryce\\a3.JPG": {
+    "name": "a3.JPG",
+    "path": "E:\\RemovableMedia\\Photos 3\\10_00_ZionBryce\\a3.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1-2\\6_02\\P6240246.JPG": {
+    "name": "P6240246.JPG",
+    "path": "E:\\RemovableMedia\\Photos1-2\\6_02\\P6240246.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\11-18-2006\\My Scans\\1999\\11_November_2\\SlideScan0225.tif": {
+    "name": "SlideScan0225.tif",
+    "path": "E:\\RemovableMedia\\11-18-2006\\My Scans\\1999\\11_November_2\\SlideScan0225.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090528.JPG": {
+    "name": "PA090528.JPG",
+    "path": "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090528.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_4\\_DSC2109.jpg": {
+    "name": "_DSC2109.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_4\\_DSC2109.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_4\\_DSC2109.jpg": {
+    "name": "_DSC2109.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_4\\_DSC2109.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\6-26-2006\\My Raw Scans\\1998\\08_August_1\\SlideScan0080.tif": {
+    "name": "SlideScan0080.tif",
+    "path": "E:\\RemovableMedia\\6-26-2006\\My Raw Scans\\1998\\08_August_1\\SlideScan0080.tif",
+    "result": "googleLowRes"
+  },
+  "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090512.JPG": {
+    "name": "PA090512.JPG",
+    "path": "E:\\RemovableMedia\\Photos4-2\\In Progress\\10_00_ZionBryce\\PA090512.JPG",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2477.jpg": {
+    "name": "_DSC2477.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2477.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Miscellaneous\\SamIcon.jpg": {
+    "name": "SamIcon.jpg",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Miscellaneous\\SamIcon.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Miscellaneous\\SamIcon.jpg": {
+    "name": "SamIcon.jpg",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Miscellaneous\\SamIcon.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos4\\SamIcon.jpg": {
+    "name": "SamIcon.jpg",
+    "path": "E:\\RemovableMedia\\Photos4\\SamIcon.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\11-3-2006\\My Raw Scans\\1999\\08_August_3\\SlideScan0189.tif": {
+    "name": "SlideScan0189.tif",
+    "path": "E:\\RemovableMedia\\11-3-2006\\My Raw Scans\\1999\\08_August_3\\SlideScan0189.tif",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2480.jpg": {
+    "name": "_DSC2480.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2480.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\11_November_2\\DSC_1734.jpg": {
+    "name": "DSC_1734.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\11_November_2\\DSC_1734.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\11_November_2\\DSC_1734.jpg": {
+    "name": "DSC_1734.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 3\\December 26 2004\\My Pictures\\2004\\11_November_2\\DSC_1734.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\11_November_2\\DSC_1734.jpg": {
+    "name": "DSC_1734.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\December 26 2004\\My Pictures\\2004\\11_November_2\\DSC_1734.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\11_November_2\\DSC_1734.jpg": {
+    "name": "DSC_1734.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\11_November_2\\DSC_1734.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_4\\_DSC2164.jpg": {
+    "name": "_DSC2164.jpg",
+    "path": "E:\\RemovableMedia\\2-12-05\\My Pictures\\2004\\12_December_4\\_DSC2164.jpg",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_4\\_DSC2164.jpg": {
+    "name": "_DSC2164.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\2005 Photos 1\\2-12-05\\My Pictures\\2004\\12_December_4\\_DSC2164.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7140002.JPG": {
+    "name": "P7140002.JPG",
+    "path": "E:\\RemovableMedia\\Photos1\\08_EuropeanVacation\\P7140002.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\11-3-2006\\My Raw Scans\\1999\\08_August_3\\SlideScan0211.tif": {
+    "name": "SlideScan0211.tif",
+    "path": "E:\\RemovableMedia\\11-3-2006\\My Raw Scans\\1999\\08_August_3\\SlideScan0211.tif",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\New Zealand 2012\\New_Zealand_Canyoning\\Ke$ha\\JACK0988.JPG": {
+    "name": "JACK0988.JPG",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\New Zealand 2012\\New_Zealand_Canyoning\\Ke$ha\\JACK0988.JPG",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2483.jpg": {
+    "name": "_DSC2483.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2483.jpg",
+    "result": "match"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Sept-Oct 93\\My Raw Scans\\1993\\10_October-s109\\NegScan0342.tif": {
+    "name": "NegScan0342.tif",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\Raw Scans Sept-Oct 93\\My Raw Scans\\1993\\10_October-s109\\NegScan0342.tif",
+    "result": "notAMatch"
+  },
+  "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2469.jpg": {
+    "name": "_DSC2469.jpg",
+    "path": "C:\\Users\\Ted\\Documents\\RemovableMedia\\8-13-05\\My Photos In Process\\2005\\03_March_3\\_DSC2469.jpg",
+    "result": "match"
+  },
+  "E:\\RemovableMedia\\Photos1\\09_September\\PA020012.JPG": {
+    "name": "PA020012.JPG",
+    "path": "E:\\RemovableMedia\\Photos1\\09_September\\PA020012.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\Photos Pre 2004\\Miscellaneous\\Please Compress\\TS_P4200029_edited.jpg": {
+    "name": "TS_P4200029_edited.jpg",
+    "path": "E:\\RemovableMedia\\Photos Pre 2004\\Miscellaneous\\Please Compress\\TS_P4200029_edited.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Miscellaneous\\Please Compress\\TS_P4200029_edited.jpg": {
+    "name": "TS_P4200029_edited.jpg",
+    "path": "E:\\RemovableMedia\\2005 Photos 10\\12-21-05\\My Pictures\\Miscellaneous\\Please Compress\\TS_P4200029_edited.jpg",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\11-18-2006\\My Scans\\1996\\12_December_1\\NegScan0558.tif": {
+    "name": "NegScan0558.tif",
+    "path": "E:\\RemovableMedia\\11-18-2006\\My Scans\\1996\\12_December_1\\NegScan0558.tif",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\09_September_Joel_Bar_Mitzvah_Ross\\Reception\\A75W3536_RJ.JPG": {
+    "name": "A75W3536_RJ.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\09_September_Joel_Bar_Mitzvah_Ross\\Reception\\A75W3536_RJ.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\09_September_Joel_Bar_Mitzvah_Ross\\Reception\\A75W3537_RJ.JPG": {
+    "name": "A75W3537_RJ.JPG",
+    "path": "E:\\RemovableMedia\\2005 Photos 8\\12-08-05\\My Negatives\\2005\\09_September_Joel_Bar_Mitzvah_Ross\\Reception\\A75W3537_RJ.JPG",
+    "result": "notAMatch"
+  },
+  "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0819.jpg": {
+    "name": "DSC_0819.jpg",
+    "path": "E:\\RemovableMedia\\2004 Photos 2\\October 10 2004\\Jpeg\\SBJpegs\\DSC_0819.jpg",
+    "result": "notAMatch"
   }
 }
