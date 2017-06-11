@@ -1,5 +1,7 @@
 // @flow
 
+const Jimp = require('jimp');
+
 import type {
   PhotoItem,
   PhotoItems,
@@ -122,34 +124,77 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
       googlePhotoItem
     ];
 
+    let matchSuffix = '';
+    let nextSuffix = '';
+    let googleLowResSuffix = '';
+    let driveLowResSuffix = '';
+    let notAMatchSuffix = '';
+
+    let hashDistance = 69;
+    if (drivePhotoItem.photo && drivePhotoItem.photo.hash && googlePhotoItem.photo && googlePhotoItem.photo.hash) {
+      hashDistance = Jimp.distanceByHash(drivePhotoItem.photo.hash, googlePhotoItem.photo.hash);
+    }
+    const hashThreshold = 0.05;
+    if (hashDistance > hashThreshold) {
+      notAMatchSuffix = ' *';
+    }
+    else {
+      if (drivePhotoItem.photo.dimensions) {
+        if (drivePhotoItem.photo.dimensions.width === Number(googlePhotoItem.photo.width) &&
+          drivePhotoItem.photo.dimensions.height === Number(googlePhotoItem.photo.height)) {
+          matchSuffix = ' *';
+        }
+        else {
+          let totalNumberOfDrivePixels = Number(drivePhotoItem.photo.dimensions.width) * Number(drivePhotoItem.photo.dimensions.height);
+          let totalNumberOfGooglePixels = Number(googlePhotoItem.photo.width) * Number(googlePhotoItem.photo.height);
+          if (totalNumberOfDrivePixels < totalNumberOfGooglePixels) {
+            driveLowResSuffix = ' *';
+          }
+          else {
+            googleLowResSuffix = ' *';
+          }
+        }
+      }
+      else {
+        nextSuffix = ' *';
+      }
+    }
+
     return (
       <MuiThemeProvider>
         <div className="photoPageContainer">
           <div className="photosDiv">
             <div className="dayOfPhotosDiv" key={Math.random().toString()}>
               <RaisedButton
-                label='Match'
+                label={'Match' + matchSuffix}
                 onClick={this.handleMatch.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
               <RaisedButton
-                label='Google Low Res'
+                label={'Google Low Res' + googleLowResSuffix}
                 onClick={this.handleGoogleLowRes.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
               <RaisedButton
-                label='Drive Photo Low Res'
+                label={'Drive Photo Low Res' + driveLowResSuffix}
                 onClick={this.handleDrivePhotoLowRes.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
               <RaisedButton
-                label='Not a match'
+                label={'Not a match' + notAMatchSuffix}
                 onClick={this.handleNotAMatch.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
+                label={'Next' + nextSuffix}
+                onClick={this.handleNext.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+                type="submit"
               />
               <RaisedButton
                 label='Discard'
@@ -160,12 +205,6 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
               <RaisedButton
                 label='Save'
                 onClick={this.handleSave.bind(this)}
-                style={this.getButtonStyle()}
-                labelStyle={this.getButtonLabelStyle()}
-              />
-              <RaisedButton
-                label='Next'
-                onClick={this.handleNext.bind(this)}
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
@@ -181,6 +220,7 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
                 style={this.getButtonStyle()}
                 labelStyle={this.getButtonLabelStyle()}
               />
+              Hash distance: {hashDistance.toString()}
               <ComparePhotoItems
                 photoItems={photoItems}
                 displayCheckBoxes={false}
