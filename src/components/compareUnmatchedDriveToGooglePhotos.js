@@ -51,6 +51,10 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
     this.props.onNavigateForward();
   }
 
+  handleRemainingUnmatched() {
+    this.props.onRemainingUnmatched();
+  }
+
   handleDiscard() {
     this.props.onDiscard(this.drivePhotoItems);
     this.props.onNavigateForward();
@@ -191,6 +195,12 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
                 labelStyle={this.getButtonLabelStyle()}
               />
               <RaisedButton
+                label={'Rest unmatched' + notAMatchSuffix}
+                onClick={this.handleRemainingUnmatched.bind(this)}
+                style={this.getButtonStyle()}
+                labelStyle={this.getButtonLabelStyle()}
+              />
+              <RaisedButton
                 label={'Next' + nextSuffix}
                 onClick={this.handleNext.bind(this)}
                 style={this.getButtonStyle()}
@@ -241,6 +251,7 @@ CompareUnmatchedDriveToGooglePhotos.propTypes = {
   drivePhotoToGooglePhotoComparisonResults: React.PropTypes.object.isRequired,
   onMatch: React.PropTypes.func.isRequired,
   onNotAMatch: React.PropTypes.func.isRequired,
+  onRemainingUnmatched: React.PropTypes.func.isRequired,
   onDiscard: React.PropTypes.func.isRequired,
   onSave: React.PropTypes.func.isRequired,
   onMatch: React.PropTypes.func.isRequired,

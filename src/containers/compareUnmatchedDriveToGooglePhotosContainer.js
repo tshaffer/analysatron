@@ -20,6 +20,7 @@ import {
   setDrivePhotoIndex,
   navigateForward,
   navigateBackward,
+  getUnreviewedPhotos,
 } from '../store/photoComparisonResults';
 
 class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
@@ -59,6 +60,12 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
     this.buildResults(drivePhotoItems, 'notAMatch');
   }
 
+  handleRemainingUnmatched() {
+    this.props.getUnreviewedPhotos().then( (unreviewed) => {
+      console.log(unreviewed);
+    });
+  }
+
   handleDiscard(drivePhotoItems) {
     this.buildResults(drivePhotoItems, 'discard');
   }
@@ -88,6 +95,7 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
         onGoogleLowRes={this.handleGoogleLowRes.bind(this)}
         onDrivePhotoLowRes={this.handleDrivePhotoLowRes.bind(this)}
         onNotAMatch={this.handleNotAMatch.bind(this)}
+        onRemainingUnmatched={this.handleRemainingUnmatched.bind(this)}
         onDiscard={this.handleDiscard.bind(this)}
         onSave={this.handleSave.bind(this)}
         onSetDrivePhotoIndex={this.handleSetDrivePhotoIndex.bind(this)}
@@ -117,6 +125,7 @@ function mapDispatchToProps(dispatch) {
     setDrivePhotoIndex,
     navigateForward,
     navigateBackward,
+    getUnreviewedPhotos,
   }, dispatch);
 }
 

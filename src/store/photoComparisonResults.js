@@ -84,6 +84,46 @@ export function initMatchedDrivePhotoComparisons() {
   };
 }
 
+export function getUnreviewedPhotos() {
+
+  return function (dispatch: Function, getState: Function) {
+    return new Promise( (resolve) => {
+
+      const state = getState();
+      const unmatchedPhotos: Array<IdenticalPhotos> =
+        state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
+      let unmatchedExistingPhotos: Array<IdenticalPhotos> = [];
+      unmatchedPhotos.forEach((unmatchedPhoto) => {
+        const photoItems: PhotoItems = unmatchedPhoto.photoItems;
+        const photoItem: PhotoItem = photoItems[0];
+        if (photoItem.photo.fileExists()) {
+          unmatchedExistingPhotos.push(unmatchedPhoto);
+        }
+      });
+
+      let drivePhotoIndex : number = 0;
+
+      let unreviewedPhotos : Array<IdenticalPhotos> = [];
+      unmatchedExistingPhotos.forEach( (unmatchedExistingPhoto, drivePhotoIndex) => {
+        const identicalDrivePhotos: IdenticalPhotos = unmatchedExistingPhotos[drivePhotoIndex];
+        const drivePhotoItems : PhotoItems = identicalDrivePhotos.photoItems;
+        const drivePhotoItem : PhotoItem = drivePhotoItems[0];
+        if (!state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults[drivePhotoItem.photo.getPath()]) {
+          unreviewedPhotos.push(identicalDrivePhotos);
+        }
+      });
+
+      let unreviewedPhotoItems : Array<PhotoItem> = [];
+      unreviewedPhotos.forEach( (unreviewedPhoto : IdenticalPhotos) => {
+        const drivePhotoItems : PhotoItems = unreviewedPhoto.photoItems;
+        drivePhotoItems.forEach( (drivePhotoItem : PhotoItem) => {
+          unreviewedPhotoItems.push(drivePhotoItem);
+        });
+      });
+      resolve(unreviewedPhotoItems);
+    });
+  };
+}
 export function initUnmatchedDrivePhotoComparisons() {
 
   return function (dispatch: Function, getState: Function) {
