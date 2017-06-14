@@ -134,7 +134,8 @@ class CompareUnmatchedDriveToGooglePhotos extends Component {
     if (drivePhotoItem.photo && drivePhotoItem.photo.hash && googlePhotoItem.photo && googlePhotoItem.photo.hash) {
       hashDistance = Jimp.distanceByHash(drivePhotoItem.photo.hash, googlePhotoItem.photo.hash);
     }
-    const hashThreshold = 0.05;
+    // const hashThreshold = 0.07;
+    const hashThreshold = 69.1;
     if (hashDistance > hashThreshold) {
       notAMatchSuffix = ' *';
     }
