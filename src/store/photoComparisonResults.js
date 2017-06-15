@@ -139,8 +139,15 @@ export function initUnmatchedDrivePhotoComparisons() {
       if (!drivePhotoToGooglePhotoComparisonResults[drivePhoto.getPath()]) {
         console.log('drivePhoto missing in drivePhotoToGooglePhotoComparisonResults: ');
         console.log(drivePhoto);
+
+        drivePhotoToGooglePhotoComparisonResults[drivePhoto.getPath()] = {
+          name : drivePhoto.name,
+          path: drivePhoto.path,
+          result: 'notAMatch'
+        };
       }
     });
+    // however, now we need a way to save these results
 
     // unmatched photos - strip out those that don't exist (due to debugging configuration)
     const unmatchedPhotos: Array<IdenticalPhotos> =
