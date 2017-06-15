@@ -61,8 +61,8 @@ class CompareUnmatchedDriveToGooglePhotosContainer extends Component {
   }
 
   handleRemainingUnmatched() {
-    this.props.getUnreviewedPhotos().then( (unreviewed) => {
-      console.log(unreviewed);
+    this.props.getUnreviewedPhotos().then( (unreviewedPhotoItems : PhotoItems) => {
+      this.buildResults(unreviewedPhotoItems, 'notAMatch');
     });
   }
 

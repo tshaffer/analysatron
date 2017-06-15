@@ -133,6 +133,15 @@ export function initUnmatchedDrivePhotoComparisons() {
     console.log('length in initUnmatchedDrivePhotoComparisons: ',
       Object.keys(state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults).length);
 
+    const drivePhotoToGooglePhotoComparisonResults = state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults;
+    const drivePhotos = state.drivePhotos.drivePhotos;
+    drivePhotos.forEach( (drivePhoto) => {
+      if (!drivePhotoToGooglePhotoComparisonResults[drivePhoto.getPath()]) {
+        console.log('drivePhoto missing in drivePhotoToGooglePhotoComparisonResults: ');
+        console.log(drivePhoto);
+      }
+    });
+
     // unmatched photos - strip out those that don't exist (due to debugging configuration)
     const unmatchedPhotos: Array<IdenticalPhotos> =
       state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
