@@ -44,6 +44,8 @@ export function saveDrivePhotoToGooglePhotoComparisonResults() {
     const drivePhotoToGooglePhotoComparisonResultsStr =
       JSON.stringify(getState().photoComparisonResults.drivePhotoToGooglePhotoComparisonResults, null, 2);
     fs.writeFileSync('drivePhotoToGooglePhotoComparisonResults.json', drivePhotoToGooglePhotoComparisonResultsStr);
+
+    console.log('drivePhotoToGooglePhotoComparisonResults.json write complete');
   };
 }
 
@@ -137,8 +139,8 @@ export function initUnmatchedDrivePhotoComparisons() {
     const drivePhotos = state.drivePhotos.drivePhotos;
     drivePhotos.forEach( (drivePhoto) => {
       if (!drivePhotoToGooglePhotoComparisonResults[drivePhoto.getPath()]) {
-        console.log('drivePhoto missing in drivePhotoToGooglePhotoComparisonResults: ');
-        console.log(drivePhoto);
+        // console.log('drivePhoto missing in drivePhotoToGooglePhotoComparisonResults: ');
+        // console.log(drivePhoto);
 
         drivePhotoToGooglePhotoComparisonResults[drivePhoto.getPath()] = {
           name : drivePhoto.name,
@@ -148,54 +150,57 @@ export function initUnmatchedDrivePhotoComparisons() {
       }
     });
     // however, now we need a way to save these results
+    // one time only
+    // dispatch(saveDrivePhotoToGooglePhotoComparisonResults());
+    return;
 
     // unmatched photos - strip out those that don't exist (due to debugging configuration)
-    const unmatchedPhotos: Array<IdenticalPhotos> =
-      state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
-    if (!unmatchedPhotos) {
-      debugger;
-    }
-
-    let unmatchedExistingPhotos: Array<IdenticalPhotos> = [];
-    unmatchedPhotos.forEach((unmatchedPhoto) => {
-      const photoItems: PhotoItems = unmatchedPhoto.photoItems;
-      const photoItem: PhotoItem = photoItems[0];
-      if (photoItem.photo.fileExists()) {
-        unmatchedExistingPhotos.push(unmatchedPhoto);
-      }
-    });
-
-    unmatchedExistingPhotos.sort((identicalPhotosA, identicalPhotosB) => {
-      if (identicalPhotosA && identicalPhotosB) {
-        const minHashDistanceA: number = identicalPhotosA.closestGooglePhoto.minHashDistance;
-        const minHashDistanceB: number = identicalPhotosB.closestGooglePhoto.minHashDistance;
-        return minHashDistanceA - minHashDistanceB;
-      }
-      return 0;
-    });
-
-    console.log('unmatchedExistingPhotos: ');
-    console.log(unmatchedExistingPhotos);
-
-    dispatch(setDrivePhotoIndex(-1));
-    dispatch(setUnmatchedExistingPhotos(unmatchedExistingPhotos));
-    dispatch(navigateForward());
-
-    // find out how many are yet to be reviewed
-    let drivePhotoIndex : number = state.photoComparisonResults.drivePhotoIndex;
-    if (!drivePhotoIndex || drivePhotoIndex < 0) {
-      drivePhotoIndex = 0;
-    }
-    let remainingPhotosToReview = 0;
-    unmatchedExistingPhotos.forEach( (unmatchedExistingPhoto, drivePhotoIndex) => {
-      const identicalDrivePhotos: IdenticalPhotos = unmatchedExistingPhotos[drivePhotoIndex];
-      const drivePhotoItems : PhotoItems = identicalDrivePhotos.photoItems;
-      const drivePhotoItem : PhotoItem = drivePhotoItems[0];
-      if (!state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults[drivePhotoItem.photo.getPath()]) {
-        remainingPhotosToReview++;
-      }
-    });
-    console.log("Number of drive photos remaining to be reviewed = ", remainingPhotosToReview);
+    // const unmatchedPhotos: Array<IdenticalPhotos> =
+    //   state.photoComparisonResults.photoComparisonResults.unmatchedPhotos;
+    // if (!unmatchedPhotos) {
+    //   debugger;
+    // }
+    //
+    // let unmatchedExistingPhotos: Array<IdenticalPhotos> = [];
+    // unmatchedPhotos.forEach((unmatchedPhoto) => {
+    //   const photoItems: PhotoItems = unmatchedPhoto.photoItems;
+    //   const photoItem: PhotoItem = photoItems[0];
+    //   if (photoItem.photo.fileExists()) {
+    //     unmatchedExistingPhotos.push(unmatchedPhoto);
+    //   }
+    // });
+    //
+    // unmatchedExistingPhotos.sort((identicalPhotosA, identicalPhotosB) => {
+    //   if (identicalPhotosA && identicalPhotosB) {
+    //     const minHashDistanceA: number = identicalPhotosA.closestGooglePhoto.minHashDistance;
+    //     const minHashDistanceB: number = identicalPhotosB.closestGooglePhoto.minHashDistance;
+    //     return minHashDistanceA - minHashDistanceB;
+    //   }
+    //   return 0;
+    // });
+    //
+    // console.log('unmatchedExistingPhotos: ');
+    // console.log(unmatchedExistingPhotos);
+    //
+    // dispatch(setDrivePhotoIndex(-1));
+    // dispatch(setUnmatchedExistingPhotos(unmatchedExistingPhotos));
+    // dispatch(navigateForward());
+    //
+    // // find out how many are yet to be reviewed
+    // let drivePhotoIndex : number = state.photoComparisonResults.drivePhotoIndex;
+    // if (!drivePhotoIndex || drivePhotoIndex < 0) {
+    //   drivePhotoIndex = 0;
+    // }
+    // let remainingPhotosToReview = 0;
+    // unmatchedExistingPhotos.forEach( (unmatchedExistingPhoto, drivePhotoIndex) => {
+    //   const identicalDrivePhotos: IdenticalPhotos = unmatchedExistingPhotos[drivePhotoIndex];
+    //   const drivePhotoItems : PhotoItems = identicalDrivePhotos.photoItems;
+    //   const drivePhotoItem : PhotoItem = drivePhotoItems[0];
+    //   if (!state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults[drivePhotoItem.photo.getPath()]) {
+    //     remainingPhotosToReview++;
+    //   }
+    // });
+    // console.log("Number of drive photos remaining to be reviewed = ", remainingPhotosToReview);
   };
 }
 
