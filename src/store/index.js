@@ -1,10 +1,13 @@
 // @flow
 
-const fs = require('fs');
+// const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const Jimp = require('jimp');
 
 import { readFile } from '../utilities/utils';
+import * as utils from '../utilities/utils';
+import { convertPhoto } from '../utilities/photoUtilities';
 import DrivePhoto from '../entities/drivePhoto';
 
 const StringDecoder = require('string_decoder').StringDecoder;
@@ -43,6 +46,8 @@ from '../types';
 import {
   readDrivePhotoToGooglePhotoComparisonResults,
 } from '../store/photoComparisonResults';
+
+let tiffDrivePhotosToCopy = [];
 
 export function analyzePhotos() {
 
@@ -124,6 +129,8 @@ function finalAnalysis(getState) {
   const drivePhotoToGooglePhotoComparisonResults = state.photoComparisonResults.drivePhotoToGooglePhotoComparisonResults;
 
   let notAMatchByHash : any = {};
+  let tiffDrivePhotosToCopyByName : any = {};
+
   state.drivePhotos.drivePhotos.forEach( (drivePhoto) => {
     const drivePhotoPath = drivePhoto.getPath();
     const photoComparisonResults = drivePhotoToGooglePhotoComparisonResults[drivePhotoPath];
@@ -138,10 +145,40 @@ function finalAnalysis(getState) {
         debugger;
       }
       if (!notAMatchByHash[key]) {
-        notAMatchByHash[key] = photosByHash;
+        const extname = path.extname(drivePhoto.path);
+        if (extname.toLowerCase() === '.tif' || extname.toLowerCase() === '.tiff') {
+          tiffDrivePhotosToCopy.push(drivePhoto);
+
+
+          // const targetDir = "E:\\AnalysatronTifFiles";
+          // const guid = utils.guid();
+          // let targetPath = path.join(targetDir, path.basename(drivePhoto.path) + guid + ".tif");
+          // convertPhoto(drivePhoto.path, targetPath).then( () => {
+          //   debugger;
+          // });
+        }
+        //   let filename;
+        //   if (extname.toLowerCase() === '.tif') {
+        //     filename = path.basename(drivePhoto.path, '.tif');
+        //   }
+        //   else {
+        //     filename = path.basename(drivePhoto.path, '.tiff');
+        //   }
+        //   if (!tiffDrivePhotosToCopyByName[filename]) {
+        //     tiffDrivePhotosToCopyByName[filename] = [];
+        //   }
+        //   tiffDrivePhotosToCopyByName[filename].push(drivePhoto);
+        // }
+        // else {
+        //   notAMatchByHash[key] = photosByHash;
+        // }
       }
     }
   });
+
+  debugger;
+  copyTiffFiles();
+  return;
 
   let filesToCopyByName : any = {};
 
@@ -151,76 +188,107 @@ function finalAnalysis(getState) {
       if (photosByHash.photoItems.length > 0) {
         const photoToCopy = photosByHash.photoItems[0].photo;
         let fileName = photoToCopy.name;
-        if (filesToCopyByName[fileName]) {
-          // yes, there are in fact, filesToCopy with the same name - need to have a unique file name
-          // append a suffix to it
-          let suffixCounter = 0;
-          while (true) {
-            fileName = photoToCopy.name + '-' + suffixCounter.toString();
-            if (!filesToCopyByName[fileName]) {
-              break;
-            }
-            suffixCounter++;
-          }
-          console.log('updated fileName: ', fileName);
+        if (fileName.toLowerCase().endsWith('tif') || fileName.toLowerCase().endsWith('tiff')) {
         }
-        filesToCopyByName[fileName] = photoToCopy;
+        else {
+          if (filesToCopyByName[fileName]) {
+            // yes, there are in fact, filesToCopy with the same name - need to have a unique file name
+            // append a suffix to it
+            let suffixCounter = 0;
+            while (true) {
+              fileName = photoToCopy.name + '-' + suffixCounter.toString();
+              if (!filesToCopyByName[fileName]) {
+                break;
+              }
+              suffixCounter++;
+            }
+            console.log('updated fileName: ', fileName);
+          }
+          filesToCopyByName[fileName] = photoToCopy;
+        }
       }
       else {
+        // entry for this key in drivePhotosByHash, and it is indeed empty
+        // note - all drivePhotos with this hash are tif files and, it appears that there are no tif files in
+        // drivePhotosByHash. there's probably a reason for this
+        debugger;
         console.log('poo');
       }
     }
   }
+
   debugger;
+  return;
 
-  // let resultsByPath : any = {};
-  // let resultsByName : any = {};
-  // for (let drivePhotoPath in drivePhotoToGooglePhotoComparisonResults) {
-  //   if (drivePhotoToGooglePhotoComparisonResults.hasOwnProperty(drivePhotoPath)) {
-  //     let photoComparisonResult: DrivePhotoToGooglePhotoComparisonResult = drivePhotoToGooglePhotoComparisonResults[drivePhotoPath];
-  //     if (photoComparisonResult.result === 'notAMatch') {
-  //       let fullPath = photoComparisonResult.path;
-  //       let dirname = path.dirname(fullPath);
-  //       if (!resultsByPath[dirname]) {
-  //         let empty  : Array<DrivePhotoToGooglePhotoComparisonResult> = [];
-  //         resultsByPath[dirname] = empty;
-  //       }
-  //       let existingResults : Array<DrivePhotoToGooglePhotoComparisonResult> = resultsByPath[dirname];
-  //       existingResults.push(photoComparisonResult);
-  //
-  //       if (resultsByName[photoComparisonResult.name]){
-  //         debugger;
-  //       }
-  //       resultsByName[photoComparisonResult.name] = fullPath;
-  //     }
-  //   }
-  // }
-}
-
-function copyFile(source, target, cb) {
-  let cbCalled = false;
-
-  let rd = fs.createReadStream(source);
-  rd.on("error", function(err) {
-    done(err);
-  });
-  let wr = fs.createWriteStream(target);
-  wr.on("error", function(err) {
-    done(err);
-  });
-  wr.on("close", function(ex) {
-    done();
-  });
-  rd.pipe(wr);
-
-  function done(err) {
-    if (!cbCalled) {
-      cb(err);
-      cbCalled = true;
-      debugger;
+  // perform file copies
+  for (let fileName in filesToCopyByName) {
+    if (filesToCopyByName.hasOwnProperty(fileName)) {
+      const fileToCopy : DrivePhoto = filesToCopyByName[fileName];
+      const sourcePath = fileToCopy.path;
+      const destinationPath = path.join("E:\\AnalysatronResults2", fileName);
+      copyFile(sourcePath, destinationPath);
     }
   }
 }
+
+function copyTiffFiles() {
+
+  const drivePhoto = tiffDrivePhotosToCopy.shift();
+
+  const extname = path.extname(drivePhoto.path);
+
+  let filename;
+  if (extname.toLowerCase() === '.tif') {
+    filename = path.basename(drivePhoto.path, '.tif');
+  }
+  else {
+    filename = path.basename(drivePhoto.path, '.tiff');
+  }
+
+  const targetDir = "E:\\AnalysatronTifFiles";
+  const guid = utils.guid();
+  let targetPath = path.join(targetDir, filename + guid + ".jpg");
+
+  console.log('convert file: ' + drivePhoto.path);
+  convertPhoto(drivePhoto.path, targetPath).then( () => {
+    copyTiffFiles();
+  });
+}
+
+function copyFile(source, target) {
+  try {
+    fs.copySync(source, target);
+    console.log('copy from: ' + source + ' to: ' + target);
+  } catch (err) {
+    console.error(err);
+    debugger;
+  }
+}
+
+// function copyFile(source, target, cb) {
+//   let cbCalled = false;
+//
+//   let rd = fs.createReadStream(source);
+//   rd.on("error", function(err) {
+//     done(err);
+//   });
+//   let wr = fs.createWriteStream(target);
+//   wr.on("error", function(err) {
+//     done(err);
+//   });
+//   wr.on("close", function(ex) {
+//     done();
+//   });
+//   rd.pipe(wr);
+//
+//   function done(err) {
+//     if (!cbCalled) {
+//       // cb(err);
+//       cbCalled = true;
+//       debugger;
+//     }
+//   }
+// }
 /*
 Results:
     Number of googlePhotos:  7773
