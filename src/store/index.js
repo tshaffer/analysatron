@@ -47,7 +47,7 @@ import {
   readDrivePhotoToGooglePhotoComparisonResults,
 } from '../store/photoComparisonResults';
 
-let tiffDrivePhotosToCopy = [];
+let tiffDrivePhotosToCopy : Array<DrivePhoto> = [];
 
 export function analyzePhotos() {
 
@@ -176,6 +176,7 @@ function finalAnalysis(getState) {
     }
   });
 
+  tiffDrivePhotosToCopy = getMatchingTiffFiles();
   debugger;
   copyTiffFiles();
   return;
@@ -231,6 +232,54 @@ function finalAnalysis(getState) {
   }
 }
 
+function getMatchingTiffFiles() : Array<DrivePhoto> {
+
+  let photosByHash : PhotosByHash = {};
+
+  tiffDrivePhotosToCopy.forEach( (photo) => {
+
+    const hash = photo.hash;
+    const aspectRatio = (Number(photo.getWidth()) / Number(photo.getHeight())).toString();
+    const key = hash + '-' + aspectRatio;
+
+    if (!photosByHash[key]) {
+      let closestGooglePhoto: ClosestHashSearchResult = { minHashDistance: 1, googlePhotoHash: ''};
+      let identicalPhotos : IdenticalPhotos = { hash: '', key: '', photoItems: [], closestGooglePhoto};
+      identicalPhotos.hash = hash;
+      identicalPhotos.key = key;
+
+      const photoItem : PhotoItem = {
+        photo,
+        matchedPhotoGroupIndex : null
+      };
+      identicalPhotos.photoItems.push(photoItem);
+      photosByHash[key] = identicalPhotos;
+    }
+    else {
+      let identicalPhotos : IdenticalPhotos = photosByHash[key];
+      const photoItem : PhotoItem = {
+        photo,
+        matchedPhotoGroupIndex : null
+      };
+      identicalPhotos.photoItems.push(photoItem);
+    }
+  })
+
+  let uniqueTiffPhotosToCopy : Array<DrivePhoto> = [];
+
+  for (let hash in photosByHash) {
+    if (photosByHash.hasOwnProperty(hash)) {
+      const photo : DrivePhoto = photosByHash[hash];
+      if (!photo.photoItems || photo.photoItems.length === 0) {
+        debugger;
+      }
+      uniqueTiffPhotosToCopy.push(photo.photoItems[0].photo);
+    }
+  }
+
+  return uniqueTiffPhotosToCopy;
+}
+
 function copyTiffFiles() {
 
   const drivePhoto = tiffDrivePhotosToCopy.shift();
@@ -238,11 +287,17 @@ function copyTiffFiles() {
   const extname = path.extname(drivePhoto.path);
 
   let filename;
-  if (extname.toLowerCase() === '.tif') {
+  if (extname === '.tif') {
     filename = path.basename(drivePhoto.path, '.tif');
   }
-  else {
+  else if (extname === '.TIF') {
+    filename = path.basename(drivePhoto.path, '.TIF');
+  }
+  else if (extname === '.tiff') {
     filename = path.basename(drivePhoto.path, '.tiff');
+  }
+  else if (extname === '.TIFF') {
+    filename = path.basename(drivePhoto.path, '.TIFF');
   }
 
   const targetDir = "E:\\AnalysatronTifFiles";
